@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f4ee">
+  <title>GRIDMIND | Microgrid simulator</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <a class="brand" href="#simulation" aria-label="GRIDMIND home">
+        <span class="brand-mark" aria-hidden="true">↯</span>
+        <span class="brand-type">GRIDMIND<small>MICROGRID SIMULATOR</small></span>
+      </a>
+      <nav id="navigation" class="navigation" aria-label="Main navigation">
+        <a href="#simulation" data-view="simulation"><span aria-hidden="true">◈</span> Simulation</a>
+        <a href="#participants" data-view="participants"><span aria-hidden="true">⊞</span> Localities &amp; participants</a>
+        <a href="#renewables" data-view="renewables"><span aria-hidden="true">☼</span> Renewable outlook</a>
+        <a href="#agents" data-view="agents"><span aria-hidden="true">⌘</span> Agent activity</a>
+        <a href="#history" data-view="history"><span aria-hidden="true">◴</span> Run history</a>
+        <a href="#database" data-view="database"><span aria-hidden="true">▤</span> Database &amp; reports</a>
+      </nav>
+      <div class="rail-foot">
+        <span class="dot" id="connection-dot"></span>
+        <span id="connection-text">Connecting</span>
+      </div>
+    </aside>
+    <main class="content" id="content">
+      <div class="topline">
+        <button class="btn btn-quiet menu-toggle" type="button" aria-controls="navigation" aria-expanded="false">Menu</button>
+        <a class="mobile-brand" href="#simulation">↯ GRIDMIND</a>
+        <label class="locality-context"><span>Locality</span><select id="locality-select" aria-label="Active locality"><option value="">Choose a locality</option></select></label>
+      </div>
+      <div id="startup-error" class="message error" role="alert" hidden></div>
+      <section id="view-simulation" class="view" aria-labelledby="title-simulation">
+        <header class="title-row">
+          <div><p class="eyebrow">Operations</p><h1 id="title-simulation">Simulation &amp; market</h1></div>
+          <button type="button" id="open-setup" class="btn btn-primary">Start simulation <span aria-hidden="true">→</span></button>
+          <button type="button" id="stop-run" class="btn btn-danger" hidden>Stop simulation</button>
+        </header>
+        <div class="status-hero" id="grid-hero">
+          <div>
+            <div class="status-chip"><span class="dot"></span><span id="grid-status">Ready</span></div>
+            <h2 id="grid-heading">Set up your first run</h2>
+            <p id="grid-detail">Select a locality and start a simulation.</p>
+          </div>
+          <div class="hero-clock"><span>Replay clock</span><time id="replay-clock">—</time><span id="run-progress">No run selected</span></div>
+        </div>
+        <div class="locality-runs" id="active-localities" hidden></div>
+        <div class="metrics" id="run-metrics"></div>
+        <div class="split summary-grid">
+          <article class="card chart-card">
+            <div class="card-head"><div><h2>Grid risk</h2><p>Chance of an import shortfall in the next hour</p></div><span class="chart-key"><span></span> Next-hour risk</span></div>
+            <canvas id="risk-chart" aria-label="Next-hour grid risk by replay step" role="img"></canvas>
+            <p id="risk-empty" class="empty inset">Grid risk appears as the replay advances.</p>
+          </article>
+          <article class="card dispatch-card"><div class="card-head"><div><h2>Local supply</h2><p>Latest completed interval</p></div></div><div id="dispatch-summary"></div></article>
+        </div>
+        <article class="card market-card">
+          <div class="card-head"><div><h2>Live P2P market</h2><p id="market-status">Awaiting a simulation</p></div><button type="button" id="open-order" class="btn btn-secondary" disabled>New request or offer</button></div>
+          <div class="market-tables" id="market-content"></div>
+        </article>
+      </section>
+      <section id="view-participants" class="view" aria-labelledby="title-participants" hidden>
+        <header class="title-row"><div><p class="eyebrow">Setup</p><h1 id="title-participants">Localities &amp; participants</h1></div><div class="action-group"><button id="open-locality" class="btn btn-secondary" type="button">Add locality</button><button id="open-participant" class="btn btn-primary" type="button">Add participant</button></div></header>
+        <article class="card"><div class="card-head"><div><h2>Localities</h2><p>Manage grid connections and import capacity.</p></div></div><div id="locality-list"></div></article>
+        <article class="card"><div class="card-head"><div><h2>Participant registry</h2><p id="participants-context">Select a locality to view its participants.</p></div></div><div id="participant-list"></div></article>
+        <article class="card"><div class="card-head"><div><h2>Energy assets</h2><p>Solar, wind and stored energy by participant.</p></div></div><div id="asset-list"></div></article>
+      </section>
+      <section id="view-renewables" class="view" aria-labelledby="title-renewables" hidden>
+        <header class="title-row"><div><p class="eyebrow">Planning</p><h1 id="title-renewables">Renewable outlook</h1></div><label class="select-control"><span>Participant</span><select id="renewable-participant"><option value="">All participants</option></select></label></header>
+        <div id="renewables-content"></div>
+      </section>
+      <section id="view-agents" class="view" aria-labelledby="title-agents" hidden>
+        <header class="title-row"><div><p class="eyebrow">Operations</p><h1 id="title-agents">Agent activity</h1></div><button id="preview-step" class="btn btn-primary" type="button">Preview a step</button></header>
+        <article class="card"><div class="card-head"><div><h2>Coordination</h2><p id="trace-heading">Latest completed interval</p></div><label class="select-control"><span>Replay step</span><select id="trace-step"><option value="">Latest</option></select></label></div><div id="trace-content"></div></article>
+      </section>
+      <section id="view-history" class="view" aria-labelledby="title-history" hidden>
+        <header class="title-row"><div><p class="eyebrow">Records</p><h1 id="title-history">Run history</h1></div><button id="refresh-runs" class="btn btn-secondary" type="button">Refresh</button></header>
+        <article class="card"><div class="card-head"><div><h2>Saved simulations</h2><p>Open a run to inspect its market and decision history.</p></div></div><div id="run-list"></div></article>
+      </section>
+      <section id="view-database" class="view" aria-labelledby="title-database" hidden>
+        <header class="title-row"><div><p class="eyebrow">Records</p><h1 id="title-database">Database &amp; reports</h1></div><button id="refresh-reports" class="btn btn-secondary" type="button">Refresh</button></header>
+        <div id="database-content"></div>
+      </section>
+    </main>
+  </div>
+  <dialog id="editor-dialog" aria-labelledby="editor-title">
+    <form id="editor-form">
+      <div class="dialog-head"><h2 id="editor-title"></h2><button type="button" class="btn btn-icon" id="close-editor" aria-label="Close dialog">×</button></div>
+      <div id="editor-fields" class="form-grid"></div>
+      <div id="editor-error" class="message error" role="alert" hidden></div>
+      <div class="dialog-actions"><button type="button" id="cancel-editor" class="btn btn-secondary">Cancel</button><button type="submit" id="save-editor" class="btn btn-primary">Save</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
