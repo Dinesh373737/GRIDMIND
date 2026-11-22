@@ -1,0 +1,25 @@
+[Unit]
+Description=GRIDMIND FastAPI and locality simulation supervisor
+Wants=network-online.target
+After=network-online.target mysql.service mysqld.service
+
+[Service]
+Type=simple
+User=gridmind
+Group=gridmind
+WorkingDirectory=/opt/gridmind
+EnvironmentFile=/etc/gridmind/gridmind.env
+StateDirectory=gridmind
+UMask=0077
+ExecStart=/opt/gridmind/.venv/bin/python -m uvicorn gridmind.api:app --host 127.0.0.1 --port 8000 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=on-failure
+RestartSec=5
+KillMode=mixed
+TimeoutStopSec=45
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target

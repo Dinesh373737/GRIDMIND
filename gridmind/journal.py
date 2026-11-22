@@ -5,6 +5,7 @@ from uuid import UUID, uuid4
 
 from sqlalchemy import select
 
+from .cloud import CloudJournal, config
 from .db import ROOT, Outbox, Run, utcnow
 
 
@@ -43,10 +44,27 @@ def publish(factory, run_id):
         pending = db.scalars(select(Outbox).where(
             Outbox.run_id == run_id, Outbox.published_at.is_(None)
         ).order_by(Outbox.step)).all()
+        settings = config()
+        cloud = CloudJournal(settings) if settings and pending else None
         for item in pending:
             if item.step != run.published_steps or item.payload is None:
                 raise ValueError("Step events must be delivered in order")
             write_event(run_id, item.step, item.payload)
+            if cloud:
+                try:
+                    cloud.write_step(run_id, item.step, item.payload)
+                    if item.step + 1 == run.steps:
+                        events = read_events(run_id, item.step + 1, after=-1, limit=run.steps)
+                        cloud.write_export(run_id, {
+                            "schema_version": 1, "run_id": run_id, "scenario": run.scenario,
+                            "locality_id": run.locality_id, "step_count": run.steps,
+                            "events": [{**payload, "run_id": run_id, "step": step}
+                                       for step, payload in enumerate(events)],
+                        })
+                except (ValueError, TypeError, KeyError):
+                    raise
+                except Exception as exc:
+                    raise OSError("Cloud journal publication failed.") from exc
             item.published_at = utcnow()
             item.payload = None
             run.published_steps += 1

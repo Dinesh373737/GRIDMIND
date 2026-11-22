@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager, suppress
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -13,6 +14,7 @@ from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import aliased
 
+from .cloud import config as cloud_config, verify_access_token
 from .datasets import load_ugim_benchmark
 from .db import (
     ROOT, Asset, Audit, FacilityType, Locality, Order, Participant, ReplayDataset, Run, RunParticipant,
@@ -131,10 +133,18 @@ def require_pack(db, dataset_id):
 
 
 def create_app(url=None):
+    cloud = cloud_config()
+
     @asynccontextmanager
     async def lifespan(app):
         engine, factory = connect(url)
         app.state.engine, app.state.factory = engine, factory
+        if cloud and engine.dialect.name != "mysql":
+            engine.dispose()
+            raise RuntimeError("GRIDMIND AWS mode requires MySQL.")
+        if cloud and engine.url.host not in (None, "localhost", "127.0.0.1", "::1"):
+            engine.dispose()
+            raise RuntimeError("In AWS mode MySQL must be on this instance.")
         initialize(engine, factory)
         import_packs(factory)
         seed_demo(factory)
@@ -171,14 +181,34 @@ def create_app(url=None):
 
     @app.middleware("http")
     async def protect(request: Request, call_next):
-        key = os.environ.get("GRIDMIND_API_KEY")
-        if key and request.url.path.startswith("/api/") and request.url.path != "/api/health":
-            received = request.headers.get("X-API-Key", "")
-            if not hmac.compare_digest(key.encode(), received.encode()):
-                return JSONResponse({"detail": "Enter a valid GRIDMIND access key."}, 401)
+        if request.url.path.startswith("/api/") and request.url.path != "/api/health":
+            if cloud:
+                from jwt import PyJWKClientConnectionError, PyJWTError
+
+                scheme, _, token = request.headers.get("Authorization", "").partition(" ")
+                if scheme.lower() != "bearer" or not token or len(token) > 16384:
+                    return JSONResponse({"detail": "Sign in with Cognito."}, 401,
+                                        headers={"WWW-Authenticate": "Bearer"})
+                try:
+                    await asyncio.to_thread(verify_access_token, cloud, token)
+                except PyJWKClientConnectionError:
+                    return JSONResponse({"detail": "Cognito signing keys are temporarily unavailable."}, 503)
+                except PyJWTError:
+                    return JSONResponse({"detail": "Sign in with a valid Cognito access token."}, 401,
+                                        headers={"WWW-Authenticate": "Bearer"})
+            else:
+                key = os.environ.get("GRIDMIND_API_KEY")
+                received = request.headers.get("X-API-Key", "")
+                if key and not hmac.compare_digest(key.encode(), received.encode()):
+                    return JSONResponse({"detail": "Enter a valid GRIDMIND access key."}, 401)
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         return response
+
+    if cloud:
+        app.add_middleware(CORSMiddleware, allow_origins=list(cloud.origins),
+                           allow_methods=["GET", "POST", "PUT", "DELETE"],
+                           allow_headers=["Authorization", "Content-Type"])
 
     @app.exception_handler(IntegrityError)
     async def constraint_error(_request, _error):
@@ -192,7 +222,8 @@ def create_app(url=None):
         return app.state.factory
 
     def health_data():
-        return {"sql": app.state.engine.dialect.name, "event_store": "local journal"}
+        return {"sql": app.state.engine.dialect.name,
+                "event_store": "DynamoDB + local journal" if cloud else "local journal"}
 
     @app.get("/api/health")
     def health():
@@ -508,11 +539,20 @@ def create_app(url=None):
     def benchmark():
         return load_ugim_benchmark() or {"available": False}
 
+    frontend_dist = ROOT / "frontend" / "dist"
+
     @app.get("/", include_in_schema=False)
     def dashboard():
-        return FileResponse(ROOT / "frontend" / "index.html")
+        index = frontend_dist / "index.html"
+        if not index.is_file():
+            return JSONResponse({
+                "detail": "Dashboard not built. In frontend, run npm ci and npm run build, "
+                          "or run the Windows start script. The backend API is available at /api/health."
+            }, status_code=503)
+        return FileResponse(index, headers={"Cache-Control": "no-cache"})
 
-    app.mount("/", StaticFiles(directory=ROOT / "frontend"), name="frontend")
+    if (frontend_dist / "assets").is_dir():
+        app.mount("/assets", StaticFiles(directory=frontend_dist / "assets"), name="frontend-assets")
 
     return app
 
