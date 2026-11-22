@@ -249,10 +249,14 @@ def _advisories(frame, participants):
     weather = frame.get("weather") or {}
     if isinstance(weather, str):
         condition, valid_at, issued_at = weather, None, None
+        outlook = frame.get("renewable_outlook")
     else:
         condition = weather.get("outlook_condition") or weather.get("condition") or "Weather outlook"
         valid_at = weather.get("outlook_valid_at")
         issued_at = weather.get("outlook_issued_at")
+        outlook = frame.get("renewable_outlook") if weather.get("outlook_source_kind") != "synthetic" else None
+    solar_band = outlook.get("solar_scenario_factor_range") if outlook else frame.get("forecast_solar_range")
+    wind_band = outlook.get("wind_scenario_factor_range") if outlook else frame.get("forecast_wind_range")
     solar_forecast = frame.get("forecast_solar_factor")
     wind_forecast = frame.get("forecast_wind_factor")
     current_solar = unit(frame.get("solar_factor", 0), "solar factor")
@@ -273,17 +277,30 @@ def _advisories(frame, participants):
         expected_drop = None if generation is None else max(0.0, current - generation)
         shortfall = None if generation is None else max(0.0, demand - generation)
         lower = upper = None
-        solar_band = frame.get("forecast_solar_range") if profile.get("solar_kw") else (0.0, 0.0)
-        wind_band = frame.get("forecast_wind_range") if profile.get("wind_kw") else (0.0, 0.0)
-        if generation is not None and solar_band is not None and wind_band is not None:
-            lower = sum(_renewables(profile, unit(solar_band[0], "lower solar factor"), unit(wind_band[0], "lower wind factor")))
-            upper = sum(_renewables(profile, unit(solar_band[1], "upper solar factor"), unit(wind_band[1], "upper wind factor")))
+        solar_bounds = solar_band if profile.get("solar_kw") else (0.0, 0.0)
+        wind_bounds = wind_band if profile.get("wind_kw") else (0.0, 0.0)
+        outlook_fields = {}
+        if generation is not None and solar_bounds is not None and wind_bounds is not None:
+            lower = sum(_renewables(profile, unit(solar_bounds[0], "lower solar factor"), unit(wind_bounds[0], "lower wind factor")))
+            upper = sum(_renewables(profile, unit(solar_bounds[1], "upper solar factor"), unit(wind_bounds[1], "upper wind factor")))
+            if outlook:
+                outlook_fields["range_kind"] = "scenario"
+        if outlook and generation is not None:
+            solar_margin = outlook.get("solar_margin_factor") if profile.get("solar_kw") else 0.0
+            wind_margin = outlook.get("wind_margin_factor") if profile.get("wind_kw") else 0.0
+            if solar_margin is not None and wind_margin is not None:
+                # Add the separate technology margins in kW. No joint coverage is implied.
+                outlook_fields["model_error_margin_kw"] = sum(_renewables(
+                    profile, unit(solar_margin, "solar margin factor"), unit(wind_margin, "wind margin factor")
+                ))
+                outlook_fields["model_error_target"] = outlook["target_label"]
         if shortfall is None:
             advisory = "Forecast unavailable"
         elif shortfall > EPSILON:
             advisory = "Expected renewable shortfall. Check backup reserve or arrange additional energy."
         elif lower is not None and lower < demand:
-            advisory = "Output may fall below expected load. Keep backup reserve available."
+            advisory = ("Output falls below expected load in the weather scenario. Keep backup reserve available."
+                        if outlook else "Output may fall below expected load. Keep backup reserve available.")
         elif expected_drop > max(0.25, current * 0.2):
             advisory = "Renewable output is expected to fall. Check planned exports and backup reserve."
         else:
@@ -295,6 +312,7 @@ def _advisories(frame, participants):
             "expected_generation_kw": generation, "current_generation_kw": current,
             "expected_drop_kw": expected_drop, "expected_load_kw": demand, "shortfall_kw": shortfall,
             "range_low_kw": lower, "range_high_kw": upper, "advisory": advisory,
+            **outlook_fields,
         })
     return advisories
 

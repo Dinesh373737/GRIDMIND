@@ -15,7 +15,7 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import aliased
 
 from .cloud import config as cloud_config, verify_access_token
-from .datasets import load_ugim_benchmark
+from .datasets import PACK, load_ugim_benchmark
 from .db import (
     ROOT, Asset, Audit, FacilityType, Locality, Order, Participant, ReplayDataset, Run, RunParticipant,
     Step, Trade, connect, initialize, participant_records, save_assets, uid,
@@ -37,7 +37,7 @@ class LocalityInput(Input):
     name: str = Field(min_length=1, max_length=100)
     import_limit_kw: float = Field(gt=0, le=100000)
     island_capable: bool = True
-    replay_pack: str = Field(default="austin", max_length=48)
+    replay_pack: str = Field(default=PACK, max_length=48)
 
 
 class ParticipantInput(Input):
@@ -146,7 +146,10 @@ def create_app(url=None):
             engine.dispose()
             raise RuntimeError("In AWS mode MySQL must be on this instance.")
         initialize(engine, factory)
-        import_packs(factory)
+        imported = import_packs(factory)
+        app.state.austin_dataset_id = next(
+            (dataset_id for dataset_id in imported if dataset_id == PACK or dataset_id.startswith(f"{PACK}-")), PACK
+        )
         seed_demo(factory)
         supervisor = app.state.supervisor = Supervisor(factory, engine.url.render_as_string(hide_password=False))
         supervisor.recover()
@@ -234,11 +237,21 @@ def create_app(url=None):
     @app.get("/api/bootstrap")
     def bootstrap():
         with db_factory()() as db:
+            datasets = db.scalars(select(ReplayDataset).order_by(ReplayDataset.id)).all()
+            current_austin = db.get(ReplayDataset, app.state.austin_dataset_id)
+            packs = []
+            for dataset in datasets:
+                name = dataset.name
+                manifest = dataset.manifest
+                if dataset.id == PACK and current_austin:
+                    name, manifest = current_austin.name, current_austin.manifest
+                elif dataset.id.startswith(f"{PACK}-"):
+                    name += f" · Fixed version {dataset.id.removeprefix(f'{PACK}-')}"
+                packs.append({"id": dataset.id, "name": name, "steps": manifest["steps"],
+                              "interval_minutes": manifest.get("interval_minutes", 15)})
             return {
                 "health": health_data(),
-                "packs": [{"id": d.id, "name": d.name, "steps": d.manifest["steps"],
-                          "interval_minutes": d.manifest.get("interval_minutes", 15)}
-                          for d in db.scalars(select(ReplayDataset).order_by(ReplayDataset.id))],
+                "packs": packs,
                 "facility_types": [{"id": t.id, "name": t.name} for t in db.scalars(
                     select(FacilityType).order_by(FacilityType.name))],
                 "localities": [locality_view(row) for row in db.scalars(
@@ -317,7 +330,10 @@ def create_app(url=None):
         run_id = uid()
         with db_factory().begin() as db:
             locality = require_locality(db, body.locality_id, lock=True)
-            dataset = require_pack(db, locality.replay_pack)
+            # The stable Austin selection follows the current import for new runs;
+            # an existing Run always reads from its own pinned version ID.
+            dataset_id = app.state.austin_dataset_id if locality.replay_pack == PACK else locality.replay_pack
+            dataset = require_pack(db, dataset_id)
             if body.start_offset + body.steps > dataset.manifest["steps"]:
                 raise HTTPException(422, "Run length exceeds the selected replay window.")
             if db.scalar(select(Run.id).where(Run.active_locality_id == locality.id)):

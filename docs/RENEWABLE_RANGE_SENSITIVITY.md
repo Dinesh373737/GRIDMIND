@@ -91,8 +91,11 @@ found 8/29 hours covered (27.6%); among the 16 hours above the fixed public PV
 factor threshold of 0.09, it found 8/16. It compared the first issued forecast
 for each target to the mean of the four measured quarter-hour samples. This
 is a different scoring protocol from the original documented 9/29 result;
-the measurements were not moved off the local computer. The unclipped
-aggregate-kW version of the check was not run on the real overlay.
+the measurements were not moved off the local computer. A second read-only
+check on unclipped measured kW recovered the frozen training scale from 60
+unsaturated rows and matched the 8/29 and 8/16 counts, with no
+rounding-indeterminate hits. The stored normalized series had 13 values
+clipped at 1.0.
 
 To justify a calibrated interval, collect additional aligned forecast and
 measured output history. Split entire days chronologically into fit,

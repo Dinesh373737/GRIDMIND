@@ -42,9 +42,12 @@ function renderOutlook(renewables, roster = participants) {
     latest: { step: 8, timestamp: '2018-08-24T20:00:00Z', renewables },
   } });
 }
-function ranges(markup) {
-  return Array.from(markup.matchAll(/<dt>Output range<\/dt><dd>(.*?)<\/dd>/g), result => result[1]);
+function readings(markup, name) {
+  return Array.from(markup.matchAll(new RegExp(`<dt>${name}</dt><dd>([^<]*)`, 'g')), result => result[1]);
 }
+const ranges = markup => readings(markup, 'Output range');
+const scenarios = markup => readings(markup, 'Scenario range');
+const margins = markup => readings(markup, 'Model error margin');
 const explanation = /this replay doesn’t provide uncertainty bands for all/;
 
 test('bundled Austin forecasts remain visible when the replay has no uncertainty bands', () => {
@@ -71,11 +74,51 @@ test('complete bounds, including zero, keep their units when other ranges are mi
   assert.doesNotMatch(allAvailable, explanation);
 });
 
+const target = 'NOAA HRRR weather-model analysis, not measured generation';
+const scenario = { range_kind: 'scenario', range_low_kw: 20, range_high_kw: 40 };
+
+test('scenario ranges and ML margins are separate from legacy output ranges', () => {
+  const markup = renderOutlook([
+    { ...austinOutlook[0], ...scenario, model_error_margin_kw: 3, model_error_target: target },
+    { ...austinOutlook[1], range_low_kw: 3, range_high_kw: 5 },
+  ]);
+  assert.deepEqual(scenarios(markup), ['20–40 kW']);
+  assert.deepEqual(margins(markup), ['±3 kW']);
+  assert.deepEqual(ranges(markup), ['3–5 kW']);
+  assert.match(markup, /what-if weather assumptions, not a prediction interval/);
+  assert.match(markup, /not a confidence interval for actual generation/);
+  assert.ok(markup.includes(`Compared with ${target}.`));
+  assert.doesNotMatch(markup, explanation);
+});
+
+test('a scenario range remains visible without a model margin, and zero is not missing', () => {
+  const markup = renderOutlook([
+    { ...austinOutlook[0], ...scenario, model_error_margin_kw: null },
+    { ...austinOutlook[1], ...scenario, range_low_kw: 0, range_high_kw: 0, model_error_margin_kw: 0, model_error_target: target },
+    { ...austinOutlook[2], ...scenario, range_low_kw: 5, range_high_kw: 2, model_error_margin_kw: -1 },
+  ]);
+  assert.deepEqual(scenarios(markup), ['20–40 kW', '0–0 kW', 'Not available']);
+  assert.deepEqual(margins(markup), ['Not available', '±0 kW', 'Not available']);
+  assert.deepEqual(ranges(markup), []);
+  assert.equal(markup.split(`Compared with ${target}.`).length, 2);
+});
+
+test('an ML margin can still be displayed when scenario bounds are absent', () => {
+  const markup = renderOutlook([{ ...austinOutlook[2], model_error_margin_kw: 1, model_error_target: target }]);
+  assert.deepEqual(ranges(markup), ['Not available']);
+  assert.deepEqual(margins(markup), ['±1 kW']);
+  assert.deepEqual(scenarios(markup), []);
+  assert.doesNotMatch(markup, /what-if weather assumptions/);
+  assert.doesNotMatch(markup, explanation);
+});
+
 test('idle and assetless runs do not present a missing range', () => {
   const idle = render({ participants });
   assert.match(idle, /Start or select a simulation/);
   assert.deepEqual(ranges(idle), []);
+  assert.deepEqual(margins(idle), []);
   const assetless = renderOutlook([], []);
   assert.match(assetless, /Register a solar or wind asset/);
   assert.deepEqual(ranges(assetless), []);
+  assert.deepEqual(margins(assetless), []);
 });

@@ -1,0 +1,2545 @@
+{
+  "schema_version": 1,
+  "source_pack_sha256": "675a32a9bac4dc27e2d0527a81d4f163d44cee8aed9849a679a693636cd76dc7",
+  "gridpoint": {
+    "latitude": 30.2672,
+    "longitude": -97.7431,
+    "x_index": 891,
+    "y_index": 223
+  },
+  "source": "NOAA HRRR CONUS surface forecast and target-time analyses, public GRIB2 and Utah HRRR Zarr",
+  "forecast_cycle_utc": 12,
+  "lead_hours": [
+    2,
+    8,
+    13
+  ],
+  "issue_days_utc": [
+    "2018-08-09",
+    "2018-08-23"
+  ],
+  "rows": [
+    {
+      "forecast_issued_at": "2018-08-09T12:00:00Z",
+      "forecast_valid_at": "2018-08-09T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.75,
+        "hub_u_ms": 1.33984375,
+        "hub_v_ms": 4.09375,
+        "irradiance_wm2": 307.70000000000005
+      },
+      "analysis": {
+        "temperature_kelvin": 300.25,
+        "hub_u_ms": 1.7568359375,
+        "hub_v_ms": 2.1328125,
+        "irradiance_wm2": 386.1
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-09T12:00:00Z",
+      "forecast_valid_at": "2018-08-09T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 310.0,
+        "hub_u_ms": -0.64013671875,
+        "hub_v_ms": 5.9609375,
+        "irradiance_wm2": 893.0
+      },
+      "analysis": {
+        "temperature_kelvin": 309.75,
+        "hub_u_ms": -2.22265625,
+        "hub_v_ms": 3.59375,
+        "irradiance_wm2": 913.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-09T12:00:00Z",
+      "forecast_valid_at": "2018-08-10T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 305.25,
+        "hub_u_ms": -4.15234375,
+        "hub_v_ms": 8.96875,
+        "irradiance_wm2": 20.8
+      },
+      "analysis": {
+        "temperature_kelvin": 307.5,
+        "hub_u_ms": -1.240234375,
+        "hub_v_ms": 2.599609375,
+        "irradiance_wm2": 15.9
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-10T12:00:00Z",
+      "forecast_valid_at": "2018-08-10T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 301.25,
+        "hub_u_ms": 2.50390625,
+        "hub_v_ms": 3.98828125,
+        "irradiance_wm2": 287.0
+      },
+      "analysis": {
+        "temperature_kelvin": 300.5,
+        "hub_u_ms": 3.076171875,
+        "hub_v_ms": 0.06683349609375,
+        "irradiance_wm2": 107.5
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-10T12:00:00Z",
+      "forecast_valid_at": "2018-08-10T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 307.25,
+        "hub_u_ms": -2.296875,
+        "hub_v_ms": -1.0,
+        "irradiance_wm2": 797.0
+      },
+      "analysis": {
+        "temperature_kelvin": 305.75,
+        "hub_u_ms": -1.4658203125,
+        "hub_v_ms": -1.720703125,
+        "irradiance_wm2": 908.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-10T12:00:00Z",
+      "forecast_valid_at": "2018-08-11T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 307.0,
+        "hub_u_ms": -1.7177734375,
+        "hub_v_ms": 2.021484375,
+        "irradiance_wm2": 19.5
+      },
+      "analysis": {
+        "temperature_kelvin": 306.25,
+        "hub_u_ms": -3.955078125,
+        "hub_v_ms": 2.29296875,
+        "irradiance_wm2": 13.9
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-11T12:00:00Z",
+      "forecast_valid_at": "2018-08-11T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 299.25,
+        "hub_u_ms": -0.99560546875,
+        "hub_v_ms": -0.5849609375,
+        "irradiance_wm2": 77.0
+      },
+      "analysis": {
+        "temperature_kelvin": 298.75,
+        "hub_u_ms": -0.8408203125,
+        "hub_v_ms": -0.52490234375,
+        "irradiance_wm2": 40.1
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-11T12:00:00Z",
+      "forecast_valid_at": "2018-08-11T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 307.75,
+        "hub_u_ms": 0.6748046875,
+        "hub_v_ms": 0.83251953125,
+        "irradiance_wm2": 719.0
+      },
+      "analysis": {
+        "temperature_kelvin": 307.0,
+        "hub_u_ms": -0.77392578125,
+        "hub_v_ms": 0.4033203125,
+        "irradiance_wm2": 906.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-11T12:00:00Z",
+      "forecast_valid_at": "2018-08-12T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.25,
+        "hub_u_ms": 0.6669921875,
+        "hub_v_ms": 2.537109375,
+        "irradiance_wm2": 9.600000000000001
+      },
+      "analysis": {
+        "temperature_kelvin": 298.25,
+        "hub_u_ms": -2.01953125,
+        "hub_v_ms": 1.7373046875,
+        "irradiance_wm2": 7.9
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-12T12:00:00Z",
+      "forecast_valid_at": "2018-08-12T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 299.75,
+        "hub_u_ms": -0.1788330078125,
+        "hub_v_ms": 3.87109375,
+        "irradiance_wm2": 226.20000000000002
+      },
+      "analysis": {
+        "temperature_kelvin": 299.5,
+        "hub_u_ms": 0.615234375,
+        "hub_v_ms": 3.435546875,
+        "irradiance_wm2": 330.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-12T12:00:00Z",
+      "forecast_valid_at": "2018-08-12T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 297.5,
+        "hub_u_ms": 0.84423828125,
+        "hub_v_ms": 3.94921875,
+        "irradiance_wm2": 168.0
+      },
+      "analysis": {
+        "temperature_kelvin": 299.0,
+        "hub_u_ms": 1.8544921875,
+        "hub_v_ms": 4.390625,
+        "irradiance_wm2": null
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-12T12:00:00Z",
+      "forecast_valid_at": "2018-08-13T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 299.5,
+        "hub_u_ms": -1.30078125,
+        "hub_v_ms": 3.798828125,
+        "irradiance_wm2": 10.8
+      },
+      "analysis": {
+        "temperature_kelvin": 299.75,
+        "hub_u_ms": -2.61328125,
+        "hub_v_ms": -1.2578125,
+        "irradiance_wm2": 10.3
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-13T12:00:00Z",
+      "forecast_valid_at": "2018-08-13T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.0,
+        "hub_u_ms": -1.193359375,
+        "hub_v_ms": 6.75390625,
+        "irradiance_wm2": 266.3
+      },
+      "analysis": {
+        "temperature_kelvin": 300.0,
+        "hub_u_ms": -0.6240234375,
+        "hub_v_ms": 5.65625,
+        "irradiance_wm2": 22.700000000000003
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-13T12:00:00Z",
+      "forecast_valid_at": "2018-08-13T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.0,
+        "hub_u_ms": 0.1807861328125,
+        "hub_v_ms": 8.375,
+        "irradiance_wm2": 840.0
+      },
+      "analysis": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -1.3193359375,
+        "hub_v_ms": 7.5546875,
+        "irradiance_wm2": 914.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-13T12:00:00Z",
+      "forecast_valid_at": "2018-08-14T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 306.0,
+        "hub_u_ms": -3.3984375,
+        "hub_v_ms": 8.8984375,
+        "irradiance_wm2": 15.200000000000001
+      },
+      "analysis": {
+        "temperature_kelvin": 305.5,
+        "hub_u_ms": -3.4375,
+        "hub_v_ms": 6.82421875,
+        "irradiance_wm2": 9.600000000000001
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-14T12:00:00Z",
+      "forecast_valid_at": "2018-08-14T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 299.25,
+        "hub_u_ms": 0.6171875,
+        "hub_v_ms": 5.5546875,
+        "irradiance_wm2": 61.5
+      },
+      "analysis": {
+        "temperature_kelvin": 300.25,
+        "hub_u_ms": 0.33740234375,
+        "hub_v_ms": 4.11328125,
+        "irradiance_wm2": 145.70000000000002
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-14T12:00:00Z",
+      "forecast_valid_at": "2018-08-14T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": -1.5478515625,
+        "hub_v_ms": 7.3046875,
+        "irradiance_wm2": 890.0
+      },
+      "analysis": {
+        "temperature_kelvin": 308.75,
+        "hub_u_ms": -1.564453125,
+        "hub_v_ms": 5.60546875,
+        "irradiance_wm2": 913.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-14T12:00:00Z",
+      "forecast_valid_at": "2018-08-15T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 306.5,
+        "hub_u_ms": -3.515625,
+        "hub_v_ms": 8.6640625,
+        "irradiance_wm2": 12.4
+      },
+      "analysis": {
+        "temperature_kelvin": 307.0,
+        "hub_u_ms": -2.76953125,
+        "hub_v_ms": 6.65625,
+        "irradiance_wm2": 6.9
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-15T12:00:00Z",
+      "forecast_valid_at": "2018-08-15T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.75,
+        "hub_u_ms": 1.044921875,
+        "hub_v_ms": 5.76953125,
+        "irradiance_wm2": 251.5
+      },
+      "analysis": {
+        "temperature_kelvin": 300.5,
+        "hub_u_ms": 1.5556640625,
+        "hub_v_ms": 4.25390625,
+        "irradiance_wm2": null
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-15T12:00:00Z",
+      "forecast_valid_at": "2018-08-15T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": -1.31640625,
+        "hub_v_ms": 4.37109375,
+        "irradiance_wm2": 857.0
+      },
+      "analysis": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": -1.740234375,
+        "hub_v_ms": 5.078125,
+        "irradiance_wm2": 909.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-15T12:00:00Z",
+      "forecast_valid_at": "2018-08-16T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.0,
+        "hub_u_ms": -0.1854248046875,
+        "hub_v_ms": 5.10546875,
+        "irradiance_wm2": 11.9
+      },
+      "analysis": {
+        "temperature_kelvin": 308.0,
+        "hub_u_ms": -1.8427734375,
+        "hub_v_ms": 3.98828125,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-16T12:00:00Z",
+      "forecast_valid_at": "2018-08-16T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 301.75,
+        "hub_u_ms": 0.671875,
+        "hub_v_ms": 3.91796875,
+        "irradiance_wm2": 283.90000000000003
+      },
+      "analysis": {
+        "temperature_kelvin": 301.25,
+        "hub_u_ms": 0.1417236328125,
+        "hub_v_ms": 2.658203125,
+        "irradiance_wm2": 368.20000000000005
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-16T12:00:00Z",
+      "forecast_valid_at": "2018-08-16T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 309.75,
+        "hub_u_ms": -0.4951171875,
+        "hub_v_ms": 5.34375,
+        "irradiance_wm2": 900.0
+      },
+      "analysis": {
+        "temperature_kelvin": 310.25,
+        "hub_u_ms": -1.2890625,
+        "hub_v_ms": 5.2578125,
+        "irradiance_wm2": 906.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-16T12:00:00Z",
+      "forecast_valid_at": "2018-08-17T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": 1.04296875,
+        "hub_v_ms": 3.861328125,
+        "irradiance_wm2": 7.2
+      },
+      "analysis": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -1.5849609375,
+        "hub_v_ms": 6.1171875,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-17T12:00:00Z",
+      "forecast_valid_at": "2018-08-17T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.5,
+        "hub_u_ms": 1.650390625,
+        "hub_v_ms": 4.78515625,
+        "irradiance_wm2": 369.0
+      },
+      "analysis": {
+        "temperature_kelvin": 299.75,
+        "hub_u_ms": 1.0380859375,
+        "hub_v_ms": 3.38671875,
+        "irradiance_wm2": null
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-17T12:00:00Z",
+      "forecast_valid_at": "2018-08-17T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 310.25,
+        "hub_u_ms": 0.84423828125,
+        "hub_v_ms": 5.796875,
+        "irradiance_wm2": 919.0
+      },
+      "analysis": {
+        "temperature_kelvin": 310.75,
+        "hub_u_ms": -0.9736328125,
+        "hub_v_ms": 3.677734375,
+        "irradiance_wm2": 913.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-17T12:00:00Z",
+      "forecast_valid_at": "2018-08-18T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": 0.14990234375,
+        "hub_v_ms": 4.09375,
+        "irradiance_wm2": 7.2
+      },
+      "analysis": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": -2.568359375,
+        "hub_v_ms": 5.09765625,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-18T12:00:00Z",
+      "forecast_valid_at": "2018-08-18T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 301.0,
+        "hub_u_ms": 1.94921875,
+        "hub_v_ms": 3.076171875,
+        "irradiance_wm2": 292.7
+      },
+      "analysis": {
+        "temperature_kelvin": 300.5,
+        "hub_u_ms": 1.845703125,
+        "hub_v_ms": 2.044921875,
+        "irradiance_wm2": 368.8
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-18T12:00:00Z",
+      "forecast_valid_at": "2018-08-18T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 310.75,
+        "hub_u_ms": -2.77734375,
+        "hub_v_ms": 3.69921875,
+        "irradiance_wm2": 904.0
+      },
+      "analysis": {
+        "temperature_kelvin": 310.75,
+        "hub_u_ms": -2.92578125,
+        "hub_v_ms": 1.525390625,
+        "irradiance_wm2": 907.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-18T12:00:00Z",
+      "forecast_valid_at": "2018-08-19T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -2.27734375,
+        "hub_v_ms": 5.796875,
+        "irradiance_wm2": 5.300000000000001
+      },
+      "analysis": {
+        "temperature_kelvin": 309.0,
+        "hub_u_ms": -2.06640625,
+        "hub_v_ms": 5.15625,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-19T12:00:00Z",
+      "forecast_valid_at": "2018-08-19T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 300.5,
+        "hub_u_ms": 0.76171875,
+        "hub_v_ms": 6.5078125,
+        "irradiance_wm2": 314.8
+      },
+      "analysis": {
+        "temperature_kelvin": 300.25,
+        "hub_u_ms": 1.08203125,
+        "hub_v_ms": 5.27734375,
+        "irradiance_wm2": 126.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-19T12:00:00Z",
+      "forecast_valid_at": "2018-08-19T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 310.0,
+        "hub_u_ms": 0.80712890625,
+        "hub_v_ms": 5.8515625,
+        "irradiance_wm2": 896.0
+      },
+      "analysis": {
+        "temperature_kelvin": 310.25,
+        "hub_u_ms": -0.2454833984375,
+        "hub_v_ms": 4.4609375,
+        "irradiance_wm2": 903.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-19T12:00:00Z",
+      "forecast_valid_at": "2018-08-20T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -0.0171051025390625,
+        "hub_v_ms": 4.6171875,
+        "irradiance_wm2": 3.7
+      },
+      "analysis": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -2.158203125,
+        "hub_v_ms": 3.990234375,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-20T12:00:00Z",
+      "forecast_valid_at": "2018-08-20T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 301.75,
+        "hub_u_ms": 1.748046875,
+        "hub_v_ms": 4.578125,
+        "irradiance_wm2": 326.70000000000005
+      },
+      "analysis": {
+        "temperature_kelvin": 301.0,
+        "hub_u_ms": 1.2001953125,
+        "hub_v_ms": 2.931640625,
+        "irradiance_wm2": 358.6
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-20T12:00:00Z",
+      "forecast_valid_at": "2018-08-20T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 309.5,
+        "hub_u_ms": 0.09197998046875,
+        "hub_v_ms": 2.783203125,
+        "irradiance_wm2": 776.0
+      },
+      "analysis": {
+        "temperature_kelvin": 309.25,
+        "hub_u_ms": -1.3857421875,
+        "hub_v_ms": 1.57421875,
+        "irradiance_wm2": 889.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-20T12:00:00Z",
+      "forecast_valid_at": "2018-08-21T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.75,
+        "hub_u_ms": -1.359375,
+        "hub_v_ms": 2.123046875,
+        "irradiance_wm2": 2.2
+      },
+      "analysis": {
+        "temperature_kelvin": 307.25,
+        "hub_u_ms": -0.1593017578125,
+        "hub_v_ms": -4.81640625,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-21T12:00:00Z",
+      "forecast_valid_at": "2018-08-21T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 302.0,
+        "hub_u_ms": 1.4765625,
+        "hub_v_ms": 2.59375,
+        "irradiance_wm2": 342.20000000000005
+      },
+      "analysis": {
+        "temperature_kelvin": 301.0,
+        "hub_u_ms": 1.7978515625,
+        "hub_v_ms": 1.5078125,
+        "irradiance_wm2": 357.5
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-21T12:00:00Z",
+      "forecast_valid_at": "2018-08-21T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 311.0,
+        "hub_u_ms": -3.01171875,
+        "hub_v_ms": 2.97265625,
+        "irradiance_wm2": 887.0
+      },
+      "analysis": {
+        "temperature_kelvin": 310.0,
+        "hub_u_ms": -2.380859375,
+        "hub_v_ms": 0.947265625,
+        "irradiance_wm2": 894.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-21T12:00:00Z",
+      "forecast_valid_at": "2018-08-22T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 306.75,
+        "hub_u_ms": -2.173828125,
+        "hub_v_ms": -0.1260986328125,
+        "irradiance_wm2": 0.9
+      },
+      "analysis": {
+        "temperature_kelvin": 310.0,
+        "hub_u_ms": -3.388671875,
+        "hub_v_ms": 1.451171875,
+        "irradiance_wm2": 0.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-22T12:00:00Z",
+      "forecast_valid_at": "2018-08-22T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": null,
+        "hub_u_ms": null,
+        "hub_v_ms": null,
+        "irradiance_wm2": null
+      },
+      "analysis": {
+        "temperature_kelvin": 300.75,
+        "hub_u_ms": 0.68701171875,
+        "hub_v_ms": 3.04296875,
+        "irradiance_wm2": 355.40000000000003
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-22T12:00:00Z",
+      "forecast_valid_at": "2018-08-22T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": null,
+        "hub_u_ms": null,
+        "hub_v_ms": null,
+        "irradiance_wm2": null
+      },
+      "analysis": {
+        "temperature_kelvin": 310.0,
+        "hub_u_ms": -1.83203125,
+        "hub_v_ms": 1.0234375,
+        "irradiance_wm2": 890.0
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-22T12:00:00Z",
+      "forecast_valid_at": "2018-08-23T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": null,
+        "hub_u_ms": null,
+        "hub_v_ms": null,
+        "irradiance_wm2": null
+      },
+      "analysis": {
+        "temperature_kelvin": 308.0,
+        "hub_u_ms": -4.40625,
+        "hub_v_ms": -0.384033203125,
+        "irradiance_wm2": null
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-23T12:00:00Z",
+      "forecast_valid_at": "2018-08-23T14:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 301.25,
+        "hub_u_ms": 0.28564453125,
+        "hub_v_ms": 2.005859375,
+        "irradiance_wm2": 355.1
+      },
+      "analysis": {
+        "temperature_kelvin": 300.25,
+        "hub_u_ms": -0.125244140625,
+        "hub_v_ms": 1.9013671875,
+        "irradiance_wm2": 363.90000000000003
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-23T12:00:00Z",
+      "forecast_valid_at": "2018-08-23T20:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 310.5,
+        "hub_u_ms": -0.95849609375,
+        "hub_v_ms": 4.55859375,
+        "irradiance_wm2": 908.0
+      },
+      "analysis": {
+        "temperature_kelvin": 311.25,
+        "hub_u_ms": -2.689453125,
+        "hub_v_ms": 4.16796875,
+        "irradiance_wm2": null
+      }
+    },
+    {
+      "forecast_issued_at": "2018-08-23T12:00:00Z",
+      "forecast_valid_at": "2018-08-24T01:00:00Z",
+      "forecast": {
+        "temperature_kelvin": 308.25,
+        "hub_u_ms": 1.1357421875,
+        "hub_v_ms": 3.224609375,
+        "irradiance_wm2": 0.0
+      },
+      "analysis": {
+        "temperature_kelvin": 308.5,
+        "hub_u_ms": -4.13671875,
+        "hub_v_ms": 3.763671875,
+        "irradiance_wm2": 0.0
+      }
+    }
+  ],
+  "archive_products": {
+    "grib:2018-08-09T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "ec79738d2a5e112e1f4acac8c5cdcf28a18f5f5e5063e0ed1282a42a2cf0e673",
+      "byte_range": [
+        79913420,
+        81251807
+      ],
+      "sha256": "def6ff7570bdb35354ec3e98bb4242d23ac203c4a61832bffc7d35b196a07be4",
+      "bytes": 1338388
+    },
+    "grib:2018-08-09T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "f0d9a7e55cb77829094399548574f8edf09cf19db9b68f59d9f71d36e9956656",
+      "byte_range": [
+        70647685,
+        72966626
+      ],
+      "sha256": "922d1730ca77c805e59ae85cd8dc7911f560aa8eb57e12aa53e18f9c3e581ea5",
+      "bytes": 2318942
+    },
+    "grib:2018-08-09T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "35c8e2308a0a5aa33d82a2ec18e9c2f4ff51900e45b9d842c79b2eb73ac2fd82",
+      "byte_range": [
+        77645560,
+        79512644
+      ],
+      "sha256": "e0554daf0d4f9fe46f754745ecd9b52760b07265a58df18ba333c85f82bc0e64",
+      "bytes": 1867085
+    },
+    "grib:2018-08-09T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "996dcf7d46c9a235fc076c63d3893d55251becef240c443c339e8aa2b03bbba3",
+      "byte_range": [
+        62673609,
+        64378117
+      ],
+      "sha256": "cd6f2421a59f75a55e16fb20b8d765786b4b4414052808d264e1ac3962d0384c",
+      "bytes": 1704509
+    },
+    "grib:2018-08-09T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180809/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "76ba7eb4e91d7c504564aaab01bba8c2b79795307d9e9c51ead247201339de09",
+      "byte_range": [
+        62949555,
+        64244969
+      ],
+      "sha256": "9899e63ce20f5321b45eb6fb3a2f25deda1199067f52e5dda48f12de2a3a8217",
+      "bytes": 1295415
+    },
+    "grib:2018-08-10T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "52aa7f1bca0049a60c43d1ef4a9acefebf8ba7e8f8134374acaf07710211936a",
+      "byte_range": [
+        61290446,
+        62241371
+      ],
+      "sha256": "1c45044e6e1d5995470b7d847c1b9ae32f247bc918a211f2aa5a7612c64c053b",
+      "bytes": 950926
+    },
+    "grib:2018-08-10T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "de62434119168c01bccca509376b2e95e08214696f2d6494270dba457157e27b",
+      "byte_range": [
+        78481538,
+        79759194
+      ],
+      "sha256": "f6f23f70d4ef79baa0015dda81acc5abae3977bd71694c78985008745c63248d",
+      "bytes": 1277657
+    },
+    "grib:2018-08-10T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "8315266d6c4eac0c600808ed508cb1d50c0087122a6764dab06a6e65d18eb1ef",
+      "byte_range": [
+        70012594,
+        72301174
+      ],
+      "sha256": "a343253bfc2e15f6d9fe44f069bdb12ff78a20da5fb7cb49640ecaa00eab22b0",
+      "bytes": 2288581
+    },
+    "grib:2018-08-10T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "479df6dee33201d0772abfa122eaea8a5f66456bdcf296eb35b558b5984308f6",
+      "byte_range": [
+        77823215,
+        79614802
+      ],
+      "sha256": "1af1b4cb6f88bf835b62b0ec0a8846664af5378846fab1922601601b9a9a009a",
+      "bytes": 1791588
+    },
+    "grib:2018-08-10T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "b55d57d7a621db6bd47557b78f8fb381bcdbdc073bbdd1493bbfee6ca38876e7",
+      "byte_range": [
+        62537545,
+        64204128
+      ],
+      "sha256": "114e691cb1ae0ad28b5d754865be45a56e060af49f4b8ba0c1f215ba7ee0ebdb",
+      "bytes": 1666584
+    },
+    "grib:2018-08-10T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180810/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "a56366af28e01a60f80ef0dd434c2c747def67d5996c576ee623c18f900e6dab",
+      "byte_range": [
+        62453846,
+        63698215
+      ],
+      "sha256": "0874ec4b9b6ce5bc2e51fe6b4641e3d1123bd0e87327bae5fc1f0d2404ea8c01",
+      "bytes": 1244370
+    },
+    "grib:2018-08-11T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "d2d725d7ea835eb03a3665edeb5a686a1de5229f68ec90e8f885de1282fee196",
+      "byte_range": [
+        62377651,
+        63330241
+      ],
+      "sha256": "1f65b8286060d6b48285d0f86088ef40867a26cda8b51b3359ff933421e1d7b3",
+      "bytes": 952591
+    },
+    "grib:2018-08-11T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "bed4a45b510c827e4c3c90f5f8cee55991ca95b306bfcda9bf49c5982f3def59",
+      "byte_range": [
+        79727193,
+        81005719
+      ],
+      "sha256": "a89fed6757b92eefcc5d264e4567ca845735e71c85a6ed788ffc32fc937ceb7e",
+      "bytes": 1278527
+    },
+    "grib:2018-08-11T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "de79668b73968d98d7221fdeb49f8eee34e18d846b8be1efc25a0641b49fcbb0",
+      "byte_range": [
+        70852374,
+        73139760
+      ],
+      "sha256": "173ff360e39392de67084998f17f20bff03b24e2976cfc364dc132e3d2b93911",
+      "bytes": 2287387
+    },
+    "grib:2018-08-11T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "0a52d08d24c16d66205723e80cdc344068881bcad46654be3cd04277613de1ad",
+      "byte_range": [
+        78847731,
+        80676920
+      ],
+      "sha256": "e308446780d6a339ac5d6a0c55b51b5a58d0f2e99122b861f4c003495a63017c",
+      "bytes": 1829190
+    },
+    "grib:2018-08-11T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "b0ac5065d33752576874c6fedc0a9fc94a9c5e29e2fa8a126eafd2bad0504342",
+      "byte_range": [
+        62060809,
+        63752600
+      ],
+      "sha256": "4b1e0c78037158879aac576569f2b31bc2d1452b958be443937f2e08bd6bb390",
+      "bytes": 1691792
+    },
+    "grib:2018-08-11T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180811/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "e9e90adc905a1b80f3de4cd23297e8774afc2fd1eda28cc6794d6ae94c514fb5",
+      "byte_range": [
+        63657621,
+        64972319
+      ],
+      "sha256": "3da47cfb3042c561ec32325b8f6e981cb1bfc563f5ed6386f72eaa44fde0e09d",
+      "bytes": 1314699
+    },
+    "grib:2018-08-12T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "9245979b58e4e084b921d4b3d628c77c1533d189e7a7638ef666191e3836685b",
+      "byte_range": [
+        62086543,
+        63040733
+      ],
+      "sha256": "845f827f5364edb92ccb2580c8e86adb24e1ef4c80e945c61be01a15efa34fe0",
+      "bytes": 954191
+    },
+    "grib:2018-08-12T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "4d4a1ce323665b3554d01cb5e7263b66e575da0a4a7ce781133375d311cfda51",
+      "byte_range": [
+        81054053,
+        82375861
+      ],
+      "sha256": "6cb542706b8b1cc7a2137a0a1c6daa95090a7f312fcf9390bf8ee60ff4e39e49",
+      "bytes": 1321809
+    },
+    "grib:2018-08-12T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "a7968bbaa77346558809e9c527946e66f0ead6f7969ce3ac6dbfc198d9cc64bc",
+      "byte_range": [
+        71955938,
+        74330241
+      ],
+      "sha256": "8233fadda79e943929466ac9e13e1af23d420967af019e9b363ba8a7f9cade0d",
+      "bytes": 2374304
+    },
+    "grib:2018-08-12T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "50e45323e9ddc420ab833bf7df0f1d733fedda1694bd6c09c70b5d4b6bf73736",
+      "byte_range": [
+        80400836,
+        82288796
+      ],
+      "sha256": "a309db2abda1bd8bd4d60dd4bdfde5045ef46976cccf12c19d378940dfe57cf7",
+      "bytes": 1887961
+    },
+    "grib:2018-08-12T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180812/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "1331cba3cbbac6b914a1555e0a3b51eba3f4e41810f83a084233e7a157279343",
+      "byte_range": [
+        62935849,
+        64668030
+      ],
+      "sha256": "ae9d3552b6f9371eafa67bcc725b0909d8cd317e2801fa3188360d478ca1c696",
+      "bytes": 1732182
+    },
+    "grib:2018-08-13T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "3fd3901ddf7bd585ac0625c84d579a5a1ecaf354d9a706f0fa23378958e39fb8",
+      "byte_range": [
+        62711830,
+        63675307
+      ],
+      "sha256": "bad1c74b8faba09f4bb0413767e4781f181bc797e63c217c75aabf5e5ca35455",
+      "bytes": 963478
+    },
+    "grib:2018-08-13T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "40f0041f96e0f389b3d05d8c2902a3d60b197f71cf8286e0655a903383613899",
+      "byte_range": [
+        80503718,
+        81876117
+      ],
+      "sha256": "47a8223662d1361b6deb8bb61f5eff23e0d57b991dddd5f87af7b2cf11bef8af",
+      "bytes": 1372400
+    },
+    "grib:2018-08-13T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "c67353ad0d42975a6eb1786ba72f311b05b3d3415276c6e9818f10308947856f",
+      "byte_range": [
+        71234016,
+        73555962
+      ],
+      "sha256": "8be5f3d5dd253839569728454b6135b47cd92ebcaf8a2701f57887a65bc319b9",
+      "bytes": 2321947
+    },
+    "grib:2018-08-13T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "bf4be20158f2fd05aa7412cead24399d13320dab072deaa25bf77e251c1719ef",
+      "byte_range": [
+        79201364,
+        81143634
+      ],
+      "sha256": "ddd4ad396996e1955459eaba30ae013309578eb13467783bd96dbf77e26626fa",
+      "bytes": 1942271
+    },
+    "grib:2018-08-13T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "742bf827a2be7a9678bf5b905baf1f18b8b3481476956f3a578d613db30e927d",
+      "byte_range": [
+        63820431,
+        65617975
+      ],
+      "sha256": "d4584407796015a580b837828e7fa87e5fbedeb8ca4590969ac895056ce2c314",
+      "bytes": 1797545
+    },
+    "grib:2018-08-13T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180813/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "1ad6eafe734a8c7002c9220598aa104bb320b5091ac6a53fd2b4f98b7557185e",
+      "byte_range": [
+        64535614,
+        65874051
+      ],
+      "sha256": "2164af8d8979ae6e30defeef3bbfd77a841f15b0b2e49c9318caf56664422728",
+      "bytes": 1338438
+    },
+    "grib:2018-08-14T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "0174b27460969cc4fd985074299c91ffb0ac9d537de39f6a8a194e92479d3ff6",
+      "byte_range": [
+        63045716,
+        64068754
+      ],
+      "sha256": "5450a012f263dbd9b2516bd95a14505f1d7f401feb18e55398d270ce05cbec5e",
+      "bytes": 1023039
+    },
+    "grib:2018-08-14T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "698356d50bf195cac864f76693b99e48903bc2e67ce3c71ec86efc0be43ff917",
+      "byte_range": [
+        81067748,
+        82441060
+      ],
+      "sha256": "e902a67c1708a07419ba6c2c42222bb557bb095a9d97f67a80ba60204e8f908a",
+      "bytes": 1373313
+    },
+    "grib:2018-08-14T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "da01e4084bcb135f067193b2b697b9d94f1f0c37de2452f43462d09fb92f6ed9",
+      "byte_range": [
+        71276639,
+        73615869
+      ],
+      "sha256": "5beece7a568c025948800f17a83e37a85c89506d77779a254c8b3d1777e8a623",
+      "bytes": 2339231
+    },
+    "grib:2018-08-14T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "b00e102e73e89b80696de62ddcb0bceef1f8e906258514ba3531c7b7e7caa7f4",
+      "byte_range": [
+        79378955,
+        81355146
+      ],
+      "sha256": "47a5e2e2ff31e9cd17e4e47ee2bb4b4b2e203f58660021566f4eb076f6475b0f",
+      "bytes": 1976192
+    },
+    "grib:2018-08-14T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "ac79b52b9951f2a6db1cf63894dabcf95294d62ca24e9704bb6aae1392568c01",
+      "byte_range": [
+        64153537,
+        65930370
+      ],
+      "sha256": "08d49496752b06c26ebf00d273bd2b87992295b3a98d231171b32a14d5cf66fd",
+      "bytes": 1776834
+    },
+    "grib:2018-08-14T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180814/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "e44956256e733ebabca01196a891c5311909e8add92e1e49862e31b50fe8971a",
+      "byte_range": [
+        64361035,
+        65763006
+      ],
+      "sha256": "a5e2b61785689638297de40f2cb4bc5bfe26edfb374a133d846ea60b39c0b3a8",
+      "bytes": 1401972
+    },
+    "grib:2018-08-15T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "dd887281ad407c3edc1ed7f6129d8013b99d2ef11bc8238aed8ade0765eab4d4",
+      "byte_range": [
+        61365079,
+        62317315
+      ],
+      "sha256": "4d1b117deb4e9aa306e9a29bda93f1837a1fcc071759ebfe1f3f4a83cdbfab43",
+      "bytes": 952237
+    },
+    "grib:2018-08-15T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "ae2bcad31801ff5d58cb9b9562566a6a99bfcb8c464c5f85ccc82f950bd24eeb",
+      "byte_range": [
+        80170455,
+        81509567
+      ],
+      "sha256": "20647955539c3792d52f3c3484489b84942c80be84f9b2ed13eca960b3b7e027",
+      "bytes": 1339113
+    },
+    "grib:2018-08-15T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "e51b13eeebefc79a94f56a7061be88ad076e3d2c19dd7ad2a20fa48f04b9b3db",
+      "byte_range": [
+        72603419,
+        74962636
+      ],
+      "sha256": "b530a9f5adbd6a828560a0486687da811a79bcf5103bbc1757ee63def1ebb648",
+      "bytes": 2359218
+    },
+    "grib:2018-08-15T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "60feacabe90d05f9d37377825dfda6397c1bbc60183a3187e780bbdc81211e5d",
+      "byte_range": [
+        80483872,
+        82439434
+      ],
+      "sha256": "dc8a25b564b0205cd4f3b722046cacd776914b2da64862c2493c81bf50119eaa",
+      "bytes": 1955563
+    },
+    "grib:2018-08-15T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180815/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "11acada85092496ade8d25e0d8f94940425cee21cadff3ee69e3c8e0b48e151a",
+      "byte_range": [
+        63200557,
+        64553079
+      ],
+      "sha256": "e5f17313d5247c6dddc700380cb275f0c8f79b7ec872b1f9089e6757dfd44e5e",
+      "bytes": 1352523
+    },
+    "grib:2018-08-16T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "5c66356624d70aa5c718185ca1d796250bbfa3e683079587dde5fba5d7d2c92d",
+      "byte_range": [
+        62110642,
+        63047070
+      ],
+      "sha256": "70931f8faf97e7b78e4eb3090100a1b620d940301cfc5d200c979c17ae8e3c97",
+      "bytes": 936429
+    },
+    "grib:2018-08-16T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "8e59519f4bc6859df6b15b1bc9e384d1a01bc589125a001e9500e9a311961a76",
+      "byte_range": [
+        80503912,
+        81850715
+      ],
+      "sha256": "2a8a66bbd3d0b15e1413d956d1a3478d9335d1c74994f63114529050295ab487",
+      "bytes": 1346804
+    },
+    "grib:2018-08-16T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "5b2bb1efe344cb510f9652755b9097b93232e332ea6556dbb9587e55b22f12ce",
+      "byte_range": [
+        71012704,
+        73358716
+      ],
+      "sha256": "044f72d6bd77dd7240db551b3e6dd82728fc9ef7eba206759114fd9cae4876f5",
+      "bytes": 2346013
+    },
+    "grib:2018-08-16T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "f05a76cbf9717d85d2aac8f9bc60bd15dce44eacdb04ec3cf45293420a8ba3e1",
+      "byte_range": [
+        78514704,
+        80449521
+      ],
+      "sha256": "7fc36d8c70de1b09b9a3ed543295c739a45ecc91e0d09c44a20400d77f5ad8a1",
+      "bytes": 1934818
+    },
+    "grib:2018-08-16T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "793b51e02b73baa56cfc2713b2d35093c1250b0a923fbe282da689e601c8666c",
+      "byte_range": [
+        63029522,
+        64708324
+      ],
+      "sha256": "a4ffe8bd04aa3a6847eb9822ec60302b16d3e3df38db368f9262a2c5d87373f0",
+      "bytes": 1678803
+    },
+    "grib:2018-08-16T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180816/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "a5662a38274fd30bcfc3397239611042960160e0202852399c3c14873076a609",
+      "byte_range": [
+        63556092,
+        64867199
+      ],
+      "sha256": "4be87a745b67ebfa8b3daffbbcd6a02b09967beb1c17c32403e8133e6feb52df",
+      "bytes": 1311108
+    },
+    "grib:2018-08-17T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "3f71298a59cd5ab11f22eb8a6389a44e99e81027001bc2bcad0ce417cb1ad422",
+      "byte_range": [
+        61586842,
+        62525854
+      ],
+      "sha256": "d95ac43e5a9f2e3fcd82b29edfa9d48bfcdf9ecfda56d16ef4abb7233fd204b4",
+      "bytes": 939013
+    },
+    "grib:2018-08-17T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "1a9b0d9a50ac64838f82a2ea514a1e4a3bf076f5a79392d24db255c54bdf3ab8",
+      "byte_range": [
+        82394273,
+        83706152
+      ],
+      "sha256": "e9ec2012b2d5dd51cb9be398a8fd0b51893f41bc99ecc0e03ecffaf1340d35cd",
+      "bytes": 1311880
+    },
+    "grib:2018-08-17T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "34d6e977f3cf3ad43c3c298dc2f6d677aa43e37c0afac6b815812970423ed4d5",
+      "byte_range": [
+        72963151,
+        75320843
+      ],
+      "sha256": "1483cb400ecaf66010b4db7fe0363d1285abed6ae7749fbf7a3ebbf773d24c29",
+      "bytes": 2357693
+    },
+    "grib:2018-08-17T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "6846af474deb305f29b0d25064043ff7f0415339ea56d03d60139375fcf08ec0",
+      "byte_range": [
+        78753699,
+        80708853
+      ],
+      "sha256": "01be482c2a90a5da9e6af1dcdeb9c4df74e9d4dc94f973a9298528e4dde533e3",
+      "bytes": 1955155
+    },
+    "grib:2018-08-17T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180817/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "4ac244ab893043234c1f717e1b8bae80121f29df82f95dd70643e628e97195a4",
+      "byte_range": [
+        63701987,
+        65048794
+      ],
+      "sha256": "0dd7053363d7aa87f889d63330ebcfa733c8081c0b8075d7f82719402d4b7be0",
+      "bytes": 1346808
+    },
+    "grib:2018-08-18T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "84c8e965033983e0d67b7035ffb753cea3f76c556ff01628f2530411141f0020",
+      "byte_range": [
+        63227093,
+        64149640
+      ],
+      "sha256": "4b0e789784cacdf26feaf1fe244bd815fbd55c4d999ac0edf8f62e847c426574",
+      "bytes": 922548
+    },
+    "grib:2018-08-18T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "1ffec69c225299b97bd4f134d0d953618be4cde3d0ae525b6d072e402eeb8e6b",
+      "byte_range": [
+        81355643,
+        82655321
+      ],
+      "sha256": "62b7e1fe89496eb81bf6f8c0d3865a7c25e21824319332e1587fe0c1f8ee6661",
+      "bytes": 1299679
+    },
+    "grib:2018-08-18T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "78569501a5d1d74deedc33f5f9d264ed1611adc0a9733ce5d7208d15f51e01f3",
+      "byte_range": [
+        72954921,
+        75352020
+      ],
+      "sha256": "75d1051e4ab912d6519b652f7dec2276062ef6a89f60811eb169e6441c18ca35",
+      "bytes": 2397100
+    },
+    "grib:2018-08-18T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "11adfd8aef53fe774fd978cd25566ba29d03f0834bcdc4c715be6e75212aaa7f",
+      "byte_range": [
+        78768875,
+        80721271
+      ],
+      "sha256": "6b1b2b7fddf563f7338c777e49da5ee6a4e28345f617c48b89a58c8e49ba84b4",
+      "bytes": 1952397
+    },
+    "grib:2018-08-18T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "9a5228b704d12c340f6f8fbe9a90afaeca6dec117e23a68ec59ad2b4e66fb53b",
+      "byte_range": [
+        64390558,
+        66148426
+      ],
+      "sha256": "7df364f3cebbf5d3776110f16dcbf3ced6f398b20a4280277f08cfed81185f3e",
+      "bytes": 1757869
+    },
+    "grib:2018-08-18T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180818/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "bd46b89014de1a44be43746517d5dcac346d47e29ebf775b9644f1c11b698396",
+      "byte_range": [
+        64110919,
+        65470209
+      ],
+      "sha256": "4c872b7c862ac3023c077090a5615e496f6feba9439494dbedf91babe913362c",
+      "bytes": 1359291
+    },
+    "grib:2018-08-19T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "54d727efadb8146719fd7221a2f486b933bdd728f95d51ef5e8c05c2a7b36f6b",
+      "byte_range": [
+        61658986,
+        62597810
+      ],
+      "sha256": "258e63a3cacabc009bcedfac12164554267fa7a28b6b8844ecaa8327861d4786",
+      "bytes": 938825
+    },
+    "grib:2018-08-19T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "48f38ea72174d131fab53c75a78820ac91f2e3502c7e609b12a6cabb96280ae2",
+      "byte_range": [
+        79560957,
+        80850419
+      ],
+      "sha256": "21b1ccd588745a66ff178836e3b501fba7af1a32b3dc33c709ef9e0ef096e6e5",
+      "bytes": 1289463
+    },
+    "grib:2018-08-19T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "fd3f983b1fd53aaf8ae5925cb807b12d203756fd375e25b1ae81ead4cb69f8da",
+      "byte_range": [
+        74104726,
+        76432368
+      ],
+      "sha256": "db3239863909fee9206c8020c9ac33fbe2d5bf07e775f9bbb639b39173a34590",
+      "bytes": 2327643
+    },
+    "grib:2018-08-19T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "3a464d75e67c9efcc0972256414990754f82011ab39ed2c90a25b8c53465c062",
+      "byte_range": [
+        78182110,
+        80126258
+      ],
+      "sha256": "5b1c636e3809c07d940189095ff3fc1e0900daa61465acf88d9f1361151d34bb",
+      "bytes": 1944149
+    },
+    "grib:2018-08-19T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "44f635baa1f6d51a6318d533aa2570dc8088bc9650571fccfc1feb9d97f367c7",
+      "byte_range": [
+        64715787,
+        66522180
+      ],
+      "sha256": "1424af8a02ad44ff14221f9970d4cb3f0039df08c0e50d611281cc05225fe599",
+      "bytes": 1806394
+    },
+    "grib:2018-08-19T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180819/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "ce38510149a71edbabeaf171437b36f1410b1139cee5b15d00be496d945b1d67",
+      "byte_range": [
+        63403649,
+        64801067
+      ],
+      "sha256": "8db6e6258807984cb4a456e6357dc8cad0046b0c43dc9f05098eac5949dba282",
+      "bytes": 1397419
+    },
+    "grib:2018-08-20T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "ae95fc8ab60b5275457085b549ae9219cd07e1b08f413a5c0109b30f084a62e4",
+      "byte_range": [
+        61638213,
+        62507094
+      ],
+      "sha256": "e73152c55aaa9da44393b4315c6ffec482daa0e7ff8b069a930335e7b1b237e1",
+      "bytes": 868882
+    },
+    "grib:2018-08-20T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "c02971717071259f5da6ceb0bd0aebdf0db75f65600b942872adfd5e8cf0a0f7",
+      "byte_range": [
+        82711295,
+        84013687
+      ],
+      "sha256": "a93d5c1a74a72a3d9a9037e430af7111b9e66319f4aab7ec2644f97fb7061efb",
+      "bytes": 1302393
+    },
+    "grib:2018-08-20T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "f8de5f6b1a347f1b1f2326a714fbad453e66fe93b927ab4bac95762f1ead4056",
+      "byte_range": [
+        75379555,
+        77745522
+      ],
+      "sha256": "e0b6416d6c087b5d76cb0d817911746a7d462a9853d035f48b8bde408a7e3904",
+      "bytes": 2365968
+    },
+    "grib:2018-08-20T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "b7bc482e11fa4f683fa072a00debd938825a4d5d3dadef9c7fd18faea220ec17",
+      "byte_range": [
+        79733282,
+        81753022
+      ],
+      "sha256": "56a6d469aa23403a3565fb6be4c9937e4090210b709adfb3096e5569663aef82",
+      "bytes": 2019741
+    },
+    "grib:2018-08-20T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "a61cf42e9ebf54aa464c70d3bf5a59219d62946c73b0667e49b3bd6a74e7b842",
+      "byte_range": [
+        65168959,
+        67005641
+      ],
+      "sha256": "7d8897ef44163464580b55feace0f7aef02c43318c6762a861dd3b5ec574a551",
+      "bytes": 1836683
+    },
+    "grib:2018-08-20T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180820/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "3b20110e46e8e78a9622132a159fbfa5e1ad5ef47d7803e5f73b676748af5ef2",
+      "byte_range": [
+        64535929,
+        65992788
+      ],
+      "sha256": "4b55d2a6cc8c7b9741a7e232fb2bec6f6e108d26df3e01ca2d1aaef58edf2a85",
+      "bytes": 1456860
+    },
+    "grib:2018-08-21T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "b7e6d0e2bdcfc94b4e5e78115f8311d745f5393c4b6718a6516b74ae1fa8ce09",
+      "byte_range": [
+        62108627,
+        63017115
+      ],
+      "sha256": "c64698ae05d43636c1586dfc4009705ed645bc9c92b3dbee2235949c1063f0ef",
+      "bytes": 908489
+    },
+    "grib:2018-08-21T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "5748391bd5af4fb2210203adbe47c740aa31070f1fa2c3faacde51b9c815e8ad",
+      "byte_range": [
+        81888822,
+        83179129
+      ],
+      "sha256": "b7324c104fa784e9563946836619ab5b68aa9b66d14d77f78814399356f27040",
+      "bytes": 1290308
+    },
+    "grib:2018-08-21T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "c2dd42badc51875cb80c853667d80b5cb9feaa0222b693d518e017908a12ffe3",
+      "byte_range": [
+        75112040,
+        77504967
+      ],
+      "sha256": "0f3b5564d55d84a7142d3c3102deec2096913903f88a905a6c2547cdcdc455a6",
+      "bytes": 2392928
+    },
+    "grib:2018-08-21T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "4acfa8404c5785502ac633fe769ba006fb8d31a37946cfea1112e9fbe3224c41",
+      "byte_range": [
+        81693989,
+        83721720
+      ],
+      "sha256": "d886edd9d9e333ce2d523dc2fb5e9e106cd1d9dcae7accce6ac280b10f942340",
+      "bytes": 2027732
+    },
+    "grib:2018-08-21T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "b57fd2db56b16d20b747771e2ab1e383be6fe724fe5796d29aba90a198474236",
+      "byte_range": [
+        64887058,
+        66709377
+      ],
+      "sha256": "f08339a81c29509ea9814a1c4effe5411d7d20b2d88a20ff9dbe3fc52a229277",
+      "bytes": 1822320
+    },
+    "grib:2018-08-21T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180821/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "89dcda7787d46410521a55c43170d2cda5787f80d3367dfcc971c120ac476b63",
+      "byte_range": [
+        65437070,
+        66877773
+      ],
+      "sha256": "e6aaf1c46d9b2cc866900c2edc494431b0dce60332f50fbd429708cbf91a9d2c",
+      "bytes": 1440704
+    },
+    "grib:2018-08-22T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "9b3948b8213adbc277b56d8d188ba31b56a146d329a823f42029433b03a61064",
+      "byte_range": [
+        62717185,
+        63622344
+      ],
+      "sha256": "4cd05057df66410bb91cdd18c641deac60e79e565f6f8bdfa61f17a370bcc8a4",
+      "bytes": 905160
+    },
+    "grib:2018-08-22T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "9bae63da367fde94b894092ed441f89a29138ac611e10ff4ab142fdd9a2279cb",
+      "byte_range": [
+        64541664,
+        66253668
+      ],
+      "sha256": "d9d83005326313b906f5a2bb0c48b395882235c045d5fa367d21357a73fe0ee1",
+      "bytes": 1712005
+    },
+    "grib:2018-08-22T20:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t20z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180822/conus/hrrr.t20z.wrfsfcf00.grib2.idx",
+      "index_sha256": "11a8fa12f8011770033117e54bf3aa757a835c749dc97d638c13528b8357f9e6",
+      "byte_range": [
+        62724167,
+        64004358
+      ],
+      "sha256": "fc3d53e1bb4a766c5a58f00aaa274876a0ef05623f705459daa7a5bd15398de0",
+      "bytes": 1280192
+    },
+    "grib:2018-08-23T12:00:00Z:13:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf13.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf13.grib2.idx",
+      "index_sha256": "e7bfa5a33ae8cd17d52280d05cdc6ebb16a15222d49fad0b9f7766918ea4672b",
+      "byte_range": [
+        78924941,
+        80170995
+      ],
+      "sha256": "5d9ed96719a075a066d3363e280cb19591e8e5fb9e78be6c04b4a296f6921b51",
+      "bytes": 1246055
+    },
+    "grib:2018-08-23T12:00:00Z:2:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf02.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf02.grib2.idx",
+      "index_sha256": "3f2f93d146eb911154c5e9836e4556e2576fcaad358a42e559ac9796aa69cf6a",
+      "byte_range": [
+        70916435,
+        73113858
+      ],
+      "sha256": "000f94252aacdea50f237011425143bb82bf0278283f2906919ff3de5bfbe275",
+      "bytes": 2197424
+    },
+    "grib:2018-08-23T12:00:00Z:8:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf08.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t12z.wrfsfcf08.grib2.idx",
+      "index_sha256": "a683c4e6ed90abdb83ead0e8c5a19c040e1c946f6628fd7efb12c56c9ea4709a",
+      "byte_range": [
+        77365527,
+        79205091
+      ],
+      "sha256": "8b7a255d5d6b08b52f5d36eda500974e4f2441e3a319a49786b3722409b696e4",
+      "bytes": 1839565
+    },
+    "grib:2018-08-23T14:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t14z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180823/conus/hrrr.t14z.wrfsfcf00.grib2.idx",
+      "index_sha256": "557f054e0c64f8dd75701c1a584b6e67a37a7e7905b8c2dded589defa13e17a7",
+      "byte_range": [
+        62493499,
+        64056006
+      ],
+      "sha256": "4ed6d5de6e751753afb09e7bca63564811349aedcfa1ea4ccf2aeb54bc6735cb",
+      "bytes": 1562508
+    },
+    "grib:2018-08-24T01:00:00Z:0:DSWRF": {
+      "url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180824/conus/hrrr.t01z.wrfsfcf00.grib2",
+      "index_url": "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20180824/conus/hrrr.t01z.wrfsfcf00.grib2.idx",
+      "index_sha256": "70c1879f042927505c27645a460226d4d4e283c20d5906b352811880a257565d",
+      "byte_range": [
+        61096281,
+        61980327
+      ],
+      "sha256": "768560b0096f15ee008f5fb3fd957299c2feabc26e6dbbb2670cfecaf01794d0",
+      "bytes": 884047
+    },
+    "zarr:2018-08-09T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "9b2c9b80efb8707254f7b351c6a544c80658f28ee66f7a7c161f905645f106a2",
+      "bytes": 1282582
+    },
+    "zarr:2018-08-09T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "0de43e3b179853df07f92c3c776716e9d167bf5e385353d66e1af0957c6e6bd5",
+      "bytes": 1239965
+    },
+    "zarr:2018-08-09T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "165df55b00d76ea59d9633341cca84b93777cb0d521eb7010f8beaba22083752",
+      "bytes": 614221
+    },
+    "zarr:2018-08-09T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "b553e894368f5bf1eca9f969f44426087b40246c3c9e33b30a85daaf7ed99552",
+      "bytes": 31582
+    },
+    "zarr:2018-08-09T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "9686dbf57ae30f11e45d19297b18cc909128f92f0495b52032411100565c041c",
+      "bytes": 31957
+    },
+    "zarr:2018-08-09T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "d195485016f2ec2b22aa1006da797f130fe1ee324722b4ddbe60fe3f5f9b3203",
+      "bytes": 16314
+    },
+    "zarr:2018-08-09T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "11150ac04f5ce0b7ea3fc75d63ccf4b214ccca33085ab4587e54290a6b4cbe6e",
+      "bytes": 37170
+    },
+    "zarr:2018-08-09T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "a2050a9b02aac1ba0e870b84f40e500d7681d6429168a81e927f029963d75f68",
+      "bytes": 35251
+    },
+    "zarr:2018-08-09T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180809/20180809_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "2ea8dc928d6eba89175ffe5370df0e51f0388b242a862246a53ba2c3ecb6e09b",
+      "bytes": 17404
+    },
+    "zarr:2018-08-10T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "3af3460651e7a7012f4df96790a1d7010abe5bd029fd5a9b8b8ac9d75cf64f33",
+      "bytes": 32774
+    },
+    "zarr:2018-08-10T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "072dcbf93ac2ed88f58d4165b1c7e7f40e46b1ebed3b27b8f4e5a60fdc9d6855",
+      "bytes": 32479
+    },
+    "zarr:2018-08-10T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "a640e91eae428a8547fc78e908bb2cf9a71eab4766b137f162bc99592c6b37f0",
+      "bytes": 18733
+    },
+    "zarr:2018-08-10T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "7930f51812039336f0998c48098854933dc370bbeb185d7d4ad3de67b14bbea4",
+      "bytes": 1291085
+    },
+    "zarr:2018-08-10T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "37272c93ead007343ac6fb3c67183630d03dc4c6cc59f8b722f1969a97601ec0",
+      "bytes": 1250970
+    },
+    "zarr:2018-08-10T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "743c371eb6dab092721a3e83c97e13c331360da8cadb919a6fa579bd61c224e9",
+      "bytes": 610358
+    },
+    "zarr:2018-08-10T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "30e0cc1d54f75801c29f5b628051f5528d8dd906ce7d56c418e7b8846f940589",
+      "bytes": 33030
+    },
+    "zarr:2018-08-10T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "c33974244fe62b270f29f7efeccc4b6879b69ded78fba89936185b8f34fe1005",
+      "bytes": 32078
+    },
+    "zarr:2018-08-10T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "61172359389456a9497559c3348ca109e40f015d53a32a8e9b44630a0f86115c",
+      "bytes": 16347
+    },
+    "zarr:2018-08-10T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "073cc6c7d2a1a3684dde9bb10862269d324bf4352fb24c161f1a6bd7fd1a069d",
+      "bytes": 35134
+    },
+    "zarr:2018-08-10T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "f31558846c9d9bda6a2f7636162c1ce81498c3a3f92e6c360a3526838b20a09d",
+      "bytes": 34581
+    },
+    "zarr:2018-08-10T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180810/20180810_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "1acaf95fe3401524dd020dd9f507e43484611ffb8103641cef7a6a767c7d6b2d",
+      "bytes": 17865
+    },
+    "zarr:2018-08-11T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "6947db235b4d1a030e7ebac844d62c661ae5731f5b65c44c0b21ecd96a4d6955",
+      "bytes": 34800
+    },
+    "zarr:2018-08-11T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "94c43dbf3fe61a2899f83014c82dbc9821f6ea92323f9d30c692c92b87efab6c",
+      "bytes": 33104
+    },
+    "zarr:2018-08-11T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "e912187e0542ca415417e1fa69032b2adf08571e6b2ef6f2b427a7883b92f543",
+      "bytes": 17997
+    },
+    "zarr:2018-08-11T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "148d0e336b8aa61fb9fd92c1ed97d93eca03a03b079e1aea397d4e118661fa83",
+      "bytes": 1302681
+    },
+    "zarr:2018-08-11T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "00b50c2dd3b1204801479dcbf8dfbc0dfbf7032800629a4f5fd324c4218f40d7",
+      "bytes": 1266693
+    },
+    "zarr:2018-08-11T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "c0d759598800d42a57968842f5fcec217e76bb71b2b64f8ce4247f3c3aef444d",
+      "bytes": 593706
+    },
+    "zarr:2018-08-11T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "e8f1ba1b3797710ab9acb34da95ae0d741929a7cc81b1bb45241935a7f4e8055",
+      "bytes": 33033
+    },
+    "zarr:2018-08-11T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "6192bd313b0e0366cf2a7286c472e330c700e70d5213d82dd7292430084f2e0f",
+      "bytes": 31867
+    },
+    "zarr:2018-08-11T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "655a517b14742af7fc34de0946e6086707168a1430eeb4f334d6ab8d9f1cb643",
+      "bytes": 15665
+    },
+    "zarr:2018-08-11T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "1138cb4b766334f8ba7050f55c9cb4d7a2f54c17e6c58ed3b379abea2c6a9a73",
+      "bytes": 35962
+    },
+    "zarr:2018-08-11T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "982916ad42cc022b04749e15523cf118a6eb17c51420866f7c7976cc1dff959d",
+      "bytes": 34366
+    },
+    "zarr:2018-08-11T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180811/20180811_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "4b888c75f59c8da323ae16bbf44fd7d5e39354d71d1ecff1e4562a8713e4e8b5",
+      "bytes": 17491
+    },
+    "zarr:2018-08-12T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "45f3fda82a4f55aebfc7a7044ac07c04f3825d0c2bacdb783fdcc230d0a6e815",
+      "bytes": 34266
+    },
+    "zarr:2018-08-12T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "d3aec6f8acd5255d1b7d261490456a80b704c4cc87150a6d7dadfaa2f48d6c64",
+      "bytes": 33353
+    },
+    "zarr:2018-08-12T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "11bb4aebbb6680b34d68c747c5624efcfdb327871db1ae75a9874c5f78c5e1d3",
+      "bytes": 16978
+    },
+    "zarr:2018-08-12T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "759da1cb5507ad4c7463a9d8043aa69ae95648d6080458afb784e6712eb14479",
+      "bytes": 1300858
+    },
+    "zarr:2018-08-12T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "cb2dca43d191cb8207623b71db429fc151c1e021c51b4b82981e11b516f726ba",
+      "bytes": 1230936
+    },
+    "zarr:2018-08-12T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "0513b3f5aae30e54ae82899d922534b096505c597f104bb0a9e9c9279969ca38",
+      "bytes": 591152
+    },
+    "zarr:2018-08-12T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "adb9fc5238d1cd1a8a54d13ea06266c934e8e403558de5a615afee4ec3914a5b",
+      "bytes": 33803
+    },
+    "zarr:2018-08-12T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "845b3825074faacb18bebf38b96d925bfb783b8690cf161bfb2b952bcb4f2f87",
+      "bytes": 33063
+    },
+    "zarr:2018-08-12T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "f0cd1f7dbf19fc9374d0be00e59cc76b38274d1b6e7d61531ec8ef15aaebb904",
+      "bytes": 15887
+    },
+    "zarr:2018-08-12T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "8f7bfe645a47304de6dfff4fdc9755ca6c37539a67b2d3d452005999161847e1",
+      "bytes": 35054
+    },
+    "zarr:2018-08-12T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "158420cc4934ffcced07d96715f7704ce4453d4d55b07a41b9ed3fab374f975c",
+      "bytes": 34364
+    },
+    "zarr:2018-08-12T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180812/20180812_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "d2b91380c59d7a2682307271dcef0eb30b0b9e5a1526ac7abdd701e8339ced1f",
+      "bytes": 17452
+    },
+    "zarr:2018-08-13T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "762cde3f8a7396f7b20e1536870fe8a68fa11f7188789f75df88ca142a936790",
+      "bytes": 32518
+    },
+    "zarr:2018-08-13T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "fe811b0704b5c05b4f25e04a0ca7a9c7fb6ae52c58f4101acdaeeabc3ed1de92",
+      "bytes": 33687
+    },
+    "zarr:2018-08-13T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "1ea338986f14930b7e53944617c55e7879fc94cd2a06ac4962d820c8518f0f62",
+      "bytes": 16576
+    },
+    "zarr:2018-08-13T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "7165e1143c5a6d81b984bfb773359528aac347b9431155cb328801d2030eaa4e",
+      "bytes": 1277497
+    },
+    "zarr:2018-08-13T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "2c5ba06399e04f58dee33addd713edeab2f1b2ee7f2318ccdbc8e481a4c4787b",
+      "bytes": 1151454
+    },
+    "zarr:2018-08-13T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "0611dfa233d6d8b59abfbe836ca5b5afc0e4165abeb24ffca494e073f4e7a013",
+      "bytes": 607539
+    },
+    "zarr:2018-08-13T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "0ed757f92031d8e9bd306da06726ff7d8d13dc681b548f7011169db4bf0071c2",
+      "bytes": 32775
+    },
+    "zarr:2018-08-13T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "c952e4c435b8d872a0e463623e012d6983336a04cfe9b3a0d3ac130f0d2c938a",
+      "bytes": 31830
+    },
+    "zarr:2018-08-13T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "cb77749daf0261e510a4b3e4cc543975b3ef71c1defd6d61dc0f64736fdb2ba7",
+      "bytes": 15795
+    },
+    "zarr:2018-08-13T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "975c566b01620d2be13fd17783e99259066636d8a4977d1edb382a3c679e53e1",
+      "bytes": 35058
+    },
+    "zarr:2018-08-13T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "b29422f01a543291e9699f16b9930ff1a63b793eab250753fe6bcf33525655f1",
+      "bytes": 31657
+    },
+    "zarr:2018-08-13T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180813/20180813_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "3cb31ab25ff3e0ad23bc558b3b3230a5af51d124fa18c6c183801b02f150cb81",
+      "bytes": 18534
+    },
+    "zarr:2018-08-14T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "e4ffe167aae10db1f468977dc51b0ba9dac06e7d0ca74b4888886dba9a1b065c",
+      "bytes": 32595
+    },
+    "zarr:2018-08-14T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "264208d5721782b7824a34a08d338d9929f59d6b082f3a35dae54e039a92cd52",
+      "bytes": 32022
+    },
+    "zarr:2018-08-14T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "7e38d321fc85d7e8901490e6a6ad50439540ffbc76ba7f6473791032225bd527",
+      "bytes": 18125
+    },
+    "zarr:2018-08-14T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "de9ca912654c024fda91a46e326f41f89adfcd35237716717be09c7f69c9aa75",
+      "bytes": 1250929
+    },
+    "zarr:2018-08-14T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "95bcff2035b45d27f36769c9c69f70ac12b061bd8b8ac397447641cfd721add8",
+      "bytes": 1104436
+    },
+    "zarr:2018-08-14T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "5b254964bf12215176e06ed8fd290536c97ffcfd9465ddf4e867bd9adcd3dc20",
+      "bytes": 610472
+    },
+    "zarr:2018-08-14T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "8456df20389c9cc4ec923bbcba1b5d3fbbdb075fb1191f0f616be3bc2015289f",
+      "bytes": 33476
+    },
+    "zarr:2018-08-14T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "4ebf6643ef8ff43094c44cb0fc92c0abedc82d23453e3a3264018e0b884b1d17",
+      "bytes": 30535
+    },
+    "zarr:2018-08-14T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "b56975d1a0f2d7c2965fe1fdb43a5a263fc22973acd0779719e82c7c33a6c9fc",
+      "bytes": 16288
+    },
+    "zarr:2018-08-14T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "7bd130de36f2601c939ba001f1b5695c2c3c0b2836d18fa13d9ee4efa2856f7e",
+      "bytes": 34759
+    },
+    "zarr:2018-08-14T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "3b5a331be1ae11fb39188bda3fb604895858bce8366827c912ca23a8eada1fee",
+      "bytes": 28233
+    },
+    "zarr:2018-08-14T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180814/20180814_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "9cafaf26d008338486d6fb3d6d315b450881bef12868de94953898de97d52c1b",
+      "bytes": 18450
+    },
+    "zarr:2018-08-15T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "65cdfa3d0c4d0720ddb000fa952032e70c3bdd3b2bd98c040f19c42f56b0b81d",
+      "bytes": 31173
+    },
+    "zarr:2018-08-15T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "70ce8fcbb24b5445e9fe13e3b74de4e6a7063c7a616ababe0ba7186f3a4f823f",
+      "bytes": 29480
+    },
+    "zarr:2018-08-15T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "20f20af49c75a77a867b7ca4d19d3cd2160420ee60a274348db968f479cee821",
+      "bytes": 18800
+    },
+    "zarr:2018-08-15T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "9c5b9f4d4fbf1c250ca7b3292da6ab7b88d67007ce6dcb61f8336b21704117f1",
+      "bytes": 1238635
+    },
+    "zarr:2018-08-15T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "c33696d7a88e408dd7245dc5aac07c4aab42c5abd46bbff91d1d6865e8199bc4",
+      "bytes": 1082202
+    },
+    "zarr:2018-08-15T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "b5d42b8950dc012b15596ed8a1c2da4f92ad4452c0bc63b5f596dc429e5fd00b",
+      "bytes": 603203
+    },
+    "zarr:2018-08-15T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "54435b472049b1b06a07c0ee288587db783a1ea9d453fda268df9d74a8c4e7a6",
+      "bytes": 32549
+    },
+    "zarr:2018-08-15T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "e244c2f0cb3d1bb6156457cc29dd779bf10dea80268a2cb68b7ee852b05c5e0c",
+      "bytes": 30022
+    },
+    "zarr:2018-08-15T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "1eaca6bbc1a571ff8664770013ae84c7f6bbda21da2ede0cd62dec8916f373b4",
+      "bytes": 16445
+    },
+    "zarr:2018-08-15T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "b675e0b95e71987fe69cb60d2489e7339d30b73ba043cb0bfd002be2e37fb162",
+      "bytes": 35659
+    },
+    "zarr:2018-08-15T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "b20044fd4a7226d9587d49a6d68ffc1f7e75629df65a6f54ff4700b00d6dab78",
+      "bytes": 30048
+    },
+    "zarr:2018-08-15T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180815/20180815_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "5f9a76de0edc297038fc31f7beb89d8f9acab07630e90b6619741412f10ab7d8",
+      "bytes": 17299
+    },
+    "zarr:2018-08-16T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "846a9edcb1a1e45b6707797fffe3263a5f87a965a5468687e150338c086b6a34",
+      "bytes": 31519
+    },
+    "zarr:2018-08-16T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "79504b314299f7d67101bbf6e11eaf6307b3dfe06bfe069217d6ec778dca2cdc",
+      "bytes": 28880
+    },
+    "zarr:2018-08-16T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "3acd18961228cc557102745e1566a1f1492981fec156afb9b465fdf6429e1df9",
+      "bytes": 18693
+    },
+    "zarr:2018-08-16T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "4b33ce2b68814e3ddfe86846bdc6f27347369f327c53cdf06c8615fdd15ef66f",
+      "bytes": 1254469
+    },
+    "zarr:2018-08-16T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "496e78297ba3357128f4c0f2baf683db21dcbc0b9cd5ed4d5434ae1d9e2ebbfb",
+      "bytes": 1103072
+    },
+    "zarr:2018-08-16T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "4aacbb52122338447de4a8c758986aad0f948c6486e5b7f09c4f6654d673f83d",
+      "bytes": 603293
+    },
+    "zarr:2018-08-16T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "d5f7463b7b62f770b2a1ff461f7c46dbcce58896abe8c1a35002c87fd9143b1e",
+      "bytes": 31939
+    },
+    "zarr:2018-08-16T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "24c32e99c7a56cfd51634795b03bc3de1d1bc2a11177ec220f7786402c5e5ac8",
+      "bytes": 29913
+    },
+    "zarr:2018-08-16T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "636b35ed0b94ef5b4986cf98838758e17afafbdab63d36a0555f9aee5d72a0c7",
+      "bytes": 16095
+    },
+    "zarr:2018-08-16T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "85dfab9bc24cbbea891b3bd4a9e95e0df9fb4c15df6852e16eb81632efbacdf5",
+      "bytes": 34573
+    },
+    "zarr:2018-08-16T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "d6bc2471a7ee245cda8bec5d46def87a1cd9c3213cc624e58af249cb62b2bc36",
+      "bytes": 31080
+    },
+    "zarr:2018-08-16T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180816/20180816_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "b24c55296d3427e14fce7014ac756d653fa49e6d2de0224a0257fff09be62863",
+      "bytes": 17220
+    },
+    "zarr:2018-08-17T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "da43c2cbf659d4e9a68d62d32aeec9787b74402fb2f8ea0dc2a28f8f0daa4b6c",
+      "bytes": 32095
+    },
+    "zarr:2018-08-17T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "8dd42ea16182d2769216e188cb47965a2183908786c193133660a8d0a01888d1",
+      "bytes": 29035
+    },
+    "zarr:2018-08-17T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "354094b1a287e7a27a2ecceceaca3dbdbfa1d497a98c1a96c315b079c8112b95",
+      "bytes": 18664
+    },
+    "zarr:2018-08-17T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "cd4662eaae3906aae38998ae87ac5c4a602f196a49a187ba42e1a83f022e9e16",
+      "bytes": 1266159
+    },
+    "zarr:2018-08-17T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "0892ef86e01ac3862e93ad9275cf4fbdb1de7c3a871a272b3c70f0300535902e",
+      "bytes": 1130333
+    },
+    "zarr:2018-08-17T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "762c07bad28cfc29b94a9c6efe2c15337bcbe5f319344baa1af5c61b369765dc",
+      "bytes": 605827
+    },
+    "zarr:2018-08-17T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "270f1dc389cfa3138d5c3e62576420d7937060578f0d84c612042767d822a2ec",
+      "bytes": 32692
+    },
+    "zarr:2018-08-17T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "67007eed930fc09b39e4fa318dc865236bd3626aadade104fc60fbfc039b3d5f",
+      "bytes": 30854
+    },
+    "zarr:2018-08-17T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "826ee811ebd5ed586a0e9a94c3851c03804b72d383eb563218747a4fec30bdf2",
+      "bytes": 16198
+    },
+    "zarr:2018-08-17T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "21e3de1b9de6e5e0b3287f26136f112a43c7871987e374d8cd1e07eb01fd28c4",
+      "bytes": 37350
+    },
+    "zarr:2018-08-17T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "dffb12e3702aa713a089988a181c68b56fc00c392a97c3daeffef1bcd691825d",
+      "bytes": 32249
+    },
+    "zarr:2018-08-17T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180817/20180817_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "cbcfbd6299876a5552e20fc365ebdb2dbe4427a724f27166336880b413fad94b",
+      "bytes": 16821
+    },
+    "zarr:2018-08-18T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "63bff9db85f91e065cf2a8f6dc2ed1519aabed392e3fb352e91966a2b7977f2c",
+      "bytes": 33372
+    },
+    "zarr:2018-08-18T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "d1ab553a7de2b6bd6e2d9e2a812e24611989339c35d1e184e7a7cc210473502f",
+      "bytes": 29858
+    },
+    "zarr:2018-08-18T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "cb11d5aa05ee64fd5ab20de3a984af99c640ba4c8c6f0079a502597b98e0a86a",
+      "bytes": 18961
+    },
+    "zarr:2018-08-18T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "dfe0a37a94fc7b7d38f0885b5695b2bd767651882b7f5337eb41f71d0666c6e9",
+      "bytes": 1270495
+    },
+    "zarr:2018-08-18T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "d6d0f20e4e51ca98bd6610446d83f7f5f4e22af19e7f01a2561aac85b5e71174",
+      "bytes": 1161471
+    },
+    "zarr:2018-08-18T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "5430606fa324fec6ab13b6b73e102215b897e95f56e2eb4a6cd1112578be0997",
+      "bytes": 609851
+    },
+    "zarr:2018-08-18T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "c56b27b4d2b25e93569699899c7d3f0def9ea410b23979d50b012f0f28ff8cc7",
+      "bytes": 32881
+    },
+    "zarr:2018-08-18T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "128859584b301737c5e69fdf11297731f9392e4e3c726f609c8a3608efd18fbb",
+      "bytes": 31668
+    },
+    "zarr:2018-08-18T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "c38adb8ff00c3d1a9558e00d21b48346e9becff02293b06775dc87dde8094003",
+      "bytes": 16138
+    },
+    "zarr:2018-08-18T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "de4c2d4754fd4addc8bb7e4fd4a086fddb3637416eeab993dd911cf0f0fca75d",
+      "bytes": 36955
+    },
+    "zarr:2018-08-18T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "66aff4e8cd1232bb086156fcb67c1acfdd7ca660c178e31712c1bf9e82940ed1",
+      "bytes": 34887
+    },
+    "zarr:2018-08-18T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180818/20180818_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "1eef069ad047e8d283620cffb63a5e793d85418dfa9f4167abf022ea247af367",
+      "bytes": 17085
+    },
+    "zarr:2018-08-19T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "76e99e4635339c6e5c951de2cf30cc3b0a6bca52211dd33cf40f47afa390c3d1",
+      "bytes": 33944
+    },
+    "zarr:2018-08-19T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "60183c7285177bfd39b50632f4f901bf2650250c0643a4c7a03b639ff62adeb1",
+      "bytes": 30815
+    },
+    "zarr:2018-08-19T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "c81a3a729aa48a13f6c04025c5124c2b71706b067859e4cff8970587c1b68a5a",
+      "bytes": 19147
+    },
+    "zarr:2018-08-19T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "3522a54d619bb98cf67844bfb5a38197e327e8fc00d2379347f0bd0320355ec4",
+      "bytes": 1276997
+    },
+    "zarr:2018-08-19T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "5507fe0fd52042da6115412b34e17492b8608c5dc88f97ba76ffbef88c2a1070",
+      "bytes": 1194805
+    },
+    "zarr:2018-08-19T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "c970a8b887397e29a1345702eb4564653c1e08811fc562c763213042fe1e13d0",
+      "bytes": 611228
+    },
+    "zarr:2018-08-19T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "d0b87f98b1056234bfcc1fd13d3f568ce03c4831ca37ccfb0046cae152e06ff5",
+      "bytes": 33405
+    },
+    "zarr:2018-08-19T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "ee3c757957d48e6167f0d244022618ee49f0f1582043e41fe2b133aa1b09f46b",
+      "bytes": 31604
+    },
+    "zarr:2018-08-19T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "4953db17946b4954cc559ff7fa502e54261a943ce16f61f89e2e2b41924b6e59",
+      "bytes": 16462
+    },
+    "zarr:2018-08-19T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "ec514186212f6053488e1194db3da4269a501f26432da98ccf45718ef63b42d4",
+      "bytes": 36343
+    },
+    "zarr:2018-08-19T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "c02a860f936e7050517656d1dc7dd7f6a35e09973e2d95b482790f6bdad6be02",
+      "bytes": 32916
+    },
+    "zarr:2018-08-19T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180819/20180819_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "4058a996d06463591c427114bca634d67b3a55b0beb938307ac3161803993f60",
+      "bytes": 17159
+    },
+    "zarr:2018-08-20T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "4146752f3e4664e08e8c22aaf1720888c05cfbb339c440220284e451ed1ec2b9",
+      "bytes": 32504
+    },
+    "zarr:2018-08-20T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "1fd0070fa7905e558a06de9fef6717056281d54c29b7ca4df98a95e14451a2f3",
+      "bytes": 31165
+    },
+    "zarr:2018-08-20T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "8931dbd04007888889ba9718e89728cd5c514c0af228376b066009c786f258f6",
+      "bytes": 18791
+    },
+    "zarr:2018-08-20T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "3dc718246801b50ddd259a7a0bfad69e3873bb32d1c732c22bcedf80d4c05624",
+      "bytes": 1238241
+    },
+    "zarr:2018-08-20T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "49d189feaf4977dfbdacbc23a53c5e255189145d94de6bd1f861e0d810497065",
+      "bytes": 1199026
+    },
+    "zarr:2018-08-20T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "03d63169b154c8f7e40023f66631928b57aaa94490acf99a219e938b46e0aaa3",
+      "bytes": 604666
+    },
+    "zarr:2018-08-20T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "9b9461323638d0e940c8d9a70fda28e3965b7a876f4b3552e7899e79752ce398",
+      "bytes": 32299
+    },
+    "zarr:2018-08-20T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "cae37d45a9bc1cca403a4212b95a03c502f2daa04879a27631bd24e8201c3b01",
+      "bytes": 31527
+    },
+    "zarr:2018-08-20T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "ce3ae571dcb2f57a743d11c6d0a13dbd478b385674955e8db7d968d7753b5236",
+      "bytes": 16149
+    },
+    "zarr:2018-08-20T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "9b918835f304167d619a6cec4587fec064359740685f27ad7501922b7f1be2be",
+      "bytes": 36148
+    },
+    "zarr:2018-08-20T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "915125c66c758085059ee774e3887e2474cf54071066ecb4665d3f2ca63aedb6",
+      "bytes": 33955
+    },
+    "zarr:2018-08-20T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180820/20180820_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "979017919976845e21f0a38af1e5e07ff6b8a5c427f69d5954f169e4a5be2c03",
+      "bytes": 16805
+    },
+    "zarr:2018-08-21T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "f30eee5f74810e8e486dcf7f2ab174c00580bdddc4f56973b7e0dda1ec953b1d",
+      "bytes": 32741
+    },
+    "zarr:2018-08-21T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "feb2e37bbc4404724acb3386f95f96f3a7de2189c636a541a3b45c98f7be0a49",
+      "bytes": 32406
+    },
+    "zarr:2018-08-21T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "31a763bdcbe1e175707604938529086fe447f0d15353e31fd8fbbfce4d236889",
+      "bytes": 19062
+    },
+    "zarr:2018-08-21T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "2cd3c9164e8ef4ba681959209edb8720f7ecaf785b0f81fb872719a576a68f94",
+      "bytes": 1247367
+    },
+    "zarr:2018-08-21T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "b2e5c68744f8cd47f75e091edeba856467f1b14146b7b468a8b151233e0cd649",
+      "bytes": 1204836
+    },
+    "zarr:2018-08-21T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "85051fc7725672f59410e7d2e18c27fff2bbabcf5bc5e626855c9934362c6b58",
+      "bytes": 609143
+    },
+    "zarr:2018-08-21T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "095ec25fc0e69fcb2ec46af013001303c89a4813036aadbe2218d04b94bd1be3",
+      "bytes": 32563
+    },
+    "zarr:2018-08-21T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "07705abcc5a0511a9994b1d6473deec5173f149eda297aacc8ca926c7426cf06",
+      "bytes": 32054
+    },
+    "zarr:2018-08-21T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "20211a85c669e0b78cd55628354e5d9a05b5c22b68a5ac2257c686a0c875913a",
+      "bytes": 15973
+    },
+    "zarr:2018-08-21T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "649189c2a6046ac3bf24da34526c8c2d0308d45b0a0e293b6a5f7eb6af3f16a0",
+      "bytes": 35150
+    },
+    "zarr:2018-08-21T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "28fd0666140ab25910ace32cf342ebccc3188c538eb6e35dd7cd434e8b1e1c3b",
+      "bytes": 34176
+    },
+    "zarr:2018-08-21T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180821/20180821_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "06b64dbf9920b44d2d9a4c0c51dfada2e18df10781c98b7e2d15991154fd482a",
+      "bytes": 16959
+    },
+    "zarr:2018-08-22T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "1e1531c97601735dc6f325c6ebeffdc36ce23151e7ee5983fd505680e4bcf104",
+      "bytes": 32104
+    },
+    "zarr:2018-08-22T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "e6ea0de529b8196d31387982aaa534e4d1e3ec8dc3915f89d569c1b7ea143a3b",
+      "bytes": 32152
+    },
+    "zarr:2018-08-22T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "e7265066d642283c5f5aac77f8a7864033b4fa481552f21634787a4c10c58e6d",
+      "bytes": 19271
+    },
+    "zarr:2018-08-22T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "85b78d213c3ddb3bcc7a7d002b123321fdf9c75d685db8a73f518a413e52ba91",
+      "bytes": 31826
+    },
+    "zarr:2018-08-22T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "747a709f3cb003ebd55c7df99c1b7a8d9f2c1a264379193cf6d6a729c074cb33",
+      "bytes": 31033
+    },
+    "zarr:2018-08-22T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "122f85a5a56446610a2dfa197d4cf81dcbef378aec455cfa4d2fc4e65070e85e",
+      "bytes": 16204
+    },
+    "zarr:2018-08-22T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "45e4c3e63bd5043825c3bb456df7f2a81e8a286c039977fcae3006e7c6d7888b",
+      "bytes": 36058
+    },
+    "zarr:2018-08-22T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "2f043f5615bb4bf61216c1bc820a87add81f871e74b4cc71cecd86123e80323b",
+      "bytes": 33781
+    },
+    "zarr:2018-08-22T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180822/20180822_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "4495c89e720423a467b1068c0abca8735363fc84d576296ae95ad788db903044",
+      "bytes": 17192
+    },
+    "zarr:2018-08-23T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "553fa0db38753a9c2b3636a3d3485cea803891e7eed031a52739d73909c2010f",
+      "bytes": 33365
+    },
+    "zarr:2018-08-23T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "142612538cb45c6e020bcbdf0c5bde03f085270310304897afd942d753662208",
+      "bytes": 32870
+    },
+    "zarr:2018-08-23T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "94da109d96a6bfb683b7a9e24ef181a5676a57d4c676ae1440404d0af25913f5",
+      "bytes": 19401
+    },
+    "zarr:2018-08-23T12:00:00Z:fcst:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_12z_fcst.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/0.1.5",
+      "sha256": "6b6864a23fd54b650389201582f3eb8f00d07241e1dc84e08c48860e0d9df8d8",
+      "bytes": 1256548
+    },
+    "zarr:2018-08-23T12:00:00Z:fcst:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_12z_fcst.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/0.1.5",
+      "sha256": "4198127ae61ee47fae29fae738e34e6a7a0e4874aa981e0ccd275bcbc61e7c2b",
+      "bytes": 1101541
+    },
+    "zarr:2018-08-23T12:00:00Z:fcst:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_12z_fcst.zarr/2m_above_ground/TMP/2m_above_ground/TMP/0.1.5",
+      "sha256": "167951be3e78f8af1ed2ab1ff12bdb318be6b8a79fc1542eacbd9fb9477d4aa4",
+      "bytes": 611549
+    },
+    "zarr:2018-08-23T14:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_14z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "9839a04712c86301f7559c64ee61b1ee3fdbbf0c8279e10d45fad4cd4b93509a",
+      "bytes": 32007
+    },
+    "zarr:2018-08-23T14:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_14z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "8e59f6962d776319908d3c65761612742f548d68587d86b6fb19e5806bb3cc1f",
+      "bytes": 31414
+    },
+    "zarr:2018-08-23T14:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_14z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "e38ad1e5ef76df5092c50676f81518f497fc8217c12c161d6e6bb290229d68bb",
+      "bytes": 16215
+    },
+    "zarr:2018-08-23T20:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_20z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "285120119cd402a0726e621b969735ad401a9b3948c23f36731ec924bba9ffa7",
+      "bytes": 37456
+    },
+    "zarr:2018-08-23T20:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_20z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "62ebbccf0169bb7ae2a363b3841a10932b6fde58241ff3a0ba5fc229ab625964",
+      "bytes": 31537
+    },
+    "zarr:2018-08-23T20:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180823/20180823_20z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "6362f566410d2bfb4d708821742d152c782173f32c35a2455022abbba82c1048",
+      "bytes": 17310
+    },
+    "zarr:2018-08-24T01:00:00Z:anl:hub_u_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180824/20180824_01z_anl.zarr/80m_above_ground/UGRD/80m_above_ground/UGRD/1.5",
+      "sha256": "b9394f5940884678a83c4e5c2f4d82bfa4fb65588eefd3d8f032cbd585f687f2",
+      "bytes": 34092
+    },
+    "zarr:2018-08-24T01:00:00Z:anl:hub_v_ms": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180824/20180824_01z_anl.zarr/80m_above_ground/VGRD/80m_above_ground/VGRD/1.5",
+      "sha256": "dfbf87a9f3664cda6762815dc6b7fb5c12136bde05c676c9ab4eea12b4a1664c",
+      "bytes": 30801
+    },
+    "zarr:2018-08-24T01:00:00Z:anl:temperature_kelvin": {
+      "url": "https://hrrrzarr.s3.amazonaws.com/sfc/20180824/20180824_01z_anl.zarr/2m_above_ground/TMP/2m_above_ground/TMP/1.5",
+      "sha256": "4a220ea81397ba3b557c4b7533b6a7b86a6afb0be9160e86dd285358a24b8c75",
+      "bytes": 19298
+    }
+  },
+  "unavailable_products": {
+    "grib:2018-08-12T20:00:00Z:0:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-15T14:00:00Z:0:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-17T14:00:00Z:0:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-22T12:00:00Z:13:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-22T12:00:00Z:2:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-22T12:00:00Z:8:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-23T01:00:00Z:0:DSWRF": "HTTP Error 404: Not Found",
+    "grib:2018-08-23T20:00:00Z:0:DSWRF": "HTTP Error 404: Not Found",
+    "zarr:2018-08-22T12:00:00Z:fcst:hub_u_ms": "HTTP Error 404: Not Found",
+    "zarr:2018-08-22T12:00:00Z:fcst:hub_v_ms": "HTTP Error 404: Not Found",
+    "zarr:2018-08-22T12:00:00Z:fcst:temperature_kelvin": "HTTP Error 404: Not Found"
+  }
+}

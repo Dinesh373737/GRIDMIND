@@ -20,7 +20,13 @@ def import_packs(factory):
                 **replay_manifest(pack), "interval_minutes": option["step_minutes"],
                 "demand_error_factors": list(pack_demand_errors(ticks, pack)),
             }
+            if not any(item.renewable_outlook is not None for item in ticks):
+                manifest.pop("renewable_outlook", None)
             rows = [asdict(item) for item in ticks]
+            for row in rows:
+                # Keep the serialized form and digest of pre-outlook datasets unchanged.
+                if row["renewable_outlook"] is None:
+                    del row["renewable_outlook"]
             digest = hashlib.sha256(
                 json.dumps({"manifest": manifest, "rows": rows}, sort_keys=True, allow_nan=False).encode()
             ).hexdigest()

@@ -23,6 +23,11 @@
 .ins-facts { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%, 145px),1fr)); gap: 12px 18px; margin: 0; padding: 0 21px 20px; }
 .ins-facts dt, .ins-power span { color: var(--ins-muted); font-size: .78rem; }
 .ins-facts dd { margin: 3px 0 0; font-size: .95rem; font-weight: 730; overflow-wrap: anywhere; }
+.ins-estimate-guide { display: grid; gap: 5px; padding: 11px 15px; border: 1px solid var(--ins-line); border-radius: 9px; background: var(--ins-paper); }
+.ins-estimate-guide p { margin: 0; color: var(--ins-muted); font-size: .84rem; line-height: 1.5; }
+.ins-estimate-guide strong { color: var(--ins-ink); }
+.ins-estimates { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 13px 0 17px; margin: 0 21px; border-top: 1px solid var(--ins-line); }
+.ins-fact-note { display: block; margin-top: 5px; color: var(--ins-muted); font-size: .76rem; font-weight: 400; line-height: 1.4; }
 .ins-power { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin: 0 21px 17px; border-radius: 8px; background: #f2f7f4; }
 .ins-power > div { min-width: 0; padding: 12px; display: grid; gap: 2px; }
 .ins-power > div + div { border-left: 1px solid var(--ins-line); }

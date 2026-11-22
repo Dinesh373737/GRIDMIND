@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import lru_cache
+from hashlib import sha256
 import json
 from pathlib import Path
 from random import Random
@@ -42,6 +43,7 @@ class ReplayTick:
     outlook_condition: str | None = None
     data_kind: str = "regional_demand_proxy"
     forecast_solar_range: tuple[float, float] | None = None
+    renewable_outlook: dict | None = None
 
 
 def solar_yield(irradiance_wm2: float, temperature_c: float) -> float:
@@ -96,12 +98,101 @@ def _meter_overlay(pack: str) -> dict | None:
     return None
 
 
+def _outlook_time(value: str) -> datetime:
+    try:
+        stamp = datetime.fromisoformat(value)
+    except (TypeError, ValueError) as error:
+        raise ValueError("Renewable outlook dates must be ISO UTC timestamps") from error
+    if stamp.utcoffset() != timedelta(0):
+        raise ValueError("Renewable outlook dates must be ISO UTC timestamps")
+    return stamp
+
+
+def _outlook_key(row: dict, prefix: str = "") -> tuple[datetime, datetime]:
+    return (_outlook_time(row.get(f"{prefix}forecast_issued_at")),
+            _outlook_time(row.get(f"{prefix}forecast_valid_at")))
+
+
+def _unit_factor(value: object, name: str) -> float:
+    if type(value) not in (int, float) or not 0 <= value <= 1:
+        raise ValueError(f"Renewable outlook {name} must be a finite number from 0 to 1")
+    return float(value)
+
+
+@lru_cache(maxsize=4)
+def _read_renewable_outlook(source_path: Path, source_mtime: int,
+                            artifact_path: Path, artifact_mtime: int) -> tuple[dict, dict]:
+    # Older Windows worktrees can still have CRLF after an update. Verify the
+    # canonical LF bytes without accepting any change to the JSON content.
+    source_raw = source_path.read_bytes().replace(b"\r\n", b"\n")
+    artifact_raw = artifact_path.read_bytes().replace(b"\r\n", b"\n")
+    artifact = json.loads(artifact_raw)
+    if not isinstance(artifact, dict) or type(artifact.get("schema_version")) is not int or artifact["schema_version"] != 1:
+        raise ValueError("Unknown Austin renewable outlook schema version")
+    source_sha256 = sha256(source_raw).hexdigest()
+    if artifact.get("source_pack_sha256") != source_sha256:
+        raise ValueError("Austin renewable outlook source hash does not match austin_public.json")
+    method = artifact.get("method")
+    if not isinstance(method, dict) or not all(isinstance(method.get(k), str) and method[k].strip()
+                                               for k in ("id", "target_label")):
+        raise ValueError("Austin renewable outlook method requires an id and target label")
+    manifest = {
+        "schema_version": 1,
+        "source_pack_sha256": source_sha256,
+        "artifact_sha256": sha256(artifact_raw).hexdigest(),
+        "method": {k: method[k].strip() for k in ("id", "target_label")},
+    }
+    entries = artifact.get("outlooks")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("Austin renewable outlook requires an array of outlooks")
+    points = {_outlook_key(row, "next_"): row for row in json.loads(source_raw)["ticks"]}
+    by_key = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("Austin renewable outlook entries must be objects")
+        key = issued, valid = _outlook_key(entry)
+        if issued >= valid or key in by_key:
+            raise ValueError("Austin renewable outlook requires unique issue/target pairs with issuance before target")
+        outlook = {"method_id": manifest["method"]["id"], "target_label": manifest["method"]["target_label"]}
+        source = points.get(key)
+        for kind in ("solar", "wind"):
+            band_name, margin_name = f"{kind}_scenario_factor_range", f"{kind}_margin_factor"
+            if band_name not in entry or margin_name not in entry:
+                raise ValueError(f"Austin renewable outlook requires both {band_name} and {margin_name}")
+            band, margin = entry[band_name], entry[margin_name]
+            if band is not None:
+                if not isinstance(band, list) or len(band) != 2:
+                    raise ValueError(f"Austin renewable outlook {band_name} must have two bounds")
+                low, high = (_unit_factor(bound, band_name) for bound in band)
+                point = source.get(f"forecast_{kind}_factor") if source is not None else None
+                if low > high or source is not None and (point is None or not low <= point <= high):
+                    raise ValueError(f"Austin renewable outlook {band_name} must enclose the archived forecast")
+                band = (low, high)
+            outlook[band_name] = band
+            outlook[margin_name] = None if margin is None else _unit_factor(margin, margin_name)
+        by_key[key] = outlook
+    return manifest, by_key
+
+
+def _renewable_outlook(pack: str) -> tuple[dict, dict] | None:
+    if pack != PACK:
+        return None
+    artifact = DATA / "austin_renewable_ml.json"
+    if not artifact.is_file():
+        return None
+    source = DATA / "austin_public.json"
+    return _read_renewable_outlook(source, source.stat().st_mtime_ns, artifact, artifact.stat().st_mtime_ns)
+
+
 def replay_manifest(pack: str = PACK) -> dict:
     public = _public(pack)
     manifest = dict(public["manifest"])
     overlay = _meter_overlay(pack)
     if overlay:
         manifest["local_meter_overlay"] = overlay["manifest"]
+    renewable_outlook = _renewable_outlook(pack)
+    if renewable_outlook:
+        manifest["renewable_outlook"] = renewable_outlook[0]
     return manifest
 
 
@@ -121,10 +212,16 @@ def load_replay(pack: str = PACK) -> tuple[ReplayTick, ...]:
     public = _public(pack)
     overlay = _meter_overlay(pack)
     meter_rows = overlay["ticks"] if overlay else {}
-    return tuple(
-        ReplayTick(**(row | meter_rows.get(row["timestamp"], {})))
-        for row in public["ticks"]
-    )
+    renewable_outlook = _renewable_outlook(pack)
+    outlooks = renewable_outlook[1] if renewable_outlook else {}
+    ticks = []
+    for row in public["ticks"]:
+        meter_row = meter_rows.get(row["timestamp"], {})
+        # The local Pecan band describes a different solar point and target.
+        # Do not combine it with archived weather scenario / error factors.
+        outlook = outlooks.get(_outlook_key(row, "next_")) if outlooks and not meter_row else None
+        ticks.append(ReplayTick(**(row | meter_row), renewable_outlook=outlook.copy() if outlook else None))
+    return tuple(ticks)
 
 
 def load_ugim_benchmark() -> dict | None:
@@ -161,7 +258,7 @@ def engine_frame(ticks: tuple[ReplayTick, ...], offset: int, *,
     }
     if row.data_kind == "meter_profile":
         measurements.update(austin_meter_demand_kw=row.demand_kw, austin_meter_solar_kw=row.solar_kw)
-    return {
+    frame = {
         "step": offset,
         "timestamp": row.timestamp,
         "load_factor": row.load_factor,
@@ -176,6 +273,9 @@ def engine_frame(ticks: tuple[ReplayTick, ...], offset: int, *,
         "weather": weather,
         "measurements": measurements,
     }
+    if row.renewable_outlook is not None:
+        frame["renewable_outlook"] = row.renewable_outlook
+    return frame
 
 
 @dataclass(frozen=True)
@@ -256,6 +356,7 @@ def augment_weather(frame: dict, seed: int, interval_minutes: int) -> dict:
     if outlook.label != "Archive":
         modeled.update(outlook_condition=outlook.label, outlook_issued_at=None,
                        outlook_source_kind="synthetic")
+        result.pop("renewable_outlook", None)
         if frame.get("forecast_solar_factor") is not None:
             result["forecast_solar_factor"] = _transmit_solar(frame["forecast_solar_factor"], outlook)
         if frame.get("forecast_wind_factor") is not None:

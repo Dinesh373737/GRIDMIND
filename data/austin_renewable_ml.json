@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "source_pack_sha256": "675a32a9bac4dc27e2d0527a81d4f163d44cee8aed9849a679a693636cd76dc7",
+  "training_data_sha256": "0dae756e1eedbf7d4cc3562aa10d853c33098c173268aca34cf2d8a9e2446f5b",
+  "method": {
+    "id": "hrrr-analysis-ridge-abs-error-v1",
+    "target_label": "NOAA HRRR weather-model analysis for the same hour, not measured generation",
+    "features": [
+      "intercept",
+      "point_factor",
+      "point_factor_squared",
+      "lead_hours_divided_by_13"
+    ],
+    "ridge_penalty": 0.1,
+    "ridge_penalty_excludes_intercept": true,
+    "residual_calibration_target": 0.8,
+    "training_forecast_issue_hour_utc": 12,
+    "training_sample_lead_hours": [
+      2,
+      8,
+      13
+    ],
+    "chronological_split_issue_dates_utc": {
+      "fit": [
+        "2018-08-09",
+        "2018-08-15"
+      ],
+      "calibration": [
+        "2018-08-16",
+        "2018-08-19"
+      ],
+      "test": [
+        "2018-08-20",
+        "2018-08-23"
+      ]
+    },
+    "first_replay_issue_utc": "2018-08-24T12:00:00+00:00",
+    "unavailable_public_products": 11,
+    "observational_coverage_claim": false
+  },
+  "source": {
+    "filename": "austin_public.json",
+    "sha256": "675a32a9bac4dc27e2d0527a81d4f163d44cee8aed9849a679a693636cd76dc7",
+    "forecast_archive": "University of Utah HRRR Zarr and original NOAA GRIB2 irradiance",
+    "forecast_source": "https://registry.opendata.aws/noaa-hrrr-pds/",
+    "gridpoint": {
+      "latitude": 30.2672,
+      "longitude": -97.7431,
+      "x_index": 891,
+      "y_index": 223
+    },
+    "publication_delay_minutes": 60.0
+  },
+  "scenario_assumptions": {
+    "id": "archived-renewable-physical-sensitivity",
+    "label": "Scenario range",
+    "interpretation": "Modeled what-if bounds under fixed perturbations; no coverage claim.",
+    "pv_relative_yield_delta": 0.2,
+    "wind_hub_speed_delta_ms": 1.0,
+    "wind_cut_in_rated_cut_out_ms": [
+      3.0,
+      12.0,
+      25.0
+    ]
+  },
+  "models": {
+    "solar": {
+      "ridge_coefficients": [
+        0.117142982905,
+        0.088814333955,
+        -0.098418780393,
+        -0.111506768016
+      ],
+      "calibration_residual_addon_factor": 0.000652105708,
+      "calibration_rank_one_based": 10,
+      "fit_n": 19,
+      "fit_issue_days": 7,
+      "calibration_n": 11,
+      "calibration_issue_days": 4,
+      "test": {
+        "n": 8,
+        "issue_days": 3,
+        "point_mae_factor": 0.0192853489,
+        "uncalibrated_error_model_mae_factor": 0.0486700215,
+        "analysis_hits": 7,
+        "analysis_coverage": 0.875,
+        "mean_margin_factor": 0.0626119667,
+        "mean_clipped_width_factor": 0.1232047387
+      }
+    },
+    "wind": {
+      "ridge_coefficients": [
+        0.001077527252,
+        0.410191013939,
+        0.313390633917,
+        0.025468001434
+      ],
+      "calibration_residual_addon_factor": 0.032123787702,
+      "calibration_rank_one_based": 11,
+      "fit_n": 21,
+      "fit_issue_days": 7,
+      "calibration_n": 12,
+      "calibration_issue_days": 4,
+      "test": {
+        "n": 9,
+        "issue_days": 3,
+        "point_mae_factor": 0.0260379097,
+        "uncalibrated_error_model_mae_factor": 0.0176067671,
+        "analysis_hits": 8,
+        "analysis_coverage": 0.8888888889,
+        "mean_margin_factor": 0.0544855273,
+        "mean_clipped_width_factor": 0.0692809485
+      }
+    }
+  },
+  "outlooks": [
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-24T19:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.660968,
+        0.991452
+      ],
+      "solar_margin_factor": 0.063949354,
+      "wind_scenario_factor_range": [
+        0.034671828,
+        0.1392237898
+      ],
+      "wind_margin_factor": 0.0805410867
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-24T20:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.621224,
+        0.931836
+      ],
+      "solar_margin_factor": 0.0587961233,
+      "wind_scenario_factor_range": [
+        0.0246312712,
+        0.1175365234
+      ],
+      "wind_margin_factor": 0.0755508649
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-24T21:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.543008,
+        0.814512
+      ],
+      "solar_margin_factor": 0.0555386907,
+      "wind_scenario_factor_range": [
+        0.0096303843,
+        0.0826710356
+      ],
+      "wind_margin_factor": 0.0669552758
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-24T22:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.423616,
+        0.635424
+      ],
+      "solar_margin_factor": 0.0514538352,
+      "wind_scenario_factor_range": [
+        0.0008009655,
+        0.0598234616
+      ],
+      "wind_margin_factor": 0.0624644545
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-24T23:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.286584,
+        0.429876
+      ],
+      "solar_margin_factor": 0.0426292095,
+      "wind_scenario_factor_range": [
+        0.0230777472,
+        0.1140827573
+      ],
+      "wind_margin_factor": 0.0803475662
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T00:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.124024,
+        0.186036
+      ],
+      "solar_margin_factor": 0.0262692239,
+      "wind_scenario_factor_range": [
+        0.0217818842,
+        0.1111785458
+      ],
+      "wind_margin_factor": 0.0814037754
+    },
+    {
+      "forecast_issued_at": "2018-08-24T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T01:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0062883206,
+      "wind_scenario_factor_range": [
+        0.0021135115,
+        0.0633860767
+      ],
+      "wind_margin_factor": 0.0693201846
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T02:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.1006402012,
+      "wind_scenario_factor_range": [
+        0.1501162992,
+        0.3529116628
+      ],
+      "wind_margin_factor": 0.1525973253
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T03:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0920627575,
+      "wind_scenario_factor_range": [
+        0.3948821469,
+        0.7399250732
+      ],
+      "wind_margin_factor": 0.3594767213
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T04:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0834853138,
+      "wind_scenario_factor_range": [
+        0.3960938111,
+        0.7417441554
+      ],
+      "wind_margin_factor": 0.3625688751
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T05:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0749078701,
+      "wind_scenario_factor_range": [
+        0.2420342209,
+        0.5039952609
+      ],
+      "wind_margin_factor": 0.2299153006
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T06:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0663304265,
+      "wind_scenario_factor_range": [
+        0.201828807,
+        0.4390885613
+      ],
+      "wind_margin_factor": 0.1998369327
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T07:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0577529828,
+      "wind_scenario_factor_range": [
+        0.1174419142,
+        0.2963354669
+      ],
+      "wind_margin_factor": 0.1384834847
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T08:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0491755391,
+      "wind_scenario_factor_range": [
+        0.1326277042,
+        0.3228772211
+      ],
+      "wind_margin_factor": 0.1514642975
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T09:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0405980954,
+      "wind_scenario_factor_range": [
+        0.1013378383,
+        0.2676360025
+      ],
+      "wind_margin_factor": 0.1308748254
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T10:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0320206517,
+      "wind_scenario_factor_range": [
+        0.0538801324,
+        0.1784200411
+      ],
+      "wind_margin_factor": 0.0996601581
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T11:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.023443208,
+      "wind_scenario_factor_range": [
+        0.021340584,
+        0.110184496
+      ],
+      "wind_margin_factor": 0.079136879
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T12:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.0,
+        0.0
+      ],
+      "solar_margin_factor": 0.0148657643,
+      "wind_scenario_factor_range": [
+        0.0135317141,
+        0.0921119541
+      ],
+      "wind_margin_factor": 0.0756106174
+    },
+    {
+      "forecast_issued_at": "2018-08-25T00:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T13:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.073,
+        0.1095
+      ],
+      "solar_margin_factor": 0.0135731384,
+      "wind_scenario_factor_range": [
+        0.0,
+        0.0575476785
+      ],
+      "wind_margin_factor": 0.0677222719
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T14:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.072608,
+        0.108912
+      ],
+      "solar_margin_factor": 0.1078902775,
+      "wind_scenario_factor_range": [
+        0.0121445664,
+        0.0887914369
+      ],
+      "wind_margin_factor": 0.0550356627
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T15:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.060472,
+        0.090708
+      ],
+      "solar_margin_factor": 0.0982138831,
+      "wind_scenario_factor_range": [
+        0.0069376578,
+        0.0759512394
+      ],
+      "wind_margin_factor": 0.053262211
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T16:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.505552,
+        0.758328
+      ],
+      "solar_margin_factor": 0.1003072848,
+      "wind_scenario_factor_range": [
+        0.0191700883,
+        0.1052561914
+      ],
+      "wind_margin_factor": 0.0639064692
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T17:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.617784,
+        0.926676
+      ],
+      "solar_margin_factor": 0.0848019892,
+      "wind_scenario_factor_range": [
+        0.0163086693,
+        0.0986518763
+      ],
+      "wind_margin_factor": 0.0638573289
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T18:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.652672,
+        0.979008
+      ],
+      "solar_margin_factor": 0.0732816738,
+      "wind_scenario_factor_range": [
+        0.0069734186,
+        0.0760417157
+      ],
+      "wind_margin_factor": 0.0591653224
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T19:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.64724,
+        0.97086
+      ],
+      "solar_margin_factor": 0.0651870355,
+      "wind_scenario_factor_range": [
+        0.008856477,
+        0.0807582858
+      ],
+      "wind_margin_factor": 0.0624819516
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T20:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.60952,
+        0.91428
+      ],
+      "solar_margin_factor": 0.0597119038,
+      "wind_scenario_factor_range": [
+        0.0043276095,
+        0.0692472598
+      ],
+      "wind_margin_factor": 0.0611572851
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T21:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.539848,
+        0.809772
+      ],
+      "solar_margin_factor": 0.0557140801,
+      "wind_scenario_factor_range": [
+        0.0,
+        0.0475988396
+      ],
+      "wind_margin_factor": 0.0572326706
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T22:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.425776,
+        0.638664
+      ],
+      "solar_margin_factor": 0.051411497,
+      "wind_scenario_factor_range": [
+        0.0,
+        0.0528019403
+      ],
+      "wind_margin_factor": 0.0605680277
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-25T23:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.283616,
+        0.425424
+      ],
+      "solar_margin_factor": 0.0425599573,
+      "wind_scenario_factor_range": [
+        0.0,
+        0.0427254999
+      ],
+      "wind_margin_factor": 0.0598857178
+    },
+    {
+      "forecast_issued_at": "2018-08-25T12:00:00+00:00",
+      "forecast_valid_at": "2018-08-26T00:00:00+00:00",
+      "solar_scenario_factor_range": [
+        0.122672,
+        0.184008
+      ],
+      "solar_margin_factor": 0.0261704182,
+      "wind_scenario_factor_range": [
+        0.0098790183,
+        0.0832825483
+      ],
+      "wind_margin_factor": 0.073010552
+    }
+  ]
+}

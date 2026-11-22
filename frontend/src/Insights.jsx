@@ -11,6 +11,9 @@ const runTitle = run => `${run.locality_name ?? 'Locality'} · ${label(run.scena
 const latest = runtime => typeof runtime.step === 'object' && runtime.step ? runtime.step : runtime.run?.latest;
 const hasOutputRange = ({ range_low_kw: low, range_high_kw: high }) =>
   Number.isFinite(low) && Number.isFinite(high) && low >= 0 && high >= low;
+const formatOutputRange = row => hasOutputRange(row) ? `${qty(row.range_low_kw)}–${qty(row.range_high_kw, 'kW')}` : 'Not available';
+const hasScenarioRange = row => row.range_kind === 'scenario';
+const hasModelErrorMargin = ({ model_error_margin_kw: margin }) => Number.isFinite(margin) && margin >= 0;
 const metrics = [
   ['served_kwh', 'Energy served'], ['unserved_kwh', 'Energy unserved'],
   ['essential_served_kwh', 'Essential energy served'], ['essential_unserved_kwh', 'Essential energy unserved'],
@@ -29,14 +32,25 @@ function Empty({ children }) {
 function Tag({ children, tone }) {
   return <span className={`ins-tag${tone ? ' ins-tag-' + tone : ''}`}>{children}</span>;
 }
-function Facts({ rows }) {
-  return <dl className="ins-facts">{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>;
+function Facts({ rows, className = '' }) {
+  return <dl className={`ins-facts${className ? ' ' + className : ''}`}>{rows.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>;
 }
 function Table({ headers, rows, empty }) {
   return rows.length ? <div className="ins-table-scroll" tabIndex={0} role="region" aria-label={headers.join(', ')}>
     <table className="ins-table"><thead><tr>{headers.map(x => <th key={x} scope="col">{x}</th>)}</tr></thead>
       <tbody>{rows.map((row, index) => <tr key={index}>{row.map((col, i) => <td key={i}>{col}</td>)}</tr>)}</tbody></table>
   </div> : <Empty>{empty}</Empty>;
+}
+
+function RenewableEstimates({ row }) {
+  const target = typeof row.model_error_target === 'string' && row.model_error_target.trim();
+  return <Facts className="ins-estimates" rows={[
+    [hasScenarioRange(row) ? 'Scenario range' : 'Output range', formatOutputRange(row)],
+    ['Model error margin', hasModelErrorMargin(row) ? <>
+      ±{qty(row.model_error_margin_kw, 'kW')}
+      <span className="ins-fact-note">{target ? `Compared with ${target}.` : 'Validation reference not available.'}</span>
+    </> : 'Not available'],
+  ]} />;
 }
 
 export function Renewables({ runtime }) {
@@ -46,6 +60,8 @@ export function Renewables({ runtime }) {
   const owners = (run?.participants ?? participants).filter(row => Number(row.solar_kw) > 0 || Number(row.wind_kw) > 0);
   const chosen = owners.some(x => x.id === owner) ? owner : '';
   const outlook = (sample?.renewables ?? []).filter(row => !chosen || row.participant_id === chosen);
+  const scenarioRanges = outlook.some(hasScenarioRange);
+  const modelMargins = outlook.some(hasModelErrorMargin);
   return <div className="ins-view">
     <Header section="Forecasting" title="Renewable outlook" detail="Archived weather estimates for the selected simulation interval.">
       <label className="ins-select">Participant<select value={chosen} onChange={e => setOwner(e.target.value)}>
@@ -53,13 +69,18 @@ export function Renewables({ runtime }) {
       </select></label>
     </Header>
     {sample && <div className="ins-context"><span>INTERVAL {Number(sample.step) + 1}</span><span>{date(sample.timestamp)}</span><span>{run?.locality_name}</span></div>}
-    {outlook.some(row => !hasOutputRange(row)) && <p className="ins-desc">
+    {(scenarioRanges || modelMargins) && <aside className="ins-estimate-guide" aria-label="Interpreting renewable estimates">
+      {scenarioRanges && <p><strong>Scenario range:</strong> Low and high output under the replay’s what-if weather assumptions, not a prediction interval.</p>}
+      <p><strong>Model error margin:</strong> Estimated forecast error against a weather-model reference, not a confidence interval for actual generation.</p>
+    </aside>}
+    {outlook.some(row => !hasScenarioRange(row) && !hasModelErrorMargin(row) && !hasOutputRange(row)) && <p className="ins-desc">
       A range is unavailable when this replay doesn’t provide uncertainty bands for all of a participant’s renewable sources. The solar and wind forecasts shown are still model estimates.
     </p>}
     {!outlook.length ? <Panel title="Energy outlook"><Empty>{!sample ? 'Start or select a simulation to see renewable estimates.' : !owners.length ? 'Register a solar or wind asset to see a participant outlook.' : 'No forecast is available for this participant in the selected interval.'}</Empty></Panel> :
       <div className="ins-cards">{outlook.map(row => {
         const name = row.participant_name ?? owners.find(x => x.id === row.participant_id)?.name ?? 'Participant';
         const short = Number(row.shortfall_kw) > 0;
+        const showEstimates = hasScenarioRange(row) || hasModelErrorMargin(row);
         return <Panel key={row.participant_id} title={name} detail={`Valid ${date(row.valid_at ?? sample.timestamp)}`} controls={<Tag tone={short ? 'amber' : 'green'}>{label(row.condition) || 'Archived forecast'}</Tag>}>
           <div className="ins-power">
             <div><span>Solar forecast</span><strong>{qty(row.forecast_solar_kw, 'kW')}</strong></div>
@@ -67,9 +88,10 @@ export function Renewables({ runtime }) {
           </div>
           <Facts rows={[
             ['Expected load', qty(row.expected_load_kw, 'kW')],
-            ['Output range', hasOutputRange(row) ? `${qty(row.range_low_kw)}–${qty(row.range_high_kw, 'kW')}` : 'Not available'],
+            ...(!showEstimates ? [['Output range', formatOutputRange(row)]] : []),
             ['Possible shortfall', qty(row.shortfall_kw, 'kW')],
           ]} />
+          {showEstimates && <RenewableEstimates row={row} />}
           {row.advisory && <p className="ins-advice">{row.advisory}</p>}
         </Panel>;
       })}</div>}

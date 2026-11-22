@@ -127,7 +127,7 @@ def prepare(source: Path, *, pv_delta: float = DEFAULT_PV_DELTA,
     """Generate a deterministic report from archived point forecasts, not variation over time."""
     pv_delta = finite_in(pv_delta, 0, 1, "PV fraction delta")
     wind_delta_ms = finite_in(wind_delta_ms, 0, CUT_OUT_MS, "hub wind speed delta")
-    raw = source.read_bytes()
+    raw = source.read_bytes().replace(b"\r\n", b"\n")
     pack = json.loads(raw)
     manifest, ticks = pack["manifest"], pack["ticks"]
     if not ticks:

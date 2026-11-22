@@ -30,6 +30,45 @@ The displayed next-hour risk estimates the modeled locality breaching its import
 
 The virtual microgrid assumes eligible solar and wind can contribute during islanding when a configured battery can form the island. Capacity, battery limits, urgency, priority policy and bid prices are scenario inputs. See [database design and queries](docs/DBMS.md).
 
+### Austin renewable ranges and model error
+
+Start a **new** Austin replay and open **Renewable Outlook**. The standard public replay shows two separate quantities: **Scenario range** (what the virtual asset would produce under stated changes to the archived forecast), and **Model error margin** (how far the point estimate may be from a later weather-model reference). Neither is a prediction interval for measured electricity generation. Saved runs keep their original dataset and results. Meter-overlay intervals and weather-varied intervals do not inherit margins learned for the unmodified public forecasts.
+
+**Clock and preprocessing.** Group the quarter-hour replay rows by the NOAA forecast's UTC issue and target timestamps. Keep the first available occurrence and require `issue + 60 minutes ≤ replay time < target`. The 120 rows represent 30 unique forecasts; repeated quarter-hour rows aren't independent examples. Keep source data unchanged and check its SHA-256 before joining the derived results.
+
+**Scenario formulas.** Factors are fractions of nameplate power, so an asset rated `C` kW has estimated output `C × factor`.
+
+- **Solar:** With irradiance `G` (W/m²) and ambient temperature `T` (°C), the virtual panel's temperature is `T_cell = T + 0.028G` and its output factor is `s = clip((G/1000) × [1 − 0.004(T_cell − 25)], 0, 1)`. The scenario is `[max(0, 0.8s), min(1, 1.2s)]`.
+- **Wind:** Hub speed is `v = sqrt(U² + V²)` from the 80 m wind components. The virtual turbine factor is zero below 3 m/s and at or above 25 m/s; otherwise `w(v) = min(1, (v³ − 3³)/(12³ − 3³))`. For a bundled point factor strictly between zero and one, invert with `v = [3³ + w × (12³ − 3³)]^(1/3)`. The wind scenario takes the minimum and maximum of `w` on `[max(0, v − 1), v + 1]`, including rated speed and cut-out if crossed.
+- **Combined participant:** Add capacity-scaled lower endpoints and upper endpoints across installed renewable sources. These are simultaneous what-if bounds, not a joint probability distribution.
+
+**Learned error margin.** Fit a separate ridge regression for solar and wind. The archived forecast factor `p` stays the point estimate; the training label is `e = |p_analysis − p|`, with the later NOAA HRRR analysis at the same Austin grid point and target hour passed through the same power curves. The analysis is a modeled weather reference, not an electricity meter. For a forecast lead of `h` hours, use `x = [1, p, p², h/13]`. Fit coefficients by minimizing `Σ(e − xβ)² + 0.10 × Σβⱼ²` over the non-intercept coefficients. The initial half-width is `g(x) = clip(xβ, 0, 1)`. On the separate calibration days, sort `e − g(x)` and take its `ceil(0.80 × (n_cal + 1))`-th smallest value `q`. The reported factor margin is `m = clip(g(x) + max(0, q), 0, 1)`; the `±` kW margin is `Σ Cᵢmᵢ` across installed sources. For single-source validation, compare the later analysis to `[max(0, p − m), min(1, p + m)]`. The margin is displayed separately; it does not silently widen the what-if bounds or affect trading.
+
+The model panel uses August 2018 Austin HRRR forecasts issued at 12:00 UTC, at leads 2, 8, and 13 hours, paired to same-target HRRR analyses. Dates are split by forecast issue day: August 9–15 for fitting, August 16–19 for selecting the margin adjustment, and August 20–23 for a final held-out check. All precede the bundled replay forecast cycles. The historical sample is short and drawn from one issue cycle, so its proxy coverage and nominal calibration setting are not guarantees for other cycles, weather regimes, or actual generation. Pecan Street meter data was audited separately and is not used to train this artifact; EIA demand, ORNL outage data, and the Porto P2P benchmark do not train the margins.
+
+| Held-out metric (against the HRRR modeled reference) | Solar | Wind |
+| --- | ---: | ---: |
+| Fit / calibration / test pairs | 19 / 11 / 8 | 21 / 12 / 9 |
+| Test targets within the margin | 7/8 | 8/9 |
+| Point MAE (% of nameplate) | 1.93% | 2.60% |
+| Mean reported half-width (% of nameplate) | 6.26% | 5.45% |
+| Mean full width after physical clipping (% of nameplate) | 12.32% | 6.93% |
+
+A fixed-margin baseline (start with mean fit-set absolute error, then use the
+same residual calibration rule) covered 7/8 solar and 9/9 wind targets, with
+mean clipped widths of 12.66% and 10.06% of nameplate. The adaptive model
+was narrower on this sample, with the same solar coverage and one fewer
+wind hit. This small comparison does not establish that ridge performs better
+in general.
+
+The final evaluations span three distinct issue days for each source. The preparation requested 45 issue–target pairs and retained available fields without filling archive gaps (11 products were unavailable). It uses DSWRF surface irradiance from the original NOAA GRIB2 and 2 m temperature plus 80 m U/V wind from the University of Utah HRRR Zarr archive, at the Austin grid point (indexed x=891, y=223). The [checked-in training data](data/austin_renewable_ml_training.json) stores only derived public grid-point inputs and source checksums. The [derived replay artifact](data/austin_renewable_ml.json) stores trained coefficients, held-out metrics, and the 30 scenario ranges and margins. To reproduce the fit and artifact offline:
+
+```sh
+python -m scripts.train_renewable_ml
+```
+
+The app reads the committed data at startup; no packages or weather downloads are required at runtime beyond the normal app dependencies. SHA-256 checks use LF line endings; Git keeps the data JSON files in that format, and existing CRLF checkouts are normalized before hashing. Re-fetching the archived public inputs is optional: install `eccodes`, `numcodecs`, and `numpy` into an analysis environment and run `python -m scripts.fetch_renewable_ml_training` before training. See [the exploratory range report](docs/RENEWABLE_RANGE_SENSITIVITY.md) for the original offline scenario prototype and separate local meter check.
+
 ### Tests
 
 ```powershell
