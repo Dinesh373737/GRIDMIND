@@ -7,7 +7,7 @@ This is a deployment/runbook, not evidence that AWS was changed. **No AWS comman
 1. Identify the account (and region(s)) containing the existing Amplify app, Cognito pool, `gridmind-backend`, `gridmind-events` and `gridmind-exports-el`. Compare account IDs. Use a read-only billing identity for the first pass. Do not switch plans, sign up for AWS Organizations, activate another paid service, or accept prompts to upgrade.
 2. In [Billing and Cost Management](https://console.aws.amazon.com/billing/), verify **Free account plan**, expiry date/days remaining, actual credit balance and expiry, and credit applicability to the specific services usage. Review Free Tier and this month's Bills by service for gross usage/current costs as well as the credit offset and net amount. Record the timestamp and current running resources. A reported $120 is not a verified balance. [AWS plan details](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans.html).
 3. Read the instance ID, state, instance type, CPU credit mode, AMI/OS, EBS volume sizes/types, snapshots, public IPv4/EIP, attachment state, current endpoint/TLS DNS, existing instance profile and authorized management access. Then review Amplify auto-build branches and artifacts, Cognito app client details (public browser client; authorization-code flow with PKCE; only approved demo users), DynamoDB keys/billing mode, and bucket region, encryption, versioning, and access settings. Verify current usage, prices and credit coverage before any build, test, storage write or start. Stop preflight on any unknown or plausible out-of-pocket charge. Do not trigger a deployment build, including an auto-build from an authorized `main` update, until preflight passes.
-4. Reuse the known EC2 instance and existing internet-facing HTTPS endpoint; do not stand up a paid load balancer, NAT gateway, hosted zone, extra IPv4, snapshot, RDS or new database/table/bucket as a workaround. If no existing endpoint can safely provide HTTPS to the Amplify frontend, pause rather than expose raw HTTP/port 8000. Changing branch build settings may trigger a billable build; inspect first.
+4. Reuse the known EC2 instance and existing internet-facing HTTPS endpoint; do not stand up a paid load balancer, NAT gateway, hosted zone, extra IPv4, snapshot, RDS or new database/table/bucket as a workaround. If no existing endpoint can safely provide HTTPS to Amplify, pause rather than expose raw HTTP or port 8000. A temporary direct-IP HTTPS demo is an exception only with explicit approval for the exact ingress and deployment window (see below). Changing branch build settings may trigger a billable build; inspect first.
 
 ## 2. Early before-credit budget (notification only)
 
@@ -37,6 +37,38 @@ Use the repository-root `amplify.yml` (Node 22.12+ or another Vite-supported LTS
 
 Allow the exact Amplify URL with trailing slash as both callback and logout URL. Use authorization code + PKCE with the `openid` scope, no app client secret. Verify the Amplify branch's default route opens the React dashboard, and confirm sign-out and the authorization gate before testing a run. Do not change the existing Amplify app or create new hosting until the billing gate passes.
 
+
+### Approved temporary public-IP HTTPS demo
+
+This only applies when the owner approves temporary demo ingress. Run the
+normal billing, budget, client and instance-role gates first. Reserve a short
+demo window, check the EC2 instance-initiated shutdown behavior is **stop**
+before relying on an in-guest shutdown timer, and independently verify that
+EC2 stops when the window ends. Do not allocate an Elastic IP or add a new
+cloud service, and do not open SSH, port 8000 or port 3306.
+
+1. Start the existing instance for the demo and use Session Manager for
+   administration. Keep FastAPI and MySQL bound to loopback. Capture the
+   assigned public IPv4 and confirm that it belongs to this instance.
+2. With the approved temporary port 80 rule, issue a
+   [short-lived IP certificate](https://letsencrypt.org/2026/03/11/shorter-certs-certbot)
+   using an official ACME client supporting IP identifiers. Use HTTP only for
+   the certificate challenge, never for the API. Remove the port 80 rule as
+   soon as validation finishes, including on failure. Expose port 443 only
+   through a TLS reverse proxy to loopback FastAPI. Verify the IP SAN, trust
+   chain, HTTPS health and signed-in origin allowlist without bypassing TLS.
+3. For this short demo, set `VITE_API_BASE_URL=https://PUBLIC_IPV4` and
+   `VITE_GRIDMIND_DEMO_EXPIRES_AT=YYYY-MM-DDTHH:MM:SSZ` on the approved
+   Amplify branch, with a UTC cutoff **before** the planned removal of access
+   and shutdown. Verify the browser build blocks sign-in and API traffic
+   after cutoff, clears local auth state, and doesn't send a bearer token to
+   a stale IP. The expiry is a defense for the planned teardown, not a
+   permanent hostname; do not reuse an old build or trust its endpoint after
+   the instance releases its IP.
+4. After the test run, expire demo browser access, remove the demo-only 443
+   rule and stop the instance. Verify both removal and the **stopped** state.
+   A later demo may require a fresh IP, certificate and frontend build.
+   Never use this temporary route as an always-on production URL.
 
 ### On-demand Bedrock run explanations
 
