@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './agentDemo.css';
+
+const STEP_DURATION_MS = 1450;
+const PLAYBACK_SPEEDS = [0.5, 1, 1.5, 2];
+const newStepClock = () => ({ remaining: STEP_DURATION_MS });
 
 const agents = {
   grid: { name: 'Grid Reliability', short: 'ASSESS', description: 'Checks the upstream connection', icon: 'grid' },
@@ -40,29 +44,45 @@ export default function AgentDemo() {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [speed, setSpeed] = useState(1);
+  const stepClock = useRef(newStepClock());
   const current = steps[index];
   const ended = index === steps.length - 1;
   const status = ended ? 'Interval validated' : index > 0 ? 'Islanded · market enabled' : 'Waiting for feeder assessment';
 
   useEffect(() => {
-    if (!playing) return undefined;
+    if (!playing || ended) return undefined;
+    const clock = stepClock.current;
+    const startedAt = window.performance.now();
     const handle = window.setTimeout(() => {
+      if (stepClock.current !== clock) return;
+      stepClock.current = newStepClock();
       setIndex(index + 1);
       if (index + 1 === steps.length - 1) setPlaying(false);
-    }, 1450);
-    return () => window.clearTimeout(handle);
-  }, [index, playing]);
+    }, clock.remaining / speed);
+    return () => {
+      window.clearTimeout(handle);
+      // Keep time in 1× units so pausing or changing speed only affects the time left.
+      if (stepClock.current === clock) {
+        clock.remaining = Math.max(0, clock.remaining - (window.performance.now() - startedAt) * speed);
+      }
+    };
+  }, [index, playing, ended, speed]);
 
   function play() {
     if (playing) {
       setPlaying(false);
       return;
     }
-    if (ended) setIndex(0);
+    if (ended) {
+      stepClock.current = newStepClock();
+      setIndex(0);
+    }
     setHasStarted(true);
     setPlaying(true);
   }
   function next() {
+    stepClock.current = newStepClock();
     setPlaying(false);
     if (!hasStarted) {
       setHasStarted(true);
@@ -71,6 +91,7 @@ export default function AgentDemo() {
     }
   }
   function reset() {
+    stepClock.current = newStepClock();
     setPlaying(false);
     setHasStarted(false);
     setIndex(0);
@@ -87,7 +108,7 @@ export default function AgentDemo() {
         <span className="gm-demo-pill">DEMO ONLY</span>
       </header>
 
-      <div className="gm-demo-console">
+      <div className="gm-demo-console" style={{ '--demo-flow-duration': `${750 / speed}ms` }}>
         <div className="gm-demo-console-head">
           <div>
             <p className="gm-demo-kicker">SCENARIO 01 <span>·</span> FICTIONAL LOCALITY</p>
@@ -127,6 +148,12 @@ export default function AgentDemo() {
             </button>
             <button type="button" onClick={next} disabled={ended}>Next step</button>
             <button type="button" onClick={reset} disabled={!hasStarted}>Reset</button>
+            <label className="gm-demo-speed">
+              Playback speed
+              <select value={speed} onChange={(event) => setSpeed(Number(event.target.value))}>
+                {PLAYBACK_SPEEDS.map((rate) => <option key={rate} value={rate}>{rate}×</option>)}
+              </select>
+            </label>
           </div>
           <div className="gm-demo-progress" aria-label={`Step ${hasStarted ? index + 1 : 0} of ${steps.length}`}>
             {steps.map((s, i) => <i className={hasStarted && i <= index ? 'is-done' : ''} key={s.time}/>)}

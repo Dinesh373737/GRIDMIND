@@ -9,6 +9,8 @@ const label = value => String(value ?? '').replaceAll('_', ' ').replace(/^./, c 
 const val = value => typeof value === 'object' && value !== null ? JSON.stringify(value) : typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value ?? '—';
 const runTitle = run => `${run.locality_name ?? 'Locality'} · ${label(run.scenario)}`;
 const latest = runtime => typeof runtime.step === 'object' && runtime.step ? runtime.step : runtime.run?.latest;
+const hasOutputRange = ({ range_low_kw: low, range_high_kw: high }) =>
+  Number.isFinite(low) && Number.isFinite(high) && low >= 0 && high >= low;
 const metrics = [
   ['served_kwh', 'Energy served'], ['unserved_kwh', 'Energy unserved'],
   ['essential_served_kwh', 'Essential energy served'], ['essential_unserved_kwh', 'Essential energy unserved'],
@@ -51,6 +53,9 @@ export function Renewables({ runtime }) {
       </select></label>
     </Header>
     {sample && <div className="ins-context"><span>INTERVAL {Number(sample.step) + 1}</span><span>{date(sample.timestamp)}</span><span>{run?.locality_name}</span></div>}
+    {outlook.some(row => !hasOutputRange(row)) && <p className="ins-desc">
+      A range is unavailable when this replay doesn’t provide uncertainty bands for all of a participant’s renewable sources. The solar and wind forecasts shown are still model estimates.
+    </p>}
     {!outlook.length ? <Panel title="Energy outlook"><Empty>{!sample ? 'Start or select a simulation to see renewable estimates.' : !owners.length ? 'Register a solar or wind asset to see a participant outlook.' : 'No forecast is available for this participant in the selected interval.'}</Empty></Panel> :
       <div className="ins-cards">{outlook.map(row => {
         const name = row.participant_name ?? owners.find(x => x.id === row.participant_id)?.name ?? 'Participant';
@@ -62,7 +67,7 @@ export function Renewables({ runtime }) {
           </div>
           <Facts rows={[
             ['Expected load', qty(row.expected_load_kw, 'kW')],
-            ['Output range', row.range_low_kw != null && row.range_high_kw != null ? `${qty(row.range_low_kw)}–${qty(row.range_high_kw, 'kW')}` : '—'],
+            ['Output range', hasOutputRange(row) ? `${qty(row.range_low_kw)}–${qty(row.range_high_kw, 'kW')}` : 'Not available'],
             ['Possible shortfall', qty(row.shortfall_kw, 'kW')],
           ]} />
           {row.advisory && <p className="ins-advice">{row.advisory}</p>}

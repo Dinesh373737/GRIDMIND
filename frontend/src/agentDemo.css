@@ -17,7 +17,7 @@
 .gm-demo-links { position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
 .gm-demo-link-base,.gm-demo-link-live { fill:none; stroke:#557365; stroke-width:1.5; vector-effect:non-scaling-stroke; }
 .gm-demo-link-live { stroke:#c9eb7e; stroke-width:2.3; stroke-dasharray:4 7; }
-.gm-demo-link-live.is-playing { animation:gm-demo-flow .75s linear infinite; }
+.gm-demo-link-live.is-playing { animation:gm-demo-flow var(--demo-flow-duration,750ms) linear infinite; }
 @keyframes gm-demo-flow { to { stroke-dashoffset:-22; } }
 .gm-demo-node { display:flex; align-items:flex-start; gap:8px; min-width:0; border:1px solid #39574a; border-radius:11px; padding:10px 9px; background:#20382d; box-shadow:0 4px 15px #06180e50; }
 .gm-demo-node-grid { grid-row:1; grid-column:1; }
@@ -34,12 +34,14 @@
 .gm-demo-node p { color:#bad0c4; font-size:10px; line-height:1.25; }
 .gm-demo-controls { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid #385548; padding-top:15px; }
 .gm-demo-controls-buttons,.gm-demo-progress { display:flex; gap:7px; align-items:center; flex-wrap:wrap; }
-.gm-demo-controls button { border:1px solid #547264; color:#edf7eb; background:#223d32; border-radius:8px; min-height:36px; padding:5px 11px; font-size:12px; font-weight:750; font-family:inherit; }
+.gm-demo-controls button,.gm-demo-speed select { border:1px solid #547264; color:#edf7eb; background:#223d32; border-radius:8px; min-height:36px; padding:5px 11px; font-size:12px; font-weight:750; font-family:inherit; }
 .gm-demo-controls button:not(:disabled):hover { background:#345743; }
 .gm-demo-controls .gm-demo-play { border-color:#c7e783; background:#c7e783; color:#172d16; }
 .gm-demo-controls .gm-demo-play:not(:disabled):hover { background:#d6f097; }
 .gm-demo-controls button:disabled { opacity:.45; cursor:not-allowed; }
-.gm-demo-controls button:focus-visible { outline:2px solid #c7e783; outline-offset:3px; }
+.gm-demo-controls button:focus-visible,.gm-demo-speed select:focus-visible { outline:2px solid #c7e783; outline-offset:3px; }
+.gm-demo-speed { display:flex; align-items:center; gap:7px; color:#d4e7da; font-size:12px; font-weight:750; }
+.gm-demo-speed select { color-scheme:dark; }
 .gm-demo-progress { color:#c3d5c8; gap:4px; font-size:11px; font-variant-numeric:tabular-nums; }
 .gm-demo-progress i { width:14px; height:4px; border-radius:10px; background:#527165; }
 .gm-demo-progress .is-done { background:#c7e783; }
