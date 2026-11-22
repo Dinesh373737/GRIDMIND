@@ -1,7 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {useRuntime} from './runtime';
-import {cloudAuth,signIn,signOut} from './api';
+import {cloudAuth,explainRun,signIn,signOut} from './api';
 import Market from './Market';
 import Registry from './Registry';
 import Simulation from './Simulation';
@@ -73,7 +73,7 @@ function App(){
   }
   const props={runtime,status,onAction,navigate};
   const authError=[401,403].includes(status.error?.status);
-  const view={market:<Market {...props}/>,simulation:<Simulation {...props} startSignal={startSignal} onStartSignalConsumed={()=>setStartSignal(0)}/>,registry:<Registry {...props}/>,activity:<Activity {...props}/>,renewables:<Renewables {...props}/>,database:<Reports {...props}/>,demo:<AgentDemo/>};
+  const view={market:<Market {...props}/>,simulation:<Simulation {...props} requestExplanation={explainRun} startSignal={startSignal} onStartSignalConsumed={()=>setStartSignal(0)}/>,registry:<Registry {...props}/>,activity:<Activity {...props}/>,renewables:<Renewables {...props}/>,database:<Reports {...props}/>,demo:<AgentDemo/>};
   return <div className="gm-shell">
     <a className="gm-skip" href="#primary-content" onClick={event=>{event.preventDefault();ref.current?.focus();}}>Skip to content</a>
     <aside className={'gm-rail'+(menu?' opened':'')}>

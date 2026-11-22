@@ -6,7 +6,7 @@ This is a deployment/runbook, not evidence that AWS was changed. **No AWS comman
 
 1. Identify the account (and region(s)) containing the existing Amplify app, Cognito pool, `gridmind-backend`, `gridmind-events` and `gridmind-exports-el`. Compare account IDs. Use a read-only billing identity for the first pass. Do not switch plans, sign up for AWS Organizations, activate another paid service, or accept prompts to upgrade.
 2. In [Billing and Cost Management](https://console.aws.amazon.com/billing/), verify **Free account plan**, expiry date/days remaining, actual credit balance and expiry, and credit applicability to the specific services usage. Review Free Tier and this month's Bills by service for gross usage/current costs as well as the credit offset and net amount. Record the timestamp and current running resources. A reported $120 is not a verified balance. [AWS plan details](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans.html).
-3. Read the instance ID, state, instance type, CPU credit mode, AMI/OS, EBS volume sizes/types, snapshots, public IPv4/EIP, attachment state, current endpoint/TLS DNS, existing instance profile and authorized management access. Then review Amplify auto-build branches and artifacts, Cognito app client details (public browser client; authorization-code flow with PKCE; only approved demo users), DynamoDB keys/billing mode, and bucket region, encryption, versioning, and access settings. Verify current usage, prices and credit coverage before any build, test, storage write or start. Stop preflight on any unknown or plausible out-of-pocket charge. Do not deploy from or test against `main`.
+3. Read the instance ID, state, instance type, CPU credit mode, AMI/OS, EBS volume sizes/types, snapshots, public IPv4/EIP, attachment state, current endpoint/TLS DNS, existing instance profile and authorized management access. Then review Amplify auto-build branches and artifacts, Cognito app client details (public browser client; authorization-code flow with PKCE; only approved demo users), DynamoDB keys/billing mode, and bucket region, encryption, versioning, and access settings. Verify current usage, prices and credit coverage before any build, test, storage write or start. Stop preflight on any unknown or plausible out-of-pocket charge. Do not trigger a deployment build, including an auto-build from an authorized `main` update, until preflight passes.
 4. Reuse the known EC2 instance and existing internet-facing HTTPS endpoint; do not stand up a paid load balancer, NAT gateway, hosted zone, extra IPv4, snapshot, RDS or new database/table/bucket as a workaround. If no existing endpoint can safely provide HTTPS to the Amplify frontend, pause rather than expose raw HTTP/port 8000. Changing branch build settings may trigger a billable build; inspect first.
 
 ## 2. Early before-credit budget (notification only)
@@ -29,10 +29,47 @@ At the end of deployment/demo, confirm no live audience or active simulation sti
 
 ### Amplify React build values
 
-Use the repository-root `amplify.yml` (Node 22.12+ or another Vite-supported LTS release). On the approved **non-main branch only**, set these public build-time values; never place secrets in Vite variables:
+Use the repository-root `amplify.yml` (Node 22.12+ or another Vite-supported LTS release). On the approved release branch (use `main` only with the repository owner's authorization and after preflight), set these public build-time values; never place secrets in Vite variables:
 
 - `VITE_API_BASE_URL`: existing HTTPS API origin, without `/api`.
 - `VITE_COGNITO_DOMAIN`: existing Cognito HTTPS managed-login origin.
 - `VITE_COGNITO_CLIENT_ID`: existing public app client ID, matching the backend verifier.
 
 Allow the exact Amplify URL with trailing slash as both callback and logout URL. Use authorization code + PKCE with the `openid` scope, no app client secret. Verify the Amplify branch's default route opens the React dashboard, and confirm sign-out and the authorization gate before testing a run. Do not change the existing Amplify app or create new hosting until the billing gate passes.
+
+
+### On-demand Bedrock run explanations
+
+Regular reports do not depend on Bedrock. The run history can request an optional
+explanation of a completed simulation. Keep `GRIDMIND_BEDROCK_ENABLED=0` until
+the exact account, region, model access, applicable credit, and current usage
+are verified. Enabling it in cloud mode allows only the regional Amazon Nova
+Lite model `amazon.nova-lite-v1:0` in `us-east-1`, not a cross-region inference
+profile. There is no background invocation. A database claim allows at most
+one inference attempt per run, even after a timeout. The SDK does not retry;
+the response is limited to 220 tokens and a successful result is stored in
+MySQL. Only compact numeric run aggregates
+are sent; participant names, account details, raw event logs, and credentials
+are not sent. An explanation is supplementary, not a replacement for the
+structured report.
+
+For `Converse`, the EC2 instance profile needs the following single-model IAM
+statement (review and obtain any required permission before applying it). Do
+not grant Bedrock Marketplace actions, broad Bedrock access, or static keys:
+
+```json
+{
+  "Effect": "Allow",
+  "Action": "bedrock:InvokeModel",
+  "Resource": "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-lite-v1:0"
+}
+```
+
+[Model and regional support](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-lite.html)
+· [Converse permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html)
+· [Bedrock pricing](https://aws.amazon.com/bedrock/pricing/).
+Until account coverage and authorization are confirmed, use the disabled mode
+and do not make a test call. For a gated smoke test, explain one completed run,
+refresh the page, and verify the next request uses the persisted result rather
+than calling the model again. Check that disabled and unavailable states leave
+the ordinary run report visible.

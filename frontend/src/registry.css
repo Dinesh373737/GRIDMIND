@@ -89,3 +89,10 @@
   .gm-record-fields{grid-template-columns:1fr}
   .gm-record-card-head{padding-inline:13px}
 }
+.gm-run-history .gm-record-scroll{container-type:inline-size}
+.gm-run-explanation{position:sticky;inset-inline-start:0;max-inline-size:min(72ch,calc(100cqi - 42px));white-space:normal;overflow-wrap:anywhere;padding:12px 14px;border-radius:8px;background:var(--gm-r-faint);border:1px solid var(--gm-r-line)}
+.gm-run-explanation h3{margin:0;font-size:.9rem}
+.gm-run-explanation p{margin:6px 0 0}
+.gm-run-explanation-note{color:var(--gm-r-muted)}
+.gm-run-explanation-text{white-space:pre-wrap}
+.gm-run-explanation button{margin-top:9px}

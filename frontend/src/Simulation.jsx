@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Field, Records, RecordDialog, format} from './Registry';
+import {RunExplanation, useRunExplanations} from './RunExplanation';
 import './registry.css';
 
 const scenarios = {
@@ -81,12 +82,13 @@ function RiskChart({events,step}) {
   </svg>;
 }
 
-export default function Simulation({runtime={},onAction,navigate,startSignal,onStartSignalConsumed}) {
+export default function Simulation({runtime={},onAction,navigate,requestExplanation,startSignal,onStartSignalConsumed}) {
   const {localities=[],localityId,participants=[],packs=[],runs=[],run,step,events}=runtime;
   const locality=localities.find(p=>String(p.id)===String(localityId));
   const ongoing=runs.find(item=>String(item.locality_id)===String(localityId) && active(item));
   const pack=packs.find(p=>p.id===locality?.replay_pack);
   const [editor,setEditor]=useState(null);
+  const {explanations, request, dismiss} = useRunExplanations(requestExplanation);
   const seenSignal=useRef(null);
   const canLaunch=Boolean(locality && participants.length && !ongoing && !active(run));
   useEffect(()=>{
@@ -134,14 +136,24 @@ export default function Simulation({runtime={},onAction,navigate,startSignal,onS
         <p className="gm-record-empty">Dispatch data appears after the first interval.</p>}
       </section>
     </div>
-    <section className="gm-record-card" aria-labelledby="gm-history-title">
+    <section className="gm-record-card gm-run-history" aria-labelledby="gm-history-title">
       <div className="gm-record-card-head"><div><h2 id="gm-history-title">Run history <span className="gm-record-count">{runs.length}</span></h2><p>Open current and past simulations across localities.</p></div></div>
-      <Records headers={['Simulation','Status','Progress','Worker PID','Started','Run']} empty="No saved simulations." rows={runs.map(record=>({id:record.id,cells:[
-        <span className="gm-run-title"><strong>{record.locality_name || localities.find(l=>l.id===record.locality_id)?.name || 'Locality'}</strong><small>{scenarios[record.scenario]?.[0] ?? nameStatus(record.scenario)}</small></span>,
-        <span className={`gm-record-chip ${record.status==='failed'?'warn':active(record)?'good':''}`}>{nameStatus(record.status)}</span>,
-        `${record.completed_steps ?? 0} / ${record.steps}`,record.worker_pid ?? '—',utc(record.started_at ?? record.created_at),
-        <button type="button" className="gm-record-button small" aria-pressed={record.id===run?.id} onClick={()=>openRun(record.id)}>{record.id===run?.id?'Selected':'Open'}</button>,
-      ]}))}/>
+      <Records headers={['Simulation','Status','Progress','Worker PID','Started','Run']} empty="No saved simulations." rows={runs.map(record=>{
+        const completed = record.status==='completed';
+        const explanation = completed ? explanations.get(record.id) : null;
+        const detailId = 'gm-explanation-'+encodeURIComponent(record.id);
+        return {id:record.id,cells:[
+          <span className="gm-run-title"><strong>{record.locality_name || localities.find(l=>l.id===record.locality_id)?.name || 'Locality'}</strong><small>{scenarios[record.scenario]?.[0] ?? nameStatus(record.scenario)}</small></span>,
+          <span className={`gm-record-chip ${record.status==='failed'?'warn':active(record)?'good':''}`}>{nameStatus(record.status)}</span>,
+          `${record.completed_steps ?? 0} / ${record.steps}`,record.worker_pid ?? '—',utc(record.started_at ?? record.created_at),
+          <div className="gm-record-actions">
+            <button type="button" className="gm-record-button small" aria-pressed={record.id===run?.id} onClick={()=>openRun(record.id)}>{record.id===run?.id?'Selected':'Open'}</button>
+            {completed && <button type="button" className="gm-record-button small" aria-expanded={Boolean(explanation)}
+              aria-controls={explanation ? detailId : undefined}
+              onClick={()=>explanation?dismiss(record.id):request(record.id)}>{explanation?'Hide explanation':'Explain this run'}</button>}
+          </div>,
+        ],detail:explanation && <RunExplanation state={explanation} id={detailId} retry={()=>request(record.id)}/>};
+      })}/>
     </section>
     {editor==='start' && locality && <RunEditor place={locality} pack={pack} participants={participants} onAction={onAction} onClose={()=>setEditor(null)}/>}
     {editor==='stop' && run && <RecordDialog title="Stop this simulation?" submitLabel="Stop simulation" danger onSubmit={()=>onAction('stop')} onClose={()=>setEditor(null)}>

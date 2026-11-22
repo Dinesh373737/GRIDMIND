@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {Fragment, useEffect, useRef, useState} from 'react';
 import './registry.css';
 
 const ids = (a,b) => String(a) === String(b);
@@ -51,7 +51,10 @@ export function Field({label, full=false, children, ...props}) {
 export function Records({headers, rows, empty}) {
   return rows.length ? <div className="gm-record-scroll"><table className="gm-record-table">
     <thead><tr>{headers.map(x=><th key={x} scope="col">{x}</th>)}</tr></thead>
-    <tbody>{rows.map(({id,cells})=><tr key={id}>{cells.map((cell,i)=> i===0 ? <th scope="row" key={i}>{cell}</th>:<td key={i}>{cell}</td>)}</tr>)}</tbody>
+    <tbody>{rows.map(({id,cells,detail})=><Fragment key={id}>
+      <tr>{cells.map((cell,i)=> i===0 ? <th scope="row" key={i}>{cell}</th>:<td key={i}>{cell}</td>)}</tr>
+      {detail && <tr><td colSpan={headers.length}>{detail}</td></tr>}
+    </Fragment>)}</tbody>
   </table></div> : <p className="gm-record-empty">{empty}</p>;
 }
 

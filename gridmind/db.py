@@ -117,6 +117,19 @@ class Run(Base):
     )
 
 
+class RunExplanation(Base):
+    __tablename__ = "run_explanations"
+    run_id: Mapped[str] = mapped_column(ForeignKey("simulation_runs.id"), primary_key=True)
+    status: Mapped[str] = mapped_column(String(12))
+    explanation: Mapped[str | None] = mapped_column(String(1800))
+    claimed_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    __table_args__ = (
+        CheckConstraint("status IN ('pending','ready','unavailable')", name="ck_explanation_status"),
+        CheckConstraint("(status = 'ready' AND explanation IS NOT NULL) OR "
+                        "(status <> 'ready' AND explanation IS NULL)", name="ck_explanation_text"),
+    )
+
+
 class RunParticipant(Base):
     __tablename__ = "run_participants"
     run_id: Mapped[str] = mapped_column(ForeignKey("simulation_runs.id"), primary_key=True)

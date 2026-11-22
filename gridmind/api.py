@@ -20,6 +20,7 @@ from .db import (
     ROOT, Asset, Audit, FacilityType, Locality, Order, Participant, ReplayDataset, Run, RunParticipant,
     Step, Trade, connect, initialize, participant_records, save_assets, uid,
 )
+from .explanations import explain_completed_run, explanation_result
 from .journal import event_directory, publish, read_events
 from .replay import import_packs, read_ticks, seed_demo
 from .supervisor import Supervisor
@@ -84,6 +85,12 @@ class OrderInput(Input):
     step: int | None = Field(default=None, ge=0)
 
 
+class RunExplanationResponse(BaseModel):
+    status: Literal["ready", "pending", "unavailable", "disabled"]
+    explanation: str | None
+    cached: bool
+
+
 def locality_view(locality):
     return {key: getattr(locality, key) for key in (
         "id", "name", "import_limit_kw", "island_capable", "replay_pack",
@@ -134,6 +141,7 @@ def require_pack(db, dataset_id):
 
 def create_app(url=None):
     cloud = cloud_config()
+    explanations_enabled = cloud is not None and os.environ.get("GRIDMIND_BEDROCK_ENABLED") == "1"
 
     @asynccontextmanager
     async def lifespan(app):
@@ -394,6 +402,19 @@ def create_app(url=None):
     def get_run(run_id: str):
         with db_factory()() as db:
             return run_view(require_run(db, run_id))
+
+    @app.post("/api/runs/{run_id}/explanation", response_model=RunExplanationResponse)
+    def explain_run(run_id: str):
+        with db_factory()() as db:
+            run = db.execute(select(Run.id, Run.status, Run.steps, Run.completed_steps, Run.scenario)
+                             .where(Run.id == run_id)).one_or_none()
+            if run is None:
+                raise HTTPException(404, "Simulation run does not exist.")
+            if run.status != "completed" or run.completed_steps != run.steps:
+                raise HTTPException(409, "Only completed simulation runs can be explained.")
+        if not explanations_enabled:
+            return explanation_result("disabled")
+        return explain_completed_run(db_factory(), run.id, run.scenario, run.steps)
 
     @app.post("/api/runs/{run_id}/stop")
     def stop_run(run_id: str):

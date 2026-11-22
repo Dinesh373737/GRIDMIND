@@ -68,3 +68,7 @@ export async function api(path,{body,headers:initial,...options}={}) {
   }
   return payload;
 }
+
+export function explainRun(id, signal) {
+  return api('/runs/'+encodeURIComponent(id)+'/explanation',{method:'POST',signal});
+}
