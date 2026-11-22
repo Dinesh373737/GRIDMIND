@@ -60,8 +60,6 @@ export function Renewables({ runtime }) {
   const owners = (run?.participants ?? participants).filter(row => Number(row.solar_kw) > 0 || Number(row.wind_kw) > 0);
   const chosen = owners.some(x => x.id === owner) ? owner : '';
   const outlook = (sample?.renewables ?? []).filter(row => !chosen || row.participant_id === chosen);
-  const scenarioRanges = outlook.some(hasScenarioRange);
-  const modelMargins = outlook.some(hasModelErrorMargin);
   return <div className="ins-view">
     <Header section="Forecasting" title="Renewable outlook" detail="Archived weather estimates for the selected simulation interval.">
       <label className="ins-select">Participant<select value={chosen} onChange={e => setOwner(e.target.value)}>
@@ -69,10 +67,6 @@ export function Renewables({ runtime }) {
       </select></label>
     </Header>
     {sample && <div className="ins-context"><span>INTERVAL {Number(sample.step) + 1}</span><span>{date(sample.timestamp)}</span><span>{run?.locality_name}</span></div>}
-    {(scenarioRanges || modelMargins) && <aside className="ins-estimate-guide" aria-label="Interpreting renewable estimates">
-      {scenarioRanges && <p><strong>Scenario range:</strong> Low and high output under the replay’s what-if weather assumptions, not a prediction interval.</p>}
-      <p><strong>Model error margin:</strong> Estimated forecast error against a weather-model reference, not a confidence interval for actual generation.</p>
-    </aside>}
     {outlook.some(row => !hasScenarioRange(row) && !hasModelErrorMargin(row) && !hasOutputRange(row)) && <p className="ins-desc">
       A range is unavailable when this replay doesn’t provide uncertainty bands for all of a participant’s renewable sources. The solar and wind forecasts shown are still model estimates.
     </p>}

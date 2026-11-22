@@ -85,8 +85,7 @@ test('scenario ranges and ML margins are separate from legacy output ranges', ()
   assert.deepEqual(scenarios(markup), ['20–40 kW']);
   assert.deepEqual(margins(markup), ['±3 kW']);
   assert.deepEqual(ranges(markup), ['3–5 kW']);
-  assert.match(markup, /what-if weather assumptions, not a prediction interval/);
-  assert.match(markup, /not a confidence interval for actual generation/);
+  assert.doesNotMatch(markup, /<aside\b|Interpreting renewable estimates|what-if weather assumptions|not a confidence interval for actual generation/);
   assert.ok(markup.includes(`Compared with ${target}.`));
   assert.doesNotMatch(markup, explanation);
 });
@@ -108,7 +107,6 @@ test('an ML margin can still be displayed when scenario bounds are absent', () =
   assert.deepEqual(ranges(markup), ['Not available']);
   assert.deepEqual(margins(markup), ['±1 kW']);
   assert.deepEqual(scenarios(markup), []);
-  assert.doesNotMatch(markup, /what-if weather assumptions/);
   assert.doesNotMatch(markup, explanation);
 });
 
