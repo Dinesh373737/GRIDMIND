@@ -3,6 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
+        - |
+          node -e 'const [major,minor] = process.versions.node.split(".").map(Number); process.exit(major > 22 || (major === 22 && minor >= 12) ? 0 : 1)' || {
+            nvm install 22 && nvm use 22
+          } || exit 1
         - node --version
         - npm ci --prefix frontend --no-audit --no-fund
     build:
