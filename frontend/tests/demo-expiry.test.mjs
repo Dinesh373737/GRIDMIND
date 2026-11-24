@@ -1,3 +1,4 @@
+import {retryAfterMs} from '../src/polling.js';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {test} from 'node:test';
@@ -30,10 +31,11 @@ function harness(env = {}, {href = origin + '/', now = expiryTime - 1, digest, r
   class MockDate extends Date { static now() {return clock.now;} }
   const location = {origin, href, assign: to => redirects.push(to)};
   const api = runInNewContext(source
+    .replace(/^import .*\n/gm, '')
     .replace('import.meta.env', 'testEnv')
     .replace(/^export /gm, '') + '\n({api, cloudAuth, signIn, completeSignIn, explainRun});', {
     testEnv: {...cloud, ...env},
-    Date: MockDate, Headers, URL, URLSearchParams, TextEncoder, Uint8Array, btoa,
+    Date: MockDate, Headers, URL, URLSearchParams, TextEncoder, Uint8Array, btoa, retryAfterMs,
     window: {
       location,
       history: {replaceState: (_, __, path) => {rewrites.push(path); location.href = new URL(path, origin).href;}},
@@ -162,4 +164,11 @@ test('crossing expiry during PKCE computation, API serialization, or a token exc
   assert.equal(callback.calls.length, 1);
   assert.equal(callback.state.has(key), false);
   assert.equal(callback.state.has(pendingKey), false);
+});
+
+test('the API passes visible Retry-After for rate limits without retrying a request', async () => {
+  const demo = harness({}, {responder:()=>new Response('{}',{status:429,headers:{'Retry-After':'7'}})});
+  await assert.rejects(demo.api.explainRun('run-22'), error=>error.status===429 && error.retryAfterMs===7000);
+  assert.equal(demo.calls.length,1);
+  assert.equal(demo.calls[0].options.method,'POST');
 });

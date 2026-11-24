@@ -20,7 +20,7 @@ from .db import (
     ROOT, Asset, Audit, FacilityType, Locality, Order, Participant, ReplayDataset, Run, RunParticipant,
     Step, Trade, connect, initialize, participant_records, save_assets, uid,
 )
-from .explanations import explain_completed_run, explanation_result
+from .explanations import configured_groq_key, explain_completed_run
 from .journal import event_directory, publish, read_events
 from .replay import import_packs, read_ticks, seed_demo
 from .supervisor import Supervisor
@@ -86,9 +86,10 @@ class OrderInput(Input):
 
 
 class RunExplanationResponse(BaseModel):
-    status: Literal["ready", "pending", "unavailable", "disabled"]
+    status: Literal["ready", "unavailable"]
     explanation: str | None
     cached: bool
+    source: Literal["groq", "deterministic"] | None
 
 
 def locality_view(locality):
@@ -141,7 +142,7 @@ def require_pack(db, dataset_id):
 
 def create_app(url=None):
     cloud = cloud_config()
-    explanations_enabled = cloud is not None and os.environ.get("GRIDMIND_BEDROCK_ENABLED") == "1"
+    groq_key = configured_groq_key()
 
     @asynccontextmanager
     async def lifespan(app):
@@ -412,9 +413,7 @@ def create_app(url=None):
                 raise HTTPException(404, "Simulation run does not exist.")
             if run.status != "completed" or run.completed_steps != run.steps:
                 raise HTTPException(409, "Only completed simulation runs can be explained.")
-        if not explanations_enabled:
-            return explanation_result("disabled")
-        return explain_completed_run(db_factory(), run.id, run.scenario, run.steps)
+        return explain_completed_run(db_factory(), run.id, run.scenario, run.steps, groq_key=groq_key)
 
     @app.post("/api/runs/{run_id}/stop")
     def stop_run(run_id: str):

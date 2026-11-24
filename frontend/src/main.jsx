@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {useRuntime} from './runtime';
 import {cloudAuth,explainRun,signIn,signOut} from './api';
+import {connectionNotice} from './connection';
 import Market from './Market';
 import Registry from './Registry';
 import Simulation from './Simulation';
@@ -69,10 +70,10 @@ function App(){
     if(name==='start'){setStartSignal(1);navigate('simulation');return;}
     if(name==='order'){if(runtime.run)setOrder(true);return;}
     if(name==='run'&&page==='simulation')setOrder(false);
-    try{return await perform(name,value);}catch(error){setFlash(error.message);throw error;}
+    try{return await perform(name,value);}catch(error){if(name!=='createRun')setFlash(error.message);throw error;}
   }
   const props={runtime,status,onAction,navigate};
-  const authError=[401,403].includes(status.error?.status);
+  const notice=status.error && connectionNotice(status.error,cloudAuth,Boolean(status.detailRun && status.detailRun===runtime.run?.id));
   const view={market:<Market {...props}/>,simulation:<Simulation {...props} requestExplanation={explainRun} startSignal={startSignal} onStartSignalConsumed={()=>setStartSignal(0)}/>,registry:<Registry {...props}/>,activity:<Activity {...props}/>,renewables:<Renewables {...props}/>,database:<Reports {...props}/>,demo:<AgentDemo/>};
   return <div className="gm-shell">
     <a className="gm-skip" href="#primary-content" onClick={event=>{event.preventDefault();ref.current?.focus();}}>Skip to content</a>
@@ -90,10 +91,12 @@ function App(){
       <div className="gm-rail-footer"><span className="gm-rail-led"/><div><strong>Simulation workspace</strong><small>No real grid control</small></div></div>
     </aside>
     <div className="gm-workspace">
-      <header className="gm-top"><div aria-label="Breadcrumb"><span>Workspace</span><span className="gm-slash">/</span><strong>{tabs.find(x=>x[0]===page)?.[1]}</strong></div><div className="gm-top-right"><span className={'gm-connection'+(status.connected?' online':'')}><i/>{page==='demo'?'Scripted demo':status.loading?'Connecting':status.connected?(cloudAuth?'AWS connected':'Local connected'):'Disconnected'}</span>{page!=='demo'&&cloudAuth&&status.connected&&<button className="gm-button small" type="button" onClick={signOut}>Sign out</button>}</div></header>
+      <header className="gm-top"><div aria-label="Breadcrumb"><span>Workspace</span><span className="gm-slash">/</span><strong>{tabs.find(x=>x[0]===page)?.[1]}</strong></div><div className="gm-top-right"><span className={'gm-connection'+(status.connected?' online':'')}><i/>{page==='demo'?'Scripted demo':status.loading?'Connecting':status.connected?(cloudAuth?'AWS connected':'Local connected'):'Disconnected'}</span>{page!=='demo'&&cloudAuth&&(status.connected||status.error?.status===403)&&<button className="gm-button small" type="button" onClick={signOut}>Sign out</button>}</div></header>
       <main className="gm-main" id="primary-content" tabIndex="-1" ref={ref}>
-        {status.error&&page!=='demo'&&<section className="gm-connect" aria-label="Connection status"><div><strong>{authError?'Connect to GRIDMIND':'Connection unavailable'}</strong><p>{status.error.message}</p></div>
-          {cloudAuth?<button className="gm-button primary" onClick={()=>signIn().catch(e=>setFlash(e.message))}>Sign in with Cognito</button>:authError?<form onSubmit={event=>{event.preventDefault();sessionStorage.setItem('gridmind-key',key.trim());setKey('');perform('retry').catch(()=>{});}}><label className="gm-sr" htmlFor="local-key">API key</label><input id="local-key" placeholder="Local API key" type="password" value={key} onChange={e=>setKey(e.target.value)} required/><button className="gm-button primary">Connect</button></form>:<button className="gm-button" onClick={()=>perform('retry').catch(()=>{})}>Retry connection</button>}
+        {notice&&page!=='demo'&&<section className="gm-connect" aria-label="Connection status"><div><strong>{notice.title}</strong><p>{notice.detail}</p></div>
+          {notice.action==='sign-in'&&<button className="gm-button primary" onClick={()=>signIn().catch(error=>setFlash(connectionNotice(error,true).detail))}>Sign in with Cognito</button>}
+          {notice.action==='api-key'&&<form onSubmit={event=>{event.preventDefault();sessionStorage.setItem('gridmind-key',key.trim());setKey('');perform('retry').catch(()=>{});}}><label className="gm-sr" htmlFor="local-key">API key</label><input id="local-key" placeholder="Local API key" type="password" value={key} onChange={e=>setKey(e.target.value)} required/><button className="gm-button primary">Connect</button></form>}
+          {notice.action==='retry'&&<button className="gm-button" onClick={()=>perform('retry').catch(()=>{})}>Retry connection</button>}
         </section>}
         {view[page]}
       </main>

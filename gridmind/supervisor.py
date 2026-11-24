@@ -21,11 +21,14 @@ class Supervisor:
         logs = event_directory().parent / "logs"
         logs.mkdir(parents=True, exist_ok=True)
         flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+        env = {**os.environ, "GRIDMIND_DATABASE_URL": self.url}
+        # Only the API requests run explanations; simulation workers do not need its key.
+        env.pop("GROQ_API_KEY", None)
         with self.guard, (logs / f"{run_id}.log").open("ab") as output:
             self.children[run_id] = subprocess.Popen(
                 [sys.executable, "-m", "gridmind.worker", run_id],
                 cwd=ROOT, stdout=output, stderr=subprocess.STDOUT, creationflags=flags,
-                env={**os.environ, "GRIDMIND_DATABASE_URL": self.url},
+                env=env,
             )
 
     def reap(self):

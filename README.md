@@ -77,4 +77,6 @@ The app reads the committed data at startup; no packages or weather downloads ar
 
 MySQL is the relational store. Local mode writes step events to a persistent document journal via a SQL outbox. Optional AWS mode publishes them to the existing DynamoDB table and exports completed runs to private S3; see [AWS preflight, deployment, and verification](docs/AWS.md). The separate **Agent Demo** page is scripted and never creates a simulation or writes to a store.
 
-In an enabled AWS deployment, **Explain this run** in Run History requests an optional Nova Lite explanation of a completed run. GRIDMIND sends a compact numeric summary, caches the result, and never needs Bedrock for normal reports or local simulations. See the [deployment runbook](docs/AWS.md#on-demand-bedrock-run-explanations).
+**Explain this run** in Run History summarizes a completed simulation. If the backend is explicitly configured for Groq, GRIDMIND sends only aggregate run statistics and caches a successful explanation. Without a key, or if the model request fails, GRIDMIND explains the run directly from its saved statistics. Normal reports and local simulations require neither Groq nor AWS. See the [deployment runbook](docs/AWS.md#on-demand-run-explanations).
+
+The [backend environment template](.example.env) lists the optional Groq settings. The app reads them from the backend process environment; it does not load this template automatically. Put a real key only in private backend configuration, never in the template or frontend.

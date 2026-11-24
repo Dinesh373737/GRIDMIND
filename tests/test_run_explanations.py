@@ -1,18 +1,22 @@
+import asyncio
 import json
+import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from contextlib import contextmanager
 from datetime import timedelta
 from threading import Barrier, Event
 from types import SimpleNamespace
-from unittest.mock import Mock
 
+import httpx
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import event
+from sqlalchemy.dialects import mysql
+from sqlalchemy.schema import CreateTable
 
 from gridmind import api, explanations
 from gridmind.db import (
-    Locality, Order, Participant, ReplayDataset, Run, RunExplanation, RunParticipant, Step, Trade,
+    GroqRunExplanation, Locality, Order, Participant, ReplayDataset, Run, RunExplanation, RunParticipant, Step, Trade,
     connect, initialize, utcnow,
 )
 
@@ -22,12 +26,59 @@ LOCALITY_ID = "private-locality-id"
 TEXT = "The grid disconnected for one interval. The local market traded 2.5 kWh."
 
 
-def result(status, explanation=None, *, cached=False):
-    return {"status": status, "explanation": explanation, "cached": cached}
+TEST_KEY = "unit-test-credential-not-secret"
+FALLBACK = (
+    "Scheduled outage: the local grid was disconnected from the upstream grid for 1 of 2 intervals. "
+    "The simulation served 25 kWh and left 3 kWh unserved. "
+    "Of the essential demand, 10 kWh was served and 0.5 kWh was unserved. "
+    "The peer-to-peer market traded 2.5 kWh across 1 trade."
+)
+AGGREGATES = {
+    "scenario": "scheduled", "interval_count": 2, "islanded_intervals": 1,
+    "served_kwh": 25, "unserved_kwh": 3, "essential_served_kwh": 10, "essential_unserved_kwh": 0.5,
+    "traded_kwh": 2.5, "islanded_unserved_kwh": 3, "islanded_essential_unserved_kwh": 0.5,
+    "trade_count": 1,
+}
 
 
-def model_output(text, reason="end_turn"):
-    return {"stopReason": reason, "output": {"message": {"role": "assistant", "content": [{"text": text}]}}}
+def result(source, explanation=FALLBACK, *, cached=False):
+    return {"status": "ready" if explanation else "unavailable",
+            "explanation": explanation, "cached": cached, "source": source}
+
+
+def model_output(text, reason="stop"):
+    return {"choices": [{"finish_reason": reason, "message": {
+        "role": "assistant", "content": text, "reasoning": "do not show this reasoning",
+    }}]}
+
+
+@pytest.fixture(autouse=True)
+def forbid_live_groq(monkeypatch):
+    async def blocked(*_args, **_kwargs):
+        pytest.fail("Tests must not use the network transport")
+
+    monkeypatch.setattr(httpx.AsyncHTTPTransport, "handle_async_request", blocked)
+
+
+@pytest.fixture
+def mocked_transport(monkeypatch):
+    def install(handler):
+        requests, options = [], []
+
+        def make_transport(**kwargs):
+            options.append(kwargs)
+
+            async def dispatch(request):
+                requests.append(request)
+                reply = handler(request)
+                return await reply if asyncio.iscoroutine(reply) else reply
+
+            return httpx.MockTransport(dispatch)
+
+        monkeypatch.setattr(httpx, "AsyncHTTPTransport", make_transport)
+        return requests, options
+
+    return install
 
 
 @pytest.fixture
@@ -74,179 +125,190 @@ def db_store(tmp_path):
         engine.dispose()
 
 
-def test_cache_persists_and_only_aggregate_fields_reach_bedrock(db_store, monkeypatch):
+def test_cache_persists_and_only_aggregate_fields_reach_groq(db_store, monkeypatch, mocked_transport):
     url, _, factory = db_store
-    client = Mock()
-    client.converse.return_value = model_output(f" {TEXT}\n")
-    monkeypatch.setattr(explanations, "bedrock_client", lambda: client)
+    monkeypatch.setenv("HTTPS_PROXY", "https://untrusted-proxy.invalid")
+    requests, options = mocked_transport(lambda _req: httpx.Response(200, json=model_output(f" {TEXT}\n")))
 
-    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2) == result("ready", TEXT)
-    params = client.converse.call_args.kwargs
-    assert set(params) == {"modelId", "system", "messages", "inferenceConfig"}
-    assert params["modelId"] == "amazon.nova-lite-v1:0"
-    assert params["inferenceConfig"]["maxTokens"] == 220
-    assert len(params["messages"]) == 1 and params["messages"][0]["role"] == "user"
-    body = params["messages"][0]["content"][0]["text"]
-    assert len(body) < 400
-    assert json.loads(body) == {
-        "scenario": "scheduled", "interval_count": 2, "islanded_intervals": 1,
-        "served_kwh": 25, "unserved_kwh": 3, "essential_served_kwh": 10, "essential_unserved_kwh": 0.5,
-        "traded_kwh": 2.5, "islanded_unserved_kwh": 3, "islanded_essential_unserved_kwh": 0.5,
-        "trade_count": 1,
-    }
+    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("groq", TEXT)
+    assert options == [{"retries": 0, "trust_env": False}]
+    request, = requests
+    assert request.method == "POST"
+    assert str(request.url) == "https://api.groq.com/openai/v1/chat/completions"
+    assert request.headers["Authorization"] == f"Bearer {TEST_KEY}"
+    assert request.headers["Accept-Encoding"] == "identity"
+    params = json.loads(request.content)
+    assert params["model"] == "openai/gpt-oss-20b"
+    assert params["max_completion_tokens"] == 400
+    assert params["reasoning_effort"] == "low" and params["stream"] is False
+    assert [message["role"] for message in params["messages"]] == ["system", "user"]
+    body = params["messages"][1]["content"]
+    assert len(body) < 400 and json.loads(body) == AGGREGATES
     assert "private" not in json.dumps(params).lower()
+    assert TEST_KEY.encode() not in request.content
+    assert RUN_ID.encode() not in request.content and b"2018-08" not in request.content
 
     restarted_engine, restarted_factory = connect(url)
     try:
-        assert explanations.explain_completed_run(restarted_factory, RUN_ID, "scheduled", 2) == result(
-            "ready", TEXT, cached=True)
-        client.converse.assert_called_once()
+        assert explanations.explain_completed_run(restarted_factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result(
+            "groq", TEXT, cached=True)
+        assert explanations.explain_completed_run(restarted_factory, RUN_ID, "scheduled", 2) == result("deterministic")
+        assert len(requests) == 1
     finally:
         restarted_engine.dispose()
 
 
-def test_concurrent_claims_only_invoke_bedrock_once(db_store, monkeypatch):
+def test_concurrent_claims_only_invoke_groq_once_and_do_not_block_fallback(
+    db_store, monkeypatch, mocked_transport,
+):
     _, _, factory = db_store
     before_insert = Barrier(2)
     invoke = Event()
     release_model = Event()
-    mock_model = Mock()
 
     def synchronize_claims(session, *_):
-        if any(isinstance(row, RunExplanation) for row in session.new):
+        if any(isinstance(row, GroqRunExplanation) for row in session.new):
             before_insert.wait(timeout=5)
 
-    def model_call(_summary):
-        mock_model()
+    async def model_reply(_request):
         invoke.set()
-        assert release_model.wait(timeout=5)
-        return TEXT
+        assert await asyncio.to_thread(release_model.wait, 5)
+        return httpx.Response(200, json=model_output(TEXT))
 
     event.listen(factory, "before_flush", synchronize_claims)
-    monkeypatch.setattr(explanations, "generate_explanation", model_call)
+    requests, _ = mocked_transport(model_reply)
     try:
         with ThreadPoolExecutor(max_workers=2) as workers:
-            futures = {workers.submit(explanations.explain_completed_run, factory, RUN_ID, "scheduled", 2)
-                       for _ in range(2)}
+            futures = {
+                workers.submit(explanations.explain_completed_run, factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY)
+                for _ in range(2)
+            }
             try:
                 assert invoke.wait(timeout=5)
-                # Both initial reads saw no cache. The losing INSERT must resolve
-                # while the winner still waits on Bedrock, not run a second call.
+                # Both initial reads saw no cache. The losing INSERT must finish
+                # with a fallback while the winner still waits on the provider.
                 done, running = wait(futures, timeout=5, return_when=FIRST_COMPLETED)
                 assert len(done) == len(running) == 1
-                assert done.pop().result() == result("pending")
+                assert done.pop().result() == result("deterministic")
             finally:
                 release_model.set()
-            assert running.pop().result(timeout=5) == result("ready", TEXT)
+            assert running.pop().result(timeout=5) == result("groq", TEXT)
     finally:
         event.remove(factory, "before_flush", synchronize_claims)
-    mock_model.assert_called_once()
+    assert len(requests) == 1
 
 
 @pytest.mark.parametrize("failure", [
-    TimeoutError("internal-provider-message"),
-    model_output("", reason="content_filtered"),
-    model_output("x" * (explanations.MAX_EXPLANATION_CHARS + 1)),
+    "connect", "rate", "redirect", "server", "oversize", "invalid_json", "invalid_unicode",
+    "truncated", "empty", "text_oversize",
 ])
-def test_bedrock_failure_is_unavailable_and_never_retried(db_store, monkeypatch, caplog, failure):
+def test_groq_failure_falls_back_and_is_never_retried(db_store, mocked_transport, caplog, failure):
     _, _, factory = db_store
-    client = Mock()
-    if isinstance(failure, Exception):
-        client.converse.side_effect = failure
-    else:
-        client.converse.return_value = failure
-    monkeypatch.setattr(explanations, "bedrock_client", lambda: client)
 
+    def failure_reply(request):
+        if failure == "connect":
+            raise httpx.ConnectError("internal-provider-detail", request=request)
+        if failure == "rate":
+            return httpx.Response(429, json={"message": "internal-provider-detail"}, headers={"Retry-After": "1"})
+        if failure == "redirect":
+            return httpx.Response(307, headers={"Location": "https://untrusted-redirect.invalid/"})
+        if failure == "server":
+            return httpx.Response(503)
+        if failure == "oversize":
+            return httpx.Response(200, content=b" " * (explanations.MAX_RESPONSE_BYTES + 1))
+        if failure == "invalid_json":
+            return httpx.Response(200, content=b"not JSON")
+        if failure == "invalid_unicode":
+            return httpx.Response(200, content=json.dumps(model_output("\ud800"), ensure_ascii=True).encode("ascii"))
+        if failure == "empty":
+            return httpx.Response(200, json=model_output(None))
+        if failure == "text_oversize":
+            return httpx.Response(200, json=model_output("x" * (explanations.MAX_EXPLANATION_CHARS + 1)))
+        return httpx.Response(200, json=model_output(TEXT, reason="length"))
+
+    requests, _ = mocked_transport(failure_reply)
     for _ in range(2):
-        assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2) == result("unavailable")
-    client.converse.assert_called_once()
-    assert "internal-provider-message" not in caplog.text
+        assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("deterministic")
+    assert len(requests) == 1
+    assert "internal-provider-detail" not in caplog.text and TEST_KEY not in caplog.text
     with factory() as db:
-        row = db.get(RunExplanation, RUN_ID)
+        row = db.get(GroqRunExplanation, RUN_ID)
         assert row.status == "unavailable" and row.explanation is None
 
 
-def test_stale_claim_is_unavailable_and_never_recycled(db_store, monkeypatch):
+def test_total_deadline_cancels_stalled_http_once(db_store, monkeypatch, mocked_transport):
+    _, _, factory = db_store
+    monkeypatch.setattr(explanations, "GROQ_DEADLINE_SECONDS", 0.03)
+
+    async def stalled(_request):
+        await asyncio.sleep(10)
+        pytest.fail("provider should have timed out")
+
+    requests, _ = mocked_transport(stalled)
+    start = time.monotonic()
+    for _ in range(2):
+        assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("deterministic")
+    assert len(requests) == 1 and time.monotonic() - start < 2
+
+
+def test_stale_claim_is_never_recycled_even_after_process_loss(db_store):
     _, _, factory = db_store
     with factory.begin() as db:
-        db.add(RunExplanation(run_id=RUN_ID, status="pending",
-                              claimed_at=utcnow() - explanations.PENDING_WINDOW - timedelta(seconds=1)))
-    model = Mock()
-    monkeypatch.setattr(explanations, "generate_explanation", model)
+        db.add(GroqRunExplanation(run_id=RUN_ID, status="pending", claimed_at=utcnow() - timedelta(hours=1)))
     for _ in range(2):
-        assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2) == result("unavailable")
-    model.assert_not_called()
+        assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("deterministic")
+    with factory() as db:
+        assert db.get(GroqRunExplanation, RUN_ID).status == "pending"
 
 
-def test_aws_client_uses_instance_role_fixed_region_and_no_sdk_retries(monkeypatch):
-    boto3 = pytest.importorskip("boto3")
-    session = Mock()
-    session.get_credentials.return_value = SimpleNamespace(method="env")
-    monkeypatch.setattr(boto3.session, "Session", lambda: session)
-    explanations.bedrock_client.cache_clear()
-    try:
-        with pytest.raises(RuntimeError, match="EC2 instance role"):
-            explanations.bedrock_client()
-        session.client.assert_not_called()
-        session.get_credentials.return_value = SimpleNamespace(method="iam-role")
-        assert explanations.bedrock_client() is session.client.return_value
-        args, kwargs = session.client.call_args
-        assert args == ("bedrock-runtime",)
-        assert set(kwargs) == {"region_name", "config"}
-        assert kwargs["region_name"] == "us-east-1"
-        config = kwargs["config"]
-        assert (config.connect_timeout, config.read_timeout) == (2, 8)
-        assert config.signature_version == "v4"
-        assert config.ignore_configured_endpoint_urls
-        assert config.retries["total_max_attempts"] == 1
-    finally:
-        explanations.bedrock_client.cache_clear()
+def test_legacy_bedrock_failure_does_not_block_groq(db_store, mocked_transport):
+    _, _, factory = db_store
+    with factory.begin() as db:
+        db.add(RunExplanation(run_id=RUN_ID, status="unavailable"))
+    requests, _ = mocked_transport(lambda _req: httpx.Response(200, json=model_output(TEXT)))
+    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("groq", TEXT)
+    assert len(requests) == 1
+    with factory() as db:
+        assert db.get(RunExplanation, RUN_ID).status == "unavailable"
+        assert db.get(GroqRunExplanation, RUN_ID).explanation == TEXT
 
 
-def test_sdk_converse_signs_regional_request_with_role_and_never_retries(monkeypatch):
-    boto3 = pytest.importorskip("boto3")
-    from botocore.awsrequest import AWSResponse
-    from botocore.credentials import Credentials
-    from botocore.exceptions import ClientError
-    from botocore.session import Session
-    from botocore.httpsession import URLLib3Session
+def test_missing_cache_table_falls_back_without_provider(db_store):
+    _, engine, factory = db_store
+    GroqRunExplanation.__table__.drop(engine)
+    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2, groq_key=TEST_KEY) == result("deterministic")
+    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 2) == result("deterministic")
 
-    # SDK shapes, signing, endpoint selection and retry handling run normally.
-    # The transport is stubbed before client creation; no requests can leave here.
-    fake_error = {"message": "fixture model not ready"}
-    requests = []
 
-    def send(_session, request):
-        requests.append(request)
-        raw = SimpleNamespace(stream=lambda: [json.dumps(fake_error).encode()])
-        return AWSResponse(request.url, 429, {"x-amzn-errortype": "ModelNotReadyException"}, raw)
+def test_no_summary_returns_unavailable_without_provider(db_store):
+    _, _, factory = db_store
+    assert explanations.explain_completed_run(factory, RUN_ID, "scheduled", 3, groq_key=TEST_KEY) == result(None, None)
 
-    monkeypatch.setattr(URLLib3Session, "send", send)
-    role = Session()
-    role._credentials = Credentials("fixture-role-key", "fixture-role-secret", method="iam-role")
-    role_session = boto3.session.Session(botocore_session=role)
-    monkeypatch.setattr(boto3.session, "Session", lambda: role_session)
-    monkeypatch.setenv("AWS_BEARER_TOKEN_BEDROCK", "fixture-bearer-not-to-use")
-    monkeypatch.setenv("AWS_ENDPOINT_URL_BEDROCK_RUNTIME", "https://not-bedrock.example")
-    explanations.bedrock_client.cache_clear()
-    try:
-        with pytest.raises(ClientError) as error:
-            explanations.generate_explanation({"served_kwh": 25})
-        assert error.value.response["Error"]["Code"] == "ModelNotReadyException"
-        assert len(requests) == 1
-        request = requests[0]
-        assert request.url == "https://bedrock-runtime.us-east-1.amazonaws.com/model/amazon.nova-lite-v1%3A0/converse"
-        assert request.headers["Authorization"].startswith(b"AWS4-HMAC-SHA256 Credential=fixture-role-key/")
-    finally:
-        explanations.bedrock_client.cache_clear()
+
+def test_empty_essential_and_market_are_not_reported_as_percentages():
+    reference = {
+        **AGGREGATES, "scenario": "reference", "islanded_intervals": 0,
+        "essential_served_kwh": 0, "essential_unserved_kwh": 0, "trade_count": 0, "traded_kwh": 0,
+    }
+    explanation = explanations.deterministic_explanation(reference)
+    assert "stayed connected for all 2 intervals" in explanation
+    assert "recorded no essential demand" in explanation
+    assert "trading was disabled in this reference run" in explanation
+    assert "%" not in explanation
+
+
+def test_groq_table_compiles_for_mysql_without_legacy_table_changes():
+    ddl = str(CreateTable(GroqRunExplanation.__table__).compile(dialect=mysql.dialect()))
+    assert "CREATE TABLE groq_run_explanations" in ddl
+    assert "PRIMARY KEY (run_id)" in ddl and "FOREIGN KEY(run_id) REFERENCES simulation_runs (id)" in ddl
+    assert RunExplanation.__tablename__ == "run_explanations"
 
 
 @contextmanager
 def app_for_tests(db_store):
     _, engine, factory = db_store
     app = api.create_app()
-    # Route tests use an isolated real persistence layer without running the
-    # production AWS/MySQL lifespan or touching external services.
+    # Route tests use a real isolated database but no production AWS/SQL lifespan.
     app.state.engine, app.state.factory = engine, factory
     client = TestClient(app)
     try:
@@ -255,20 +317,35 @@ def app_for_tests(db_store):
         client.close()
 
 
-def test_local_opt_in_does_not_enable_bedrock(db_store, monkeypatch):
+@pytest.mark.parametrize(("flag", "key"), [(None, None), (None, TEST_KEY), ("1", None), ("1", "not a token")])
+def test_unauthorized_and_no_opt_in_or_key_stay_offline(db_store, monkeypatch, flag, key):
+    for name, value in (("GRIDMIND_GROQ_ENABLED", flag), ("GROQ_API_KEY", key)):
+        monkeypatch.delenv(name, raising=False) if value is None else monkeypatch.setenv(name, value)
     monkeypatch.setenv("GRIDMIND_BEDROCK_ENABLED", "1")
     monkeypatch.setenv("GRIDMIND_API_KEY", "test-key")
     monkeypatch.setattr(api, "cloud_config", lambda: None)
-    invoke = Mock()
-    monkeypatch.setattr(api, "explain_completed_run", invoke)
     with app_for_tests(db_store) as client:
         url = f"/api/runs/{RUN_ID}/explanation"
         assert client.post(url).status_code == 401
-        assert client.post(url, headers={"X-API-Key": "test-key"}).json() == result("disabled")
-    invoke.assert_not_called()
+        assert client.post(url, headers={"X-API-Key": "test-key"}).json() == result("deterministic")
+    with db_store[2]() as db:
+        assert db.get(GroqRunExplanation, RUN_ID) is None
 
 
-def test_aws_endpoint_auth_completed_only_and_report_fallback(db_store, monkeypatch):
+def test_explicit_local_opt_in_uses_groq(db_store, monkeypatch, mocked_transport):
+    monkeypatch.setenv("GRIDMIND_GROQ_ENABLED", "1")
+    monkeypatch.setenv("GROQ_API_KEY", TEST_KEY)
+    monkeypatch.setenv("GRIDMIND_API_KEY", "test-key")
+    monkeypatch.setattr(api, "cloud_config", lambda: None)
+    requests, _ = mocked_transport(lambda _req: httpx.Response(200, json=model_output(TEXT)))
+    with app_for_tests(db_store) as client:
+        url = f"/api/runs/{RUN_ID}/explanation"
+        assert client.post(url).status_code == 401
+        assert client.post(url, headers={"X-API-Key": "test-key"}).json() == result("groq", TEXT)
+    assert len(requests) == 1
+
+
+def test_cloud_auth_completion_gate_and_unchanged_report_fallback(db_store, monkeypatch, mocked_transport):
     jwt = pytest.importorskip("jwt")
     monkeypatch.setattr(api, "cloud_config", lambda: SimpleNamespace(origins=("https://demo.example",)))
 
@@ -277,28 +354,23 @@ def test_aws_endpoint_auth_completed_only_and_report_fallback(db_store, monkeypa
             raise jwt.InvalidTokenError("invalid")
 
     monkeypatch.setattr(api, "verify_access_token", verify)
-    model = Mock(side_effect=RuntimeError("provider-secret-details"))
-    monkeypatch.setattr(explanations, "generate_explanation", model)
+    monkeypatch.setenv("GRIDMIND_GROQ_ENABLED", "1")
+    monkeypatch.setenv("GROQ_API_KEY", TEST_KEY)
+    requests, _ = mocked_transport(lambda _req: httpx.Response(429))
     auth = {"Authorization": "Bearer access-token"}
     url = f"/api/runs/{RUN_ID}/explanation"
-    monkeypatch.delenv("GRIDMIND_BEDROCK_ENABLED", raising=False)
-    with app_for_tests(db_store) as disabled:
-        assert disabled.post(url, headers=auth).json() == result("disabled")
-    model.assert_not_called()
 
-    monkeypatch.setenv("GRIDMIND_BEDROCK_ENABLED", "1")
     with app_for_tests(db_store) as client:
         assert client.post(url).status_code == 401
         assert client.post(url, headers={"Authorization": "Bearer wrong"}).status_code == 401
         assert client.post("/api/runs/unknown/explanation", headers=auth).status_code == 404
         assert client.post(f"/api/runs/{ACTIVE_ID}/explanation", headers=auth).status_code == 409
-        model.assert_not_called()
+        assert not requests
 
-        assert client.post(url, headers=auth, json={"prompt": "do not forward this"}).json() == result("unavailable")
-        assert client.post(url, headers=auth).json() == result("unavailable")
+        assert client.post(url, headers=auth, json={"prompt": "do not forward this"}).json() == result("deterministic")
+        assert client.post(url, headers=auth).json() == result("deterministic")
         report = client.get(f"/api/reports?run_id={RUN_ID}", headers=auth)
         assert report.status_code == 200
         assert report.json()["totals"]["served_kwh"] == 25
         assert report.json()["trade_count"] == 1
-    model.assert_called_once()
-    assert "do not forward" not in repr(model.call_args)
+    assert len(requests) == 1 and b"do not forward" not in requests[0].content

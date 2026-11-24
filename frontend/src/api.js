@@ -1,3 +1,5 @@
+import {retryAfterMs} from './polling';
+
 const env = import.meta.env;
 const localOnly = env.VITE_GRIDMIND_LOCAL_ONLY === '1';
 const domain = (localOnly ? '' : env.VITE_COGNITO_DOMAIN || '').replace(/\/$/,'');
@@ -18,17 +20,18 @@ function parseUtc(value) {
   return Number.isFinite(time) && new Date(time).toISOString().slice(0,19) === value.slice(0,19) ? time : NaN;
 }
 
+const problem = (kind,message) => Object.assign(new Error(message),{kind});
+
 function requireValidCloud() {
   if (!cloudAuth) return;
   if (demoExpiry !== undefined && (!Number.isFinite(demoExpiryTime) || Date.now() >= demoExpiryTime)) {
     sessionStorage.removeItem(tokenKey);
     sessionStorage.removeItem(pkceKey);
-    throw new Error(Number.isFinite(demoExpiryTime)
-      ? 'This temporary GRIDMIND demo has expired. Open an updated deployment to continue.'
-      : 'This GRIDMIND demo has an invalid expiration setting. Contact the deployment owner.');
+    if (Number.isFinite(demoExpiryTime)) throw problem('demo-expired','This temporary GRIDMIND demo has expired. Open an updated deployment to continue.');
+    throw problem('cloud-config','This GRIDMIND demo has an invalid expiration setting. Contact the deployment owner.');
   }
   if (!httpsOrigin.test(domain) || !httpsOrigin.test(base) || !/^[a-z0-9]+$/i.test(clientId || '')) {
-    throw new Error('Configure all three GRIDMIND cloud settings with HTTPS origins and a Cognito client ID.');
+    throw problem('cloud-config','Configure all three GRIDMIND cloud settings with HTTPS origins and a Cognito client ID.');
   }
 }
 const encode = bytes => btoa(String.fromCharCode(...new Uint8Array(bytes))).replaceAll('+','-').replaceAll('/','_').replaceAll('=','');
@@ -55,14 +58,15 @@ export async function completeSignIn() {
     const pending = JSON.parse(sessionStorage.getItem(pkceKey)||'null');
     sessionStorage.removeItem(pkceKey);
     const code = url.searchParams.get('code');
-    if (!code || !pending || pending.state !== url.searchParams.get('state')) throw new Error('Sign-in could not be verified. Please try again.');
+    if (!code || !pending || pending.state !== url.searchParams.get('state')) throw problem('sign-in','Sign-in could not be verified. Please try again.');
     requireValidCloud();
-    const response = await fetch(domain+'/oauth2/token',{method:'POST',body:new URLSearchParams({grant_type:'authorization_code',client_id:clientId,code,redirect_uri:redirectUri,code_verifier:pending.verifier}),credentials:'omit',referrerPolicy:'no-referrer'});
+    const response = await fetch(domain+'/oauth2/token',{method:'POST',body:new URLSearchParams({grant_type:'authorization_code',client_id:clientId,code,redirect_uri:redirectUri,code_verifier:pending.verifier}),credentials:'omit',referrerPolicy:'no-referrer'})
+      .catch(()=>{throw problem('sign-in','Could not connect to Cognito. Please sign in again.');});
     requireValidCloud();
-    if (!response.ok) throw new Error('Sign-in could not be completed. Please try again.');
-    const token = await response.json();
+    if (!response.ok) throw problem('sign-in','Sign-in could not be completed. Please try again.');
+    const token = await response.json().catch(()=>null);
     requireValidCloud();
-    if (!token.access_token) throw new Error('Sign-in did not return an access token.');
+    if (!token?.access_token) throw problem('sign-in','Sign-in did not return an access token.');
     sessionStorage.setItem(tokenKey, JSON.stringify({value:token.access_token,expires:Date.now()+token.expires_in*1000}));
   })();
 }
@@ -83,12 +87,14 @@ export async function api(path,{body,headers:initial,...options}={}) {
   if(body !== undefined) headers.set('Content-Type','application/json');
   const serializedBody = body===undefined ? undefined : JSON.stringify(body);
   requireValidCloud();
-  const response=await fetch(base+'/api'+path,{...options,headers,body:serializedBody,cache:'no-store'});
+  const response=await fetch(base+'/api'+path,{...options,headers,body:serializedBody,cache:'no-store'})
+    .catch(error=>{if(options.signal?.aborted)throw error;throw problem('network','Could not reach GRIDMIND.');});
   const payload=await response.json().catch(()=>null);
   if(!response.ok) {
     const detail = payload?.detail;
     const error = new Error(typeof detail==='string'? detail : Array.isArray(detail)? detail.map(x=>[x.loc?.at(-1),x.msg].filter(Boolean).join(': ')).join(' • '):'Request failed ('+response.status+').');
     error.status=response.status;
+    if(response.status===429 || response.status===503) error.retryAfterMs=retryAfterMs(response.headers.get('Retry-After'));
     throw error;
   }
   return payload;

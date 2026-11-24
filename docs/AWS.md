@@ -70,38 +70,40 @@ cloud service, and do not open SSH, port 8000 or port 3306.
    A later demo may require a fresh IP, certificate and frontend build.
    Never use this temporary route as an always-on production URL.
 
-### On-demand Bedrock run explanations
+### On-demand run explanations
 
-Regular reports do not depend on Bedrock. The run history can request an optional
-explanation of a completed simulation. Keep `GRIDMIND_BEDROCK_ENABLED=0` until
-the exact account, region, model access, applicable credit, and current usage
-are verified. Enabling it in cloud mode allows only the regional Amazon Nova
-Lite model `amazon.nova-lite-v1:0` in `us-east-1`, not a cross-region inference
-profile. There is no background invocation. A database claim allows at most
-one inference attempt per run, even after a timeout. The SDK does not retry;
-the response is limited to 220 tokens and a successful result is stored in
-MySQL. Only compact numeric run aggregates
-are sent; participant names, account details, raw event logs, and credentials
-are not sent. An explanation is supplementary, not a replacement for the
-structured report.
+**Explain this run** works without an external provider. The built-in summary
+is assembled from saved run statistics and is labeled separately from AI
+output. Normal simulation reports do not depend on either explanation path.
 
-For `Converse`, the EC2 instance profile needs the following single-model IAM
-statement (review and obtain any required permission before applying it). Do
-not grant Bedrock Marketplace actions, broad Bedrock access, or static keys:
+To enable Groq on the existing EC2 backend:
 
-```json
-{
-  "Effect": "Allow",
-  "Action": "bedrock:InvokeModel",
-  "Resource": "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-lite-v1:0"
-}
-```
+1. Verify the Groq project is on the Free plan and that the selected model
+   `openai/gpt-oss-20b` is available. Check the
+   [Groq rate limits](https://console.groq.com/docs/rate-limits). AWS credits
+   do not apply to Groq. Do not upgrade plans or add a payment method.
+2. Keep `GRIDMIND_GROQ_ENABLED=0` until a fresh, private key is available.
+   Use an approved private admin session that does not record secret input.
+   Enter `GROQ_API_KEY` in the existing root-owned, mode-0600 systemd
+   EnvironmentFile on EC2, not in a command argument. Set
+   `GRIDMIND_GROQ_ENABLED=1` in that file only when approved.
+   Never paste the key into chat, Git, Amplify, Vite variables, cloud command
+   payloads, or logs. Revoke any key previously shared that way.
+3. The backend uses outbound HTTPS to
+   `https://api.groq.com/openai/v1/chat/completions`. No new incoming network
+   access or AWS IAM grants are needed. Only compact run aggregates are sent,
+   not run IDs, participant details, logs, or credentials. Inference is
+   on-demand, with no background activity. A database claim caps Groq at one
+   attempt per completed run, including timeouts, and caches a successful
+   response. A failed attempt on that run continues to use the saved-data
+   fallback rather than retrying.
+4. On the deployed backend, request an explanation for one known completed
+   run; verify `source: groq` and that the repeated request reads the cached
+   explanation. With the provider disabled, verify that a completed run
+   returns a directly generated summary. Test timeouts and rate limits through
+   a mock rather than exhausting the live service. Check the normal report
+   independently, then stop EC2 and confirm it stopped.
 
-[Model and regional support](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-lite.html)
-· [Converse permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html)
-· [Bedrock pricing](https://aws.amazon.com/bedrock/pricing/).
-Until account coverage and authorization are confirmed, use the disabled mode
-and do not make a test call. For a gated smoke test, explain one completed run,
-refresh the page, and verify the next request uses the persisted result rather
-than calling the model again. Check that disabled and unavailable states leave
-the ordinary run report visible.
+No Bedrock calls are used by this feature. Existing Bedrock result records do
+not need to be deleted. If Groq is disabled, no key is configured, or the
+provider fails, the built-in summary remains available.
